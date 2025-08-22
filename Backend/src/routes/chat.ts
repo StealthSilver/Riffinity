@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 const router = express.Router();
 import Thread from "../models/Thread";
+import getOpenAiAPIResponse from "../utils/openai";
 
 // test
 
@@ -65,6 +66,42 @@ router.delete("/thread/:threadId", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "failed ot fetch thread" });
+  }
+});
+
+// chatting wiht the model
+
+router.post("/chat", async (req, res) => {
+  const { threadId, message } = req.body;
+
+  if (!threadId || !message) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    let thread = await Thread.findOne({ threadId });
+
+    if (!thread) {
+      // create a new thread in db
+      thread = new Thread({
+        threadId,
+        title: message,
+        messages: [{ role: "user", content: message }],
+      });
+    } else {
+      thread.messages.push({ role: "user", content: message });
+    }
+
+    const assistantReply = await getOpenAiAPIResponse(message);
+
+    thread.messages.push({ role: "assistant", content: assistantReply });
+    thread.updatedAt = new Date();
+    await thread.save();
+
+    res.json({ reply: assistantReply });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Something went wrong" });
   }
 });
 
