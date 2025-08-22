@@ -61,4 +61,8 @@ c. creating the routes
  DELETE /thread/threadId -> deleting a specific thread 
  POST /chat -> sending the msessage and getting the answer from model, then storing in a db to create a new thread 
 
- 
+ POST /chat : validate threadId, message 
+            : check is threadId is part of db -> continue the previous thread
+                                        or not -> create new thread 
+            : save the message(user) in thread
+            : save the response(openAi) in thread
