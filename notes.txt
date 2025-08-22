@@ -28,3 +28,37 @@ Words, sub-words, punctuation, and spaces are all broken down into tokens before
 - in server.ts write the express boilerplate code 
 - create the openai client with the api key 
 - create the post endpoint for testing 
+
+------------------------------------------------------------------------------------
+
+3. creating the complete backend 
+
+this will have three steps 
+a. creating schemas and models and connection the db 
+b. creating the utils to run the logic 
+c. creating the express routes
+
+a. Creating the schemeas
+The history will be stored in the db, there will be chat threads
+
+ThreadSchema : id, title, messages, createdAt, updatedAt
+MessageSchema : content, role, timestamp
+
+- create three directories models, utils, routes in src
+- in models create the Thread schema and model 
+- in server.ts connect to the mongo db 
+- add the mongo connection string in the .env
+
+b. creating the utils 
+- in src/utils create openai.ts and write the communication logic 
+
+c. creating the routes 
+- in routes create the chat.ts 
+- create the test route
+- mainly there are four routes:
+ GET /thread -> getting all threads in the sidebar 
+ GET /thread/threadId -> getting one specific thread
+ DELETE /thread/threadId -> deleting a specific thread 
+ POST /chat -> sending the msessage and getting the answer from model, then storing in a db to create a new thread 
+
+ 
