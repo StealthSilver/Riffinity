@@ -12,3 +12,9 @@ DATABASE : Mongo
 - tsconfig, rootDir : "./src" , outDir: "./dist"
 
 ------------------------------------------------------------------------------------
+
+In OpenAi we have to choose the Model, we will be using GPT-vo mini from OpenAI 
+
+token : A token is the fundamental unit of text an LLM understands and processes.
+Words, sub-words, punctuation, and spaces are all broken down into tokens before going into the model.
+
