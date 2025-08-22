@@ -1,0 +1,14 @@
+BACKEND : nodejs + express + OpenAi api
+FRONTEND : react + tailwind
+DATABASE : Mongo
+
+1. Backend setup 
+
+- Create a folder in the base repo 
+- npm init -y 
+- tsc --init 
+- create src/server.ts 
+- npm i express @types/express cors nodemon 
+- tsconfig, rootDir : "./src" , outDir: "./dist"
+
+------------------------------------------------------------------------------------
