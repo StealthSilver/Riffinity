@@ -1,5 +1,5 @@
 BACKEND : nodejs + express + OpenAi api
-FRONTEND : react + tailwind
+FRONTEND : react + css
 DATABASE : Mongo
 
 1. Backend setup 
@@ -66,3 +66,23 @@ c. creating the routes
                                         or not -> create new thread 
             : save the message(user) in thread
             : save the response(openAi) in thread
+
+------------------------------------------------------------------------------------
+
+4. Frontend setup
+
+- npm create vite -> react -> typescript
+- clear all the boilerplate 
+
+5. crating components 
+
+Sidebar 
+Chat Window -> Navbar + Chat Input
+Chat
+
+- create a folder components in the src 
+- create Sidebar.tsx , Chat.tsx and ChatWindow.tsx
+- creating the top logo div, history and the accounts section in the sidebar 
+- styling the sidebar
+
+------------------------------------------------------------------------------------
