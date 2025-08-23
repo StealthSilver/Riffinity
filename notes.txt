@@ -93,3 +93,11 @@ Chat Window ->
 - create ChatWindow.tsx in components 
 - create the navbar, chat component and the input compoennt
 - style the chat window
+
+------------------------------------------------------------------------------------
+
+7. Adding the chat functionality 
+
+- sending prompt from frontend and getting the response
+- add the loader from react spinners npm
+- show the chats (prompt + reply)

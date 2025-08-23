@@ -38,7 +38,7 @@ router.get("/thread", async (req, res) => {
 router.get("/thread/:threadId", async (req, res) => {
   const { threadId } = req.params;
   try {
-    const thread = await Thread.findById(threadId);
+    const thread = await Thread.findOne({ threadId });
 
     if (!thread) {
       return res.status(404).json({ error: "Thread not found" });
@@ -47,7 +47,7 @@ router.get("/thread/:threadId", async (req, res) => {
     res.json(thread.messages);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "failed ot fetch thread" });
+    res.status(500).json({ error: "failed to fetch thread" });
   }
 });
 
@@ -98,7 +98,7 @@ router.post("/chat", async (req, res) => {
     thread.updatedAt = new Date();
     await thread.save();
 
-    res.json({ reply: assistantReply });
+    res.json({ assistantReply });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Something went wrong" });
