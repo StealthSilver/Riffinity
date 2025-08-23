@@ -86,3 +86,10 @@ Chat
 - styling the sidebar
 
 ------------------------------------------------------------------------------------
+
+6. creating chatWindow 
+
+Chat Window -> 
+- create ChatWindow.tsx in components 
+- create the navbar, chat component and the input compoennt
+- style the chat window

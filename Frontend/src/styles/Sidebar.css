@@ -1,10 +1,11 @@
 .sidebar {
-  background-color: #171717;
+  background-color: transparent;
   color: #b4b4b4;
   height: 100vh;
   width: 320px;
   display: flex;
   flex-direction: column;
+  border-right: solid 0.25px rgba(255, 255, 255, 0.5);
 }
 
 .topDiv {
@@ -25,7 +26,7 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 button:hover {
   background-color: rgba(255, 255, 255, 0.05);
@@ -50,18 +51,24 @@ button:hover {
   margin-bottom: 1rem;
   border: solid 1px transparent;
   border-radius: 4px;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .history li:hover {
   background-color: rgba(255, 255, 255, 0.05);
-  transition: all;
 }
 
 .sign {
-  padding: 10px;
+  padding: 10px 10px;
+  display: flex;
   margin: 10px;
   font-size: 16px;
-  text-align: center;
+  align-items: center;
   border-top: solid 0.25px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.accName {
+  margin-left: 10px;
+  cursor: pointer;
 }

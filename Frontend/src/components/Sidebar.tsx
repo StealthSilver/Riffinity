@@ -1,6 +1,6 @@
 import "../styles/Sidebar.css";
 import logo from "../assets/Riffinity_Logo.svg";
-import { SquarePen } from "lucide-react";
+import { SquarePen, CircleUserRound } from "lucide-react";
 
 function Sidebar() {
   return (
@@ -22,7 +22,8 @@ function Sidebar() {
 
       {/* sign  */}
       <div className="sign">
-        <p>Account</p>
+        <CircleUserRound />
+        <p className="accName">Silver</p>
       </div>
     </section>
   );
