@@ -92,6 +92,14 @@ router.post("/chat", async (req, res) => {
       thread.messages.push({ role: "user", content: message });
     }
 
+    if (!message.trim()) {
+      const assistantReply = "Please enter a prompt to talk.";
+      thread.messages.push({ role: "assistant", content: assistantReply });
+      thread.updatedAt = new Date();
+      await thread.save();
+      return res.json({ assistantReply });
+    }
+
     const assistantReply = await getOpenAiAPIResponse(message);
 
     thread.messages.push({ role: "assistant", content: assistantReply });

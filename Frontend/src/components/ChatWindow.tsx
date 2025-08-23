@@ -77,7 +77,7 @@ function ChatWindow() {
         </span>
         <div className="shareIconDiv">
           <span className="shareIcon">
-            <Share className="share" />
+            <Share className="share" size={20} />
             <p>Share</p>
           </span>
         </div>

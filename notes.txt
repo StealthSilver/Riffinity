@@ -101,3 +101,27 @@ Chat Window ->
 - sending prompt from frontend and getting the response
 - add the loader from react spinners npm
 - show the chats (prompt + reply)
+- format the chat using react markdown and rehypeHighlight
+- use the highlight.js/styles/github.css -> for syntax highlighting
+
+------------------------------------------------------------------------------------
+
+8. creating the thread history, new chat and delete chat in sidebar 
+
+- make the onclick functions on respective buttons
+- create the new chat and delete functionality 
+- add the scroll on the sidebar
+
+------------------------------------------------------------------------------------
+
+Future TODO
+
+- create the landing page 
+- create the signin, signup page
+- create the auth logic 
+- implement zod validations 
+- create the account modal
+- create the multiuser architecture 
+- add image and docs upload 
+- add voice prompt feature
+- implement light and dark mode 

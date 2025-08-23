@@ -1,26 +1,125 @@
 import "../styles/Sidebar.css";
 import logo from "../assets/Riffinity_Logo.svg";
-import { SquarePen, CircleUserRound } from "lucide-react";
+import { SquarePen, CircleUserRound, Trash } from "lucide-react";
+import React, { useContext, useEffect } from "react"; // ✅ import hooks
+import { MyContext } from "../MyContext";
+import { v1 as uuidv1 } from "uuid";
 
 function Sidebar() {
+  const {
+    allThreads,
+    setAllThreads,
+    currThreadId,
+    setNewChat,
+    setPrompt,
+    setReply,
+    setCurrThreadId,
+    setPrevChats,
+  } = useContext(MyContext);
+
+  const getAllThreads = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/thread");
+      const res = await response.json();
+
+      const filteredData = res.map((thread: any) => ({
+        threadId: thread.threadId,
+        title: thread.title,
+      }));
+
+      setAllThreads(filteredData);
+
+      console.log("Fetched threads:", filteredData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllThreads();
+  }, [currThreadId]);
+
+  const createNewChat = () => {
+    setNewChat(true);
+    setPrompt("");
+    setReply(null);
+    setCurrThreadId(uuidv1());
+    setPrevChats([]);
+  };
+
+  const changeThread = async (newthreadId: React.SetStateAction<string>) => {
+    setCurrThreadId(newthreadId);
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/thread/${newthreadId}`
+      );
+
+      const res = await response.json();
+      console.log(res);
+      setPrevChats(res);
+      setNewChat(false);
+      setReply(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteThread = async (threadId: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/thread/${threadId}`,
+        { method: "DELETE" }
+      );
+
+      const res = await response.json();
+
+      // updated threads re-render
+
+      setAllThreads((prev) =>
+        prev.filter((thread) => thread.threadId !== threadId)
+      );
+
+      if (threadId === currThreadId) {
+        createNewChat();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <section className="sidebar">
       {/* new chat button */}
       <div className="topDiv">
         <img className="logo" src={logo} alt="logo" />
-        <button>
-          <SquarePen />
+        <button onClick={createNewChat}>
+          <SquarePen size={20} />
         </button>
       </div>
 
       {/* history */}
       <ul className="history">
-        <li>thread 1</li>
-        <li>thread 1</li>
-        <li>thread 1</li>
+        {allThreads?.map((thread, idx) => (
+          <li
+            key={idx}
+            onClick={(e) => changeThread(thread.threadId)}
+            className={thread.threadId === currThreadId ? "highlighted" : " "}
+          >
+            {thread.title}
+            <Trash
+              className="trash"
+              size={16}
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteThread(thread.threadId);
+              }}
+            />
+          </li>
+        ))}
       </ul>
 
-      {/* sign  */}
+      {/* sign */}
       <div className="sign">
         <CircleUserRound />
         <p className="accName">Silver</p>

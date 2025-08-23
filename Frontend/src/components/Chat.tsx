@@ -7,22 +7,21 @@ import "highlight.js/styles/github-dark.css";
 
 function Chat() {
   const { newChat, prevChats, reply } = useContext(MyContext);
-  const [latestReply, setLatestReply] = useState(null);
+  const [latestReply, setLatestReply] = useState<string | null>(null);
 
   useEffect(() => {
     if (reply === null) {
-      setLatestReply(null); //prevchat load
+      setLatestReply(null); // prevchat load
       return;
     }
 
     if (!prevChats?.length) return;
 
-    const content = reply.split(" "); //individual words
+    const content = reply.split(" "); // individual words
 
     let idx = 0;
     const interval = setInterval(() => {
       setLatestReply(content.slice(0, idx + 1).join(" "));
-
       idx++;
       if (idx >= content.length) clearInterval(interval);
     }, 40);
@@ -40,7 +39,9 @@ function Chat() {
             key={idx}
           >
             {chat.role === "user" ? (
-              <p className="userMessage">{chat.content}</p>
+              <p className="userMessage">
+                {chat.content.trim() === "" ? "(empty message)" : chat.content}
+              </p>
             ) : (
               <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                 {chat.content}

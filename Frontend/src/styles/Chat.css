@@ -28,6 +28,7 @@
 .gptDiv {
   text-align: left;
   font-size: 0.9rem;
+  line-height: 24px;
 }
 
 .userMessage {
@@ -39,5 +40,10 @@
   width: fit-content;
 }
 
-.gptMessage {
+.h1js {
+  border-radius: 14px !important;
+}
+
+pre {
+  white-space: pre-wrap;
 }
