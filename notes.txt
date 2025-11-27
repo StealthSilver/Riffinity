@@ -1,0 +1,127 @@
+BACKEND : nodejs + express + OpenAi api
+FRONTEND : react + css
+DATABASE : Mongo
+
+1. Backend setup 
+
+- Create a folder in the base repo 
+- npm init -y 
+- tsc --init 
+- create src/server.ts 
+- npm i express @types/express cors nodemon 
+- tsconfig, rootDir : "./src" , outDir: "./dist"
+
+------------------------------------------------------------------------------------
+
+In OpenAi we have to choose the Model, we will be using GPT-vo mini from OpenAI 
+
+token : A token is the fundamental unit of text an LLM understands and processes.
+Words, sub-words, punctuation, and spaces are all broken down into tokens before going into the model.
+
+2. setting up the openai 
+- npm i openai -> install the openai npm package to get convenient access to the OpenAI REST API 
+- go to https://platform.openai.com/docs/overview create a developer account and get the API_KEY 
+- store the API_KEY in the .env file 
+- create a .gitignore file 
+- npm i dotenv 
+- "dev": "npx tsc -b && node dist/server.js" add the dev script in package.json
+- in server.ts write the express boilerplate code 
+- create the openai client with the api key 
+- create the post endpoint for testing 
+
+------------------------------------------------------------------------------------
+
+3. creating the complete backend 
+
+this will have three steps 
+a. creating schemas and models and connection the db 
+b. creating the utils to run the logic 
+c. creating the express routes
+
+a. Creating the schemeas
+The history will be stored in the db, there will be chat threads
+
+ThreadSchema : id, title, messages, createdAt, updatedAt
+MessageSchema : content, role, timestamp
+
+- create three directories models, utils, routes in src
+- in models create the Thread schema and model 
+- in server.ts connect to the mongo db 
+- add the mongo connection string in the .env
+
+b. creating the utils 
+- in src/utils create openai.ts and write the communication logic 
+
+c. creating the routes 
+- in routes create the chat.ts 
+- create the test route
+- mainly there are four routes:
+ GET /thread -> getting all threads in the sidebar 
+ GET /thread/threadId -> getting one specific thread
+ DELETE /thread/threadId -> deleting a specific thread 
+ POST /chat -> sending the msessage and getting the answer from model, then storing in a db to create a new thread 
+
+ POST /chat : validate threadId, message 
+            : check is threadId is part of db -> continue the previous thread
+                                        or not -> create new thread 
+            : save the message(user) in thread
+            : save the response(openAi) in thread
+
+------------------------------------------------------------------------------------
+
+4. Frontend setup
+
+- npm create vite -> react -> typescript
+- clear all the boilerplate 
+
+5. crating components 
+
+Sidebar 
+Chat Window -> Navbar + Chat Input
+Chat
+
+- create a folder components in the src 
+- create Sidebar.tsx , Chat.tsx and ChatWindow.tsx
+- creating the top logo div, history and the accounts section in the sidebar 
+- styling the sidebar
+
+------------------------------------------------------------------------------------
+
+6. creating chatWindow 
+
+Chat Window -> 
+- create ChatWindow.tsx in components 
+- create the navbar, chat component and the input compoennt
+- style the chat window
+
+------------------------------------------------------------------------------------
+
+7. Adding the chat functionality 
+
+- sending prompt from frontend and getting the response
+- add the loader from react spinners npm
+- show the chats (prompt + reply)
+- format the chat using react markdown and rehypeHighlight
+- use the highlight.js/styles/github.css -> for syntax highlighting
+
+------------------------------------------------------------------------------------
+
+8. creating the thread history, new chat and delete chat in sidebar 
+
+- make the onclick functions on respective buttons
+- create the new chat and delete functionality 
+- add the scroll on the sidebar
+
+------------------------------------------------------------------------------------
+
+Future TODO
+
+- create the landing page 
+- create the signin, signup page
+- create the auth logic 
+- implement zod validations 
+- create the account modal
+- create the multiuser architecture 
+- add image and docs upload 
+- add voice prompt feature
+- implement light and dark mode 

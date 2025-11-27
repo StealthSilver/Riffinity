@@ -1,0 +1,109 @@
+.sidebar {
+  background-color: transparent;
+  color: #b4b4b4;
+  height: 100vh;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  border-right: solid 0.25px rgba(255, 255, 255, 0.5);
+}
+
+.topDiv {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+}
+
+button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px;
+  padding: 2px;
+  border-radius: 4px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  height: 60px;
+  width: 150px;
+}
+
+.history {
+  flex: 1;
+  margin: 20px;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.history::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.history li {
+  font-size: 16px;
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px 10px;
+  margin-bottom: 1rem;
+  border: solid 1px transparent;
+  border-radius: 4px;
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.history li:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sign {
+  padding: 10px 10px;
+  display: flex;
+  margin: 10px;
+  font-size: 16px;
+  align-items: center;
+  border-top: solid 0.25px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.accName {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.trash {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.history li:hover .trash {
+  opacity: 1;
+  color: red;
+}
+
+.highlighted {
+  background-color: rgba(180, 180, 180, 0.05);
+  border-radius: 10px;
+}
