@@ -37,7 +37,7 @@ const Navbar = () => {
         </div>
 
         <Link
-          href="https://riffinity.vercel.app/"
+          href="https://riffinity-main.vercel.app/"
           target="_blank"
           className="bg-[#e3186c] hover:bg-[#9c0543] text-[#fbfffd] font-bold px-6 py-2 rounded-full transition-colors duration-300 font-sans"
         >
