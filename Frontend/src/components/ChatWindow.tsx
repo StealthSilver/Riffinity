@@ -40,9 +40,15 @@ function ChatWindow() {
       );
       const res = await response.json();
       console.log(res);
-      setReply(res.assistantReply);
+
+      if (res.error) {
+        setReply(`Error: ${res.error}`);
+      } else {
+        setReply(res.assistantReply);
+      }
     } catch (err) {
-      console.log(err);
+      console.error("Error in getReply:", err);
+      setReply("Failed to get response from server. Please try again.");
     }
     setLoading(false);
   };

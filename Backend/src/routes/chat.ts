@@ -107,9 +107,10 @@ router.post("/chat", async (req, res) => {
     await thread.save();
 
     res.json({ assistantReply });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Something went wrong" });
+  } catch (err: any) {
+    console.error("Error in /chat endpoint:", err);
+    const errorMessage = err.message || "Something went wrong";
+    res.status(500).json({ error: errorMessage });
   }
 });
 
