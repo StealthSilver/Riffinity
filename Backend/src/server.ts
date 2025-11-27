@@ -8,7 +8,17 @@ const app = express();
 const PORT = 8080;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://riffinity.vercel.app",
+      "https://riffinity-main.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 app.use("/api", chatRoutes);
 
