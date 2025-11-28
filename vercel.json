@@ -1,16 +1,17 @@
 {
   "version": 2,
-  "buildCommand": "cd Backend && npm install && npm run build",
-  "installCommand": "cd Backend && npm install",
-  "functions": {
-    "Backend/src/server.ts": {
-      "runtime": "@vercel/node@3.0.23"
-    }
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/Backend/src/server.ts"
+      "src": "Backend/src/server.ts",
+      "use": "@vercel/node"
     }
-  ]
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Backend/src/server.ts"
+    }
+  ],
+  "installCommand": "npm install --prefix Backend",
+  "buildCommand": "npm run build --prefix Backend"
 }
