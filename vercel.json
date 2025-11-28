@@ -1,17 +1,3 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "Backend/src/server.ts",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "Backend/src/server.ts"
-    }
-  ],
-  "installCommand": "npm install --prefix Backend",
-  "buildCommand": "npm run build --prefix Backend"
+  "version": 2
 }
