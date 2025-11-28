@@ -5,12 +5,23 @@ import mongoose from "mongoose";
 import chatRoutes from "./routes/chat";
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 
 // Prevent mongoose from buffering commands when not connected
 mongoose.set("bufferCommands", false);
 
 app.use(express.json());
+
+// DB readiness / lazy connection middleware (helps in serverless cold starts)
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState === 1) return next(); // connected
+  try {
+    await connectDB();
+    return next();
+  } catch (e) {
+    return res.status(503).json({ error: "Database not connected" });
+  }
+});
 app.use(
   cors({
     origin: [
@@ -25,7 +36,7 @@ app.use(
 
 app.use("/api", chatRoutes);
 
-// Start the server only after a successful DB connection
+// Start the server only in traditional runtime (not Vercel serverless)
 async function start() {
   try {
     await connectDB();
@@ -38,21 +49,39 @@ async function start() {
   }
 }
 
-start();
+if (!process.env.VERCEL) {
+  // local / non-serverless environment
+  start();
+}
+
+let _connecting: Promise<void> | null = null;
 
 async function connectDB() {
   try {
     if (!process.env.MONGODB_URI) {
       throw new Error("MONGODB_URI is not defined in .env file");
     }
-
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "Riffinity",
-    });
-
-    console.log("Connected to MongoDB");
+    if (mongoose.connection.readyState === 1) return; // already connected
+    if (_connecting) {
+      await _connecting; // reuse in-flight promise
+      return;
+    }
+    _connecting = mongoose
+      .connect(process.env.MONGODB_URI, {
+        dbName: "Riffinity",
+      })
+      .then(() => {
+        console.log("Connected to MongoDB");
+      })
+      .finally(() => {
+        _connecting = null;
+      });
+    await _connecting;
   } catch (err) {
     console.error("MongoDB connection error:", err);
     throw err;
   }
 }
+
+// Export the Express app for Vercel serverless usage
+export default app;
