@@ -47,6 +47,9 @@ app.use(
 app.use("/api", chatRoutes);
 
 // Start the server only in traditional runtime (not Vercel serverless)
+// Cache for in-flight mongoose connection promise to avoid duplicate connects
+let _connecting: Promise<void> | null = null;
+
 async function start() {
   try {
     await connectDB();
@@ -63,8 +66,6 @@ if (!process.env.VERCEL) {
   // local / non-serverless environment
   start();
 }
-
-let _connecting: Promise<void> | null = null;
 
 async function connectDB() {
   try {
