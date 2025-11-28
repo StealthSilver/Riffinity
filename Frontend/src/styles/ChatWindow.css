@@ -184,3 +184,97 @@ input:focus {
   padding: 0.5rem;
   color: #b4b4b4;
 }
+
+/* Responsive Tweaks */
+@media (max-width: 1200px) {
+  .chatWindow {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 1rem;
+  }
+  .modelDiv {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .navbar span {
+    margin: 0.8rem 1.2rem;
+  }
+  .modelDiv {
+    margin-left: 12px;
+  }
+  .modelDropdown {
+    width: 220px;
+  }
+  .inputBox input {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .modelDiv {
+    order: 1;
+  }
+  .shareIconDiv {
+    order: 2;
+    margin-right: 12px;
+  }
+  .chatInput {
+    padding: 0 12px;
+  }
+  .inputBox {
+    max-width: 100%;
+  }
+  .inputBox input {
+    font-size: 0.9rem;
+  }
+  #submit {
+    right: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modelDiv {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .modelOption {
+    font-size: 0.75rem;
+    padding: 7px 10px;
+  }
+  .modelHeader {
+    font-size: 0.65rem;
+  }
+  .modelFooter {
+    font-size: 0.55rem;
+  }
+  .inputBox input {
+    padding: 14px 16px;
+  }
+  .info {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .navbar {
+    justify-content: center;
+  }
+  .shareIconDiv {
+    display: none; /* hide share icon on very small screens to save space */
+  }
+  .inputBox input {
+    padding: 12px 14px;
+  }
+  #submit svg {
+    width: 18px;
+    height: 18px;
+  }
+}

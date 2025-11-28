@@ -107,3 +107,40 @@ body::after {
   height: 100vh;
   width: 100%;
 }
+
+/* Responsive Layout Adjustments */
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 700px) {
+  .app {
+    flex-direction: column;
+  }
+  body {
+    background-size: 300% 300%;
+    animation: gradientWave 18s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    --animated-gradient: linear-gradient(
+      150deg,
+      #2e026d 0%,
+      #7b2cbf 40%,
+      #ff6a00 75%,
+      #ffcc00 100%
+    );
+  }
+}
+
+@media (max-width: 450px) {
+  body::after {
+    animation: rippleDrift 22s linear infinite;
+  }
+}

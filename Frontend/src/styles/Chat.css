@@ -47,3 +47,60 @@
 pre {
   white-space: pre-wrap;
 }
+
+/* Responsive Tweaks */
+@media (max-width: 1200px) {
+  .chats {
+    padding: 5rem 4rem 6rem;
+  }
+  .userMessage {
+    margin-left: auto; /* allow natural right alignment */
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 900px) {
+  .chats {
+    padding: 3rem 2rem 5rem;
+    max-width: 100%;
+  }
+  .userMessage {
+    margin-left: auto;
+    max-width: 85%;
+  }
+  .userDiv,
+  .gptDiv {
+    font-size: 0.85rem;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .chats {
+    padding: 2rem 1.2rem 4.5rem;
+  }
+  .userMessage {
+    margin-left: 0; /* prevent huge offset on tiny screens */
+    max-width: 100%;
+    padding: 10px 16px;
+  }
+  .userDiv,
+  .gptDiv {
+    font-size: 0.8rem;
+    line-height: 20px;
+  }
+  pre {
+    font-size: 0.75rem;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .chats {
+    padding: 1.6rem 0.9rem 4rem;
+  }
+  .userMessage {
+    padding: 8px 14px;
+    border-radius: 12px;
+  }
+}

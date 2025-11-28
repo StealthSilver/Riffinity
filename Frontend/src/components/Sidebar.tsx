@@ -122,34 +122,45 @@ function Sidebar() {
 
 function ProfileSection() {
   const [expanded, setExpanded] = useState(false);
+  // close on outside click
+  React.useEffect(() => {
+    function handle(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".profileWrapper") && expanded) {
+        setExpanded(false);
+      }
+    }
+    if (expanded) document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, [expanded]);
   return (
-    <div className={"sign" + (expanded ? " expanded" : "")}>
-      <div
-        className="profileCard"
-        role="button"
-        aria-haspopup="true"
-        aria-expanded={expanded}
-        tabIndex={0}
-        onClick={() => setExpanded((e) => !e)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setExpanded((v) => !v);
-          }
-        }}
-      >
-        <div className="avatar">
-          <CircleUserRound size={30} />
-        </div>
-        <div className="profileInfo">
+    <div className="sign">
+      <div className="profileWrapper">
+        <div
+          className="profileCard"
+          role="button"
+          aria-haspopup="dialog"
+          aria-expanded={expanded}
+          tabIndex={0}
+          onClick={() => setExpanded((e) => !e)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setExpanded((v) => !v);
+            }
+          }}
+        >
+          <div className="avatar">
+            <CircleUserRound size={30} />
+          </div>
           <div className="profileName">Silver User</div>
-          {expanded && (
-            <>
-              <div className="profileEmail">user@example.com</div>
-              <div className="planBadge">Silver Plan</div>
-            </>
-          )}
         </div>
+        {expanded && (
+          <div className="profilePopover" role="dialog">
+            <div className="profileEmail">user@example.com</div>
+            <div className="planBadge">Silver Plan</div>
+          </div>
+        )}
       </div>
     </div>
   );

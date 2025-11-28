@@ -90,8 +90,8 @@ button:hover {
 
 .profileCard {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
@@ -114,24 +114,17 @@ button:hover {
   border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
-.profileInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-}
-
 .profileName {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   color: #e6e6e6;
 }
 
 .profileEmail {
   font-size: 0.65rem;
   letter-spacing: 0.4px;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 
 .planBadge {
@@ -146,15 +139,41 @@ button:hover {
   backdrop-filter: blur(6px);
 }
 
-.sign.expanded .profileCard {
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-  padding: 6px 10px 10px 10px;
+.profileWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.sign:not(.expanded) .profileCard:hover {
+.profileCard:hover {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 12px;
+}
+
+.profilePopover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  min-width: 220px;
+  padding: 12px 14px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.55),
+    0 4px 12px rgba(0, 0, 0, 0.45), inset 0 0 0 0.5px rgba(255, 255, 255, 0.35);
+  z-index: 60;
+  animation: dropdownFade 0.18s ease;
 }
 
 .trash {
@@ -171,4 +190,84 @@ button:hover {
 .highlighted {
   background-color: rgba(180, 180, 180, 0.05);
   border-radius: 10px;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 280px;
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 240px;
+  }
+  .history li {
+    font-size: 14px;
+    padding: 7px 8px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+    border-right: none;
+    border-bottom: solid 0.25px rgba(255, 255, 255, 0.4);
+    padding-top: 4px;
+  }
+  .topDiv {
+    padding: 4px 14px 8px 14px;
+  }
+  .history {
+    flex: initial;
+    height: 180px;
+    margin: 4px 12px 8px 12px;
+    padding: 4px 4px 10px 4px;
+  }
+  .sign {
+    border-top: none;
+    padding: 10px 14px 12px 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .history li {
+    font-size: 13px;
+    padding: 6px 8px;
+  }
+  .logo {
+    height: 52px;
+    width: 130px;
+  }
+  .avatar {
+    width: 38px;
+    height: 38px;
+  }
+  .profileName {
+    font-size: 0.75rem;
+  }
+  .profileEmail {
+    font-size: 0.55rem;
+  }
+  .planBadge {
+    font-size: 0.5rem;
+    padding: 3px 6px;
+  }
+}
+
+@media (max-width: 450px) {
+  .history {
+    height: 150px;
+  }
+  .history li {
+    padding: 6px 6px;
+  }
+  .topDiv {
+    margin-bottom: 2px;
+  }
 }
