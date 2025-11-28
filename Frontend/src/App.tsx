@@ -13,6 +13,7 @@ function App() {
   const [prevChats, setPrevChats] = useState<ChatMessage[]>([]);
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
+  const [currentModel, setCurrentModel] = useState<string>("default-model");
 
   const providerValues = {
     prompt,
@@ -27,6 +28,8 @@ function App() {
     setPrevChats,
     allThreads,
     setAllThreads,
+    currentModel,
+    setCurrentModel,
   };
 
   return (

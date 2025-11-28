@@ -26,6 +26,8 @@ type ChatContextType = {
   setNewChat: React.Dispatch<React.SetStateAction<boolean>>;
   currentModel: string;
   setCurrentModel: React.Dispatch<React.SetStateAction<string>>;
+  mobileSidebarOpen: boolean;
+  setMobileSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const MyContext = createContext<ChatContextType>({
@@ -43,6 +45,8 @@ export const MyContext = createContext<ChatContextType>({
   setNewChat: () => {},
   currentModel: "gpt-4o-mini",
   setCurrentModel: () => {},
+  mobileSidebarOpen: false,
+  setMobileSidebarOpen: () => {},
 });
 
 export function MyProvider({ children }: { children: ReactNode }) {
@@ -53,6 +57,7 @@ export function MyProvider({ children }: { children: ReactNode }) {
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
   const [newChat, setNewChat] = useState<boolean>(false);
   const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState<boolean>(false);
 
   return (
     <MyContext.Provider
@@ -71,6 +76,8 @@ export function MyProvider({ children }: { children: ReactNode }) {
         setNewChat,
         currentModel,
         setCurrentModel,
+        mobileSidebarOpen,
+        setMobileSidebarOpen,
       }}
     >
       {children}
