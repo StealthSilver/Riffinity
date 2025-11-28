@@ -1,7 +1,7 @@
 import "../styles/Sidebar.css";
 import logo from "../assets/riffinity_logo.svg";
 import { SquarePen, CircleUserRound, Trash } from "lucide-react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import { v1 as uuidv1 } from "uuid";
 
@@ -115,11 +115,43 @@ function Sidebar() {
         ))}
       </ul>
 
-      <div className="sign">
-        <CircleUserRound />
-        <p className="accName">Silver</p>
-      </div>
+      <ProfileSection />
     </section>
+  );
+}
+
+function ProfileSection() {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className={"sign" + (expanded ? " expanded" : "")}>
+      <div
+        className="profileCard"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded={expanded}
+        tabIndex={0}
+        onClick={() => setExpanded((e) => !e)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setExpanded((v) => !v);
+          }
+        }}
+      >
+        <div className="avatar">
+          <CircleUserRound size={30} />
+        </div>
+        <div className="profileInfo">
+          <div className="profileName">Silver User</div>
+          {expanded && (
+            <>
+              <div className="profileEmail">user@example.com</div>
+              <div className="planBadge">Silver Plan</div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

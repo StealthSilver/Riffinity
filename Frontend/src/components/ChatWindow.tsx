@@ -104,14 +104,14 @@ function ChatWindow() {
           onClick={() => setModelMenuOpen((o) => !o)}
           ref={modelRef}
         >
-          <Cpu size={18} />
-          <span className="modelLabel">{currentModel}</span>
+          <Cpu size={18} /> Model
           <ChevronDown
             className={modelMenuOpen ? "chevron rotated" : "chevron"}
             size={16}
           />
           {modelMenuOpen && (
             <div className="modelDropdown" role="menu">
+              <div className="modelHeader">Models</div>
               {models.map((m) => (
                 <div
                   key={m}
@@ -128,6 +128,7 @@ function ChatWindow() {
                   <span>{m}</span>
                 </div>
               ))}
+              <div className="modelFooter">More models coming soon...</div>
             </div>
           )}
         </div>
