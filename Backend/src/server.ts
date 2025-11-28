@@ -7,6 +7,9 @@ import chatRoutes from "./routes/chat";
 const app = express();
 const PORT = 8080;
 
+// Prevent mongoose from buffering commands when not connected
+mongoose.set("bufferCommands", false);
+
 app.use(express.json());
 app.use(
   cors({
@@ -22,12 +25,22 @@ app.use(
 
 app.use("/api", chatRoutes);
 
-app.listen(PORT, () => {
-  console.log(`App is listening on port ${PORT}`);
-  connectDB();
-});
+// Start the server only after a successful DB connection
+async function start() {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`App is listening on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to start server:", err);
+    process.exit(1);
+  }
+}
 
-const connectDB = async () => {
+start();
+
+async function connectDB() {
   try {
     if (!process.env.MONGODB_URI) {
       throw new Error("MONGODB_URI is not defined in .env file");
@@ -40,6 +53,6 @@ const connectDB = async () => {
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error("MongoDB connection error:", err);
-    process.exit(1);
+    throw err;
   }
-};
+}
