@@ -8,12 +8,13 @@ import { v1 as uuidv1 } from "uuid";
 
 function App() {
   const [prompt, setPrompt] = useState("");
-  const [reply, setReply] = useState<string | null>(null); // ✅ fixed typing
+  const [reply, setReply] = useState<string | null>(null);
   const [currThreadId, setCurrThreadId] = useState(uuidv1());
   const [prevChats, setPrevChats] = useState<ChatMessage[]>([]);
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
-  const [currentModel, setCurrentModel] = useState<string>("default-model");
+  const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const providerValues = {
     prompt,
@@ -30,6 +31,8 @@ function App() {
     setAllThreads,
     currentModel,
     setCurrentModel,
+    mobileSidebarOpen,
+    setMobileSidebarOpen,
   };
 
   return (
