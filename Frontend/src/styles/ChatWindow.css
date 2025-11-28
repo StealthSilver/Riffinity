@@ -185,6 +185,33 @@ input:focus {
   color: #b4b4b4;
 }
 
+/* Hamburger button hidden by default */
+.hamburgerBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  margin-left: 6px;
+  color: #e6e6e6;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.hamburgerBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 700px) {
+  .hamburgerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar {
+    justify-content: flex-start;
+  }
+}
+
 /* Responsive Tweaks */
 @media (max-width: 1200px) {
   .chatWindow {

@@ -3,7 +3,7 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "../context.js";
 import { useContext, useState, useEffect, useRef } from "react";
 import { PropagateLoader } from "react-spinners";
-import { ChevronDown, SendHorizontal, Share, Cpu } from "lucide-react";
+import { ChevronDown, SendHorizontal, Share, Cpu, Menu } from "lucide-react";
 
 function ChatWindow() {
   const {
@@ -16,6 +16,8 @@ function ChatWindow() {
     setNewChat,
     currentModel,
     setCurrentModel,
+    mobileSidebarOpen,
+    setMobileSidebarOpen,
   } = useContext(MyContext);
   const [loading, setLoading] = useState(false);
   const [modelMenuOpen, setModelMenuOpen] = useState(false);
@@ -99,6 +101,14 @@ function ChatWindow() {
     <div className="chatWindow">
       {/* navbar */}
       <div className="navbar">
+        <button
+          className="hamburgerBtn"
+          aria-label="Open menu"
+          aria-expanded={mobileSidebarOpen}
+          onClick={() => setMobileSidebarOpen((o) => !o)}
+        >
+          <Menu size={20} />
+        </button>
         <div
           className="modelDiv"
           onClick={() => setModelMenuOpen((o) => !o)}

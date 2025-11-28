@@ -1,6 +1,6 @@
 import "../styles/Sidebar.css";
 import logo from "../assets/riffinity_logo.svg";
-import { SquarePen, CircleUserRound, Trash } from "lucide-react";
+import { SquarePen, CircleUserRound, Trash, X } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import { v1 as uuidv1 } from "uuid";
@@ -15,6 +15,8 @@ function Sidebar() {
     setReply,
     setCurrThreadId,
     setPrevChats,
+    mobileSidebarOpen,
+    setMobileSidebarOpen,
   } = useContext(MyContext);
 
   const getAllThreads = async () => {
@@ -46,6 +48,7 @@ function Sidebar() {
     setReply(null);
     setCurrThreadId(uuidv1());
     setPrevChats([]);
+    setMobileSidebarOpen(false);
   };
 
   const changeThread = async (newthreadId: React.SetStateAction<string>) => {
@@ -60,6 +63,7 @@ function Sidebar() {
       setPrevChats(res);
       setNewChat(false);
       setReply(null);
+      setMobileSidebarOpen(false);
     } catch (err) {
       console.log(err);
     }
@@ -87,36 +91,55 @@ function Sidebar() {
   };
 
   return (
-    <section className="sidebar">
-      <div className="topDiv">
-        <img className="logo" src={logo} alt="logo" />
-        <button onClick={createNewChat}>
-          <SquarePen size={20} />
-        </button>
-      </div>
-
-      <ul className="history">
-        {allThreads?.map((thread, idx) => (
-          <li
-            key={idx}
-            onClick={() => changeThread(thread.threadId)}
-            className={thread.threadId === currThreadId ? "highlighted" : " "}
+    <>
+      <section
+        className={"sidebar" + (mobileSidebarOpen ? " open" : " closed")}
+        aria-hidden={!mobileSidebarOpen}
+      >
+        <div className="topDiv">
+          <img className="logo" src={logo} alt="logo" />
+          <button onClick={createNewChat}>
+            <SquarePen size={20} />
+          </button>
+          <button
+            className="closeMobile"
+            aria-label="Close menu"
+            onClick={() => setMobileSidebarOpen(false)}
           >
-            {thread.title}
-            <Trash
-              className="trash"
-              size={16}
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteThread(thread.threadId);
-              }}
-            />
-          </li>
-        ))}
-      </ul>
+            <X size={20} />
+          </button>
+        </div>
 
-      <ProfileSection />
-    </section>
+        <ul className="history">
+          {allThreads?.map((thread, idx) => (
+            <li
+              key={idx}
+              onClick={() => changeThread(thread.threadId)}
+              className={thread.threadId === currThreadId ? "highlighted" : " "}
+            >
+              {thread.title}
+              <Trash
+                className="trash"
+                size={16}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteThread(thread.threadId);
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+
+        <ProfileSection />
+      </section>
+      {mobileSidebarOpen && (
+        <div
+          className="sidebarOverlay"
+          onClick={() => setMobileSidebarOpen(false)}
+          aria-label="Close sidebar overlay"
+        />
+      )}
+    </>
   );
 }
 
