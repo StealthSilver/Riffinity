@@ -29,7 +29,8 @@ app.use(
         "http://localhost:5173",
         "http://localhost:3000",
         "https://riffinity.vercel.app",
-        "https://riffinity-main.vercel.app",
+
+        "https://riffinity-fe.vercel.app",
       ];
       if (!origin || allowed.includes(origin)) {
         callback(null, true);
