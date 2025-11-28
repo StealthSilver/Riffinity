@@ -34,10 +34,8 @@ function ChatWindow() {
     };
 
     try {
-      const response = await fetch(
-        "https://riffinity.vercel.app/api/chat",
-        options
-      );
+      const baseUrl = "https://riffinity-main.vercel.app";
+      const response = await fetch(`${baseUrl}/api/chat`, options);
       const res = await response.json();
       console.log(res);
 
