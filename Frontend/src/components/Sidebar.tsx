@@ -19,7 +19,7 @@ function Sidebar() {
 
   const getAllThreads = async () => {
     try {
-      const baseUrl = "https://riffinity-main.vercel.app";
+      const baseUrl = "https://riffinity.onrender.com";
       const response = await fetch(`${baseUrl}/api/thread`);
       const res = await response.json();
 
@@ -52,7 +52,7 @@ function Sidebar() {
     setCurrThreadId(newthreadId);
 
     try {
-      const baseUrl = "https://riffinity-main.vercel.app";
+      const baseUrl = "https://riffinity.onrender.com";
       const response = await fetch(`${baseUrl}/api/thread/${newthreadId}`);
 
       const res = await response.json();
@@ -67,7 +67,7 @@ function Sidebar() {
 
   const deleteThread = async (threadId: string) => {
     try {
-      const baseUrl = "https://riffinity-main.vercel.app";
+      const baseUrl = "https://riffinity.onrender.com";
       const response = await fetch(`${baseUrl}/api/thread/${threadId}`, {
         method: "DELETE",
       });
