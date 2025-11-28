@@ -40,7 +40,7 @@ const Hero = () => {
 
           <div className="flex flex-col md:flex-row items-center justify-center pt-12 gap-6 md:gap-[120px]">
             <Link
-              href="https://riffinity-main.vercel.app/"
+              href="https://riffinity-fe.vercel.app/"
               target="_blank"
               className="bg-[#e3186c] hover:bg-[#9c0543] text-[#fbfffd] font-sans font-bold px-10 py-2 md:px-20 rounded-full transition-colors duration-300 cursor-pointer inline-block text-sm md:text-base"
             >

@@ -48,7 +48,7 @@ const CTA = () => {
         </h1>
 
         <Link
-          href="https://riffinity-main.vercel.app/"
+          href="https://riffinity-fe.vercel.app/"
           target="_blank"
           className="bg-[#e3186c] hover:bg-[#9c0543] text-[#fbfffd] font-sans font-bold px-20 py-2 mt-20 rounded-full transition-colors duration-300 cursor-pointer inline-block"
         >
