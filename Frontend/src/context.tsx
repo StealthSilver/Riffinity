@@ -24,6 +24,8 @@ type ChatContextType = {
   setAllThreads: React.Dispatch<React.SetStateAction<Thread[]>>;
   newChat: boolean;
   setNewChat: React.Dispatch<React.SetStateAction<boolean>>;
+  currentModel: string;
+  setCurrentModel: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const MyContext = createContext<ChatContextType>({
@@ -39,6 +41,8 @@ export const MyContext = createContext<ChatContextType>({
   setAllThreads: () => {},
   newChat: false,
   setNewChat: () => {},
+  currentModel: "gpt-4o-mini",
+  setCurrentModel: () => {},
 });
 
 export function MyProvider({ children }: { children: ReactNode }) {
@@ -48,6 +52,7 @@ export function MyProvider({ children }: { children: ReactNode }) {
   const [prevChats, setPrevChats] = useState<ChatMessage[]>([]);
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
   const [newChat, setNewChat] = useState<boolean>(false);
+  const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
 
   return (
     <MyContext.Provider
@@ -64,6 +69,8 @@ export function MyProvider({ children }: { children: ReactNode }) {
         setAllThreads,
         newChat,
         setNewChat,
+        currentModel,
+        setCurrentModel,
       }}
     >
       {children}

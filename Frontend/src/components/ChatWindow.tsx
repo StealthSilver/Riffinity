@@ -1,9 +1,9 @@
 import "../styles/ChatWindow.css";
 import Chat from "./Chat.jsx";
 import { MyContext } from "../context.js";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { PropagateLoader } from "react-spinners";
-import { ChevronDown, SendHorizontal, Share } from "lucide-react";
+import { ChevronDown, SendHorizontal, Share, Cpu } from "lucide-react";
 
 function ChatWindow() {
   const {
@@ -14,8 +14,20 @@ function ChatWindow() {
     currThreadId,
     setPrevChats,
     setNewChat,
+    currentModel,
+    setCurrentModel,
   } = useContext(MyContext);
   const [loading, setLoading] = useState(false);
+  const [modelMenuOpen, setModelMenuOpen] = useState(false);
+  const modelRef = useRef<HTMLDivElement | null>(null);
+
+  const models = [
+    "gpt-4o-mini",
+    "gpt-4o",
+    "gpt-4.1-mini",
+    "gpt-4.1",
+    "o3-mini",
+  ];
 
   const getReply = async () => {
     setLoading(true);
@@ -30,6 +42,7 @@ function ChatWindow() {
       body: JSON.stringify({
         message: prompt,
         threadId: currThreadId,
+        model: currentModel,
       }),
     };
 
@@ -69,13 +82,55 @@ function ChatWindow() {
     setPrompt("");
   }, [reply]);
 
+  // close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (modelRef.current && !modelRef.current.contains(e.target as Node)) {
+        setModelMenuOpen(false);
+      }
+    }
+    if (modelMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [modelMenuOpen]);
+
   return (
     <div className="chatWindow">
       {/* navbar */}
       <div className="navbar">
-        <span className="modelDiv">
-          Model <ChevronDown />
-        </span>
+        <div
+          className="modelDiv"
+          onClick={() => setModelMenuOpen((o) => !o)}
+          ref={modelRef}
+        >
+          <Cpu size={18} />
+          <span className="modelLabel">{currentModel}</span>
+          <ChevronDown
+            className={modelMenuOpen ? "chevron rotated" : "chevron"}
+            size={16}
+          />
+          {modelMenuOpen && (
+            <div className="modelDropdown" role="menu">
+              {models.map((m) => (
+                <div
+                  key={m}
+                  className={
+                    "modelOption" + (m === currentModel ? " active" : "")
+                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentModel(m);
+                    setModelMenuOpen(false);
+                  }}
+                >
+                  <Cpu size={14} />
+                  <span>{m}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="shareIconDiv">
           <span className="shareIcon">
             <Share className="share" size={20} />
