@@ -195,51 +195,41 @@ function ChatWindow() {
       {/* Chat Area */}
       <Chat />
 
-      {/* Loading Overlay */}
+      {/* Loader Section - Above Input */}
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-md z-40">
-          <div className="flex flex-col items-center gap-4 px-8 py-6 bg-[#1a1a1a] border border-white/10 rounded-2xl shadow-2xl">
-            <PropagateLoader color="#6366f1" loading={loading} size={12} />
-            <p className="text-sm text-gray-300 font-medium">Generating response...</p>
+        <div className="w-full border-t border-white/8 bg-[#111111] px-4 py-3">
+          <div className="w-full max-w-4xl mx-auto flex items-center gap-3 px-4 py-2 bg-[#1a1a1a] border border-pink-400/30 rounded-lg">
+            <div className="flex items-center gap-2">
+              <PropagateLoader color="#ec4899" loading={loading} size={8} />
+            </div>
+            <p className="text-xs text-gray-400 font-medium">Generating response...</p>
           </div>
         </div>
       )}
 
       {/* Input Area */}
-      <div className="w-full flex flex-col items-center px-4 py-6 border-t border-white/8 bg-[#111111]">
-        <div className="w-full max-w-4xl">
-          <div className="flex items-end gap-3">
-            <div className="flex-1 relative">
-              <textarea
-                placeholder="Type your message..."
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    getReply();
-                  }
-                }}
-                rows={1}
-                className="w-full px-5 py-4 bg-[#1a1a1a] border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 focus:bg-[#1f1f1f] transition-all text-[15px] resize-none max-h-32"
-                style={{
-                  minHeight: "56px",
-                  overflowY: prompt.split("\n").length > 3 ? "auto" : "hidden",
-                }}
-              />
-            </div>
-
-            <button
-              onClick={getReply}
-              disabled={loading || !prompt.trim()}
-              className="flex-shrink-0 p-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-indigo-600 disabled:hover:to-purple-600 rounded-2xl transition-all flex items-center justify-center shadow-lg shadow-indigo-900/30"
-            >
-              <Send size={20} className="text-white" />
-            </button>
-          </div>
-          <p className="text-xs text-gray-500 mt-3 text-center">
-            Riffinity AI can make mistakes. Verify important information.
-          </p>
+      <div className="w-full border-t border-white/8 bg-[#111111] p-4">
+        <div className="w-full max-w-4xl mx-auto flex items-center gap-3">
+          <input
+            type="text"
+            placeholder="Type your message..."
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                getReply();
+              }
+            }}
+            className="flex-1 px-4 py-2.5 bg-[#1a1a1a] border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none focus:border-pink-400/50 hover:bg-white/5 transition-all"
+          />
+          <button
+            onClick={getReply}
+            disabled={loading || !prompt.trim()}
+            className="flex-shrink-0 px-4 py-2.5 bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-700 hover:border-pink-400/60 rounded-xl transition-all text-gray-300 hover:text-white text-sm font-medium"
+          >
+            <Send size={16} />
+          </button>
         </div>
       </div>
     </div>

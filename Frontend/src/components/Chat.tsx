@@ -44,35 +44,35 @@ function Chat() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-8">
-          <div className="max-w-4xl mx-auto space-y-6">
+        <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6">
+          <div className="max-w-4xl mx-auto space-y-4">
             {prevChats?.slice(0, -1).map((chat, idx) => (
               <div
                 key={idx}
-                className={`flex gap-4 animate-fade-in ${
+                className={`flex gap-3 animate-fade-in ${
                   chat.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 {chat.role === "assistant" && (
-                  <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
-                    <Bot size={18} className="text-white" />
+                  <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
+                    <Bot size={14} className="text-pink-400" />
                   </div>
                 )}
                 <div
-                  className={`flex-1 max-w-3xl px-5 py-4 rounded-2xl ${
+                  className={`max-w-3xl px-3.5 py-2.5 rounded-lg ${
                     chat.role === "user"
-                      ? "bg-[#1e293b] text-white ml-12"
-                      : "bg-[#18181b] border border-white/8"
+                      ? "bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 text-gray-200"
+                      : "bg-[#1a1a1a] border border-white/10 text-gray-300"
                   }`}
                 >
                   {chat.role === "user" ? (
-                    <p className="text-[15px] leading-relaxed text-gray-100">
+                    <p className="text-sm leading-relaxed">
                       {chat.content.trim() === ""
                         ? "(empty message)"
                         : chat.content}
                     </p>
                   ) : (
-                    <div className="prose prose-invert max-w-none">
+                    <div className="prose prose-sm prose-invert max-w-none">
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                         {chat.content}
                       </ReactMarkdown>
@@ -80,7 +80,7 @@ function Chat() {
                   )}
                 </div>
                 {chat.role === "user" && (
-                  <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-gray-300 font-semibold text-sm shadow-lg">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-gray-300 font-medium text-xs shadow-md">
                     U
                   </div>
                 )}
@@ -88,12 +88,12 @@ function Chat() {
             ))}
 
             {prevChats.length > 0 && (
-              <div className="flex gap-4 justify-start animate-fade-in">
-                <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
-                  <Bot size={18} className="text-white" />
+              <div className="flex gap-3 justify-start animate-fade-in">
+                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
+                  <Bot size={14} className="text-pink-400" />
                 </div>
-                <div className="flex-1 max-w-3xl px-5 py-4 rounded-2xl bg-[#18181b] border border-white/8">
-                  <div className="prose prose-invert max-w-none">
+                <div className="max-w-3xl px-3.5 py-2.5 rounded-lg bg-[#1a1a1a] border border-white/10 text-gray-300">
+                  <div className="prose prose-sm prose-invert max-w-none">
                     {latestReply === null ? (
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                         {prevChats[prevChats.length - 1].content}

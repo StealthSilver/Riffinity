@@ -112,17 +112,17 @@ function Sidebar() {
         </div>
 
         {/* New Chat Button */}
-        <div className="px-4 py-4">
+        <div className="px-4 py-3">
           <button
             onClick={createNewChat}
-            className="group relative w-full flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-xl transition-all font-medium overflow-hidden border border-gray-700 hover:border-pink-400/60 hover:text-white"
+            className="group relative w-full flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-lg transition-all text-sm font-medium overflow-hidden border border-gray-700 hover:border-pink-400/60 hover:text-white"
             aria-label="New chat"
           >
             {/* Metallic shine effect */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </div>
-            <SquarePen size={18} className="relative z-10" />
+            <SquarePen size={16} className="relative z-10" />
             <span className="relative z-10">New Chat</span>
           </button>
         </div>
@@ -148,7 +148,7 @@ function Sidebar() {
                     {thread.title}
                   </span>
                   {thread.threadId === currThreadId && (
-                    <ChevronRight size={16} className="flex-shrink-0 text-indigo-400" />
+                    <ChevronRight size={16} className="flex-shrink-0 text-pink-400" />
                   )}
                 </button>
                 <button
@@ -197,27 +197,27 @@ function ProfileSection() {
   }, [expanded]);
 
   return (
-    <div className="border-t border-white/8 p-4">
+    <div className="border-t border-white/8 p-3">
       <div className="profileWrapper relative">
         <button
-          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/5 transition-all"
+          className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/5 transition-all"
           onClick={() => setExpanded((e) => !e)}
           aria-haspopup="dialog"
           aria-expanded={expanded}
         >
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
-            <User size={18} className="text-white" />
+          <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
+            <User size={16} className="text-pink-400" />
           </div>
           <div className="flex-1 text-left">
-            <div className="text-sm font-semibold text-white">Silver User</div>
-            <div className="text-xs text-gray-500">Pro Plan</div>
+            <div className="text-xs font-medium text-white">Silver User</div>
+            <div className="text-[10px] text-gray-500">Pro Plan</div>
           </div>
         </button>
 
         {expanded && (
-          <div className="absolute bottom-full left-0 mb-3 w-full bg-[#1a1a1a] border border-white/10 rounded-xl p-4 shadow-2xl z-50 space-y-3 animate-fade-in">
+          <div className="absolute bottom-full left-0 mb-2 w-full bg-[#1a1a1a] border border-white/10 rounded-lg p-3 shadow-2xl z-50 space-y-2 animate-fade-in">
             <div className="text-xs text-gray-400">user@example.com</div>
-            <div className="px-3 py-1.5 text-xs bg-gradient-to-r from-indigo-600/20 to-purple-600/20 border border-indigo-500/30 rounded-lg text-center text-indigo-300 font-medium">
+            <div className="px-2.5 py-1 text-[10px] bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/30 rounded-md text-center text-pink-300 font-medium">
               Silver Plan Active
             </div>
           </div>
