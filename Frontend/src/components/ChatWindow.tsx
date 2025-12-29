@@ -80,8 +80,8 @@ function ChatWindow() {
         console.error("Error fetching models:", err);
         // Fallback to some default models if API fails
         setModels([
-          { id: "openai/gpt-4o-mini", name: "GPT-4o Mini", description: "OpenAI" },
           { id: "openai/gpt-4o", name: "GPT-4o", description: "OpenAI" },
+          { id: "openai/gpt-4o-mini", name: "GPT-4o Mini", description: "OpenAI" },
           { id: "google/gemini-2.0-flash-exp:free", name: "Gemini 2.0 Flash", description: "Google" },
         ]);
       } finally {
@@ -124,9 +124,9 @@ function ChatWindow() {
   }, [modelMenuOpen]);
 
   return (
-    <div className="flex flex-col h-screen w-full bg-[#0a0a0a] relative">
+    <div className="flex flex-col h-screen w-full bg-[#0a0a0a] relative overflow-hidden">
       {/* Top Navigation Bar */}
-      <nav className="w-full flex items-center justify-between px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl relative z-50">
+      <nav className="w-full flex-shrink-0 flex items-center justify-between px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl relative z-50">
         {/* Mobile Menu Button */}
         <button
           className="md:hidden flex items-center justify-center p-1.5 sm:p-2 rounded-lg hover:bg-white/10 transition-all text-gray-400"
@@ -234,7 +234,7 @@ function ChatWindow() {
       <Chat />
 
       {/* Input Area */}
-      <div className="w-full border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2.5 sm:p-3 md:p-4 relative z-10">
+      <div className="w-full flex-shrink-0 border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2.5 sm:p-3 md:p-4 relative z-[100]">
         <div className="w-full max-w-4xl mx-auto flex items-center gap-2 sm:gap-3">
           <div className="relative flex-1">
             <input

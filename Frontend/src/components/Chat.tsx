@@ -31,7 +31,7 @@ function Chat() {
   }, [prevChats, latestReply]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] relative overflow-hidden">
+    <div className="flex-1 flex flex-col min-h-0 max-h-full bg-[#0a0a0a] relative overflow-hidden">
       {newChat ? (
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6">
           <div className="text-center max-w-3xl space-y-4 sm:space-y-6 animate-fade-in">
