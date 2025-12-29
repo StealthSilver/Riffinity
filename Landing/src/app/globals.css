@@ -4,6 +4,11 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: #000000;
+  overflow-x: hidden;
+}
+
 :root {
   --font-maven-pro: "Maven Pro", sans-serif;
   --font-poppins: "Poppins", sans-serif;
@@ -15,6 +20,24 @@ html {
 
 .font-heading {
   font-family: var(--font-poppins);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e3186c 0%, #38bdf8 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9c0543 0%, #0284c7 100%);
 }
 
 @theme inline {

@@ -8,7 +8,7 @@ import CTA from "../components/sections/CTA";
 
 export default function Home() {
   return (
-    <main>
+    <main className="min-h-screen bg-black">
       <Navbar />
       <Hero />
       <Services />

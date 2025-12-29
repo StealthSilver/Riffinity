@@ -1,59 +1,210 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import { BackgroundRippleEffect } from "../ui/Ripple";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CTA = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const orb1Ref = useRef<HTMLDivElement>(null);
+  const orb2Ref = useRef<HTMLDivElement>(null);
+  const orb3Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Title animation
+      gsap.from(titleRef.current, {
+        opacity: 0,
+        scale: 0.8,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Button animation
+      gsap.from(buttonRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+        },
+        delay: 0.3,
+      });
+
+      // Floating orbs
+      gsap.to(orb1Ref.current, {
+        x: 30,
+        y: -30,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
+      gsap.to(orb2Ref.current, {
+        x: -40,
+        y: 40,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 0.5,
+      });
+
+      gsap.to(orb3Ref.current, {
+        x: 20,
+        y: 30,
+        duration: 4.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 1,
+      });
+
+      // Pulse animation for button
+      gsap.to(buttonRef.current, {
+        scale: 1.05,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="cta"
-      className="overflow-x-hidden overflow-hidden relative py-20 px-4 mt-20 mb-24 flex flex-col items-center justify-center max-w-7xl mx-auto rounded-2xl shadow-md gap-12"
+      className="relative py-32 px-4 overflow-hidden"
     >
-      <BackgroundRippleEffect rows={10} cols={27} cellSize={72} />
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black" />
 
+      {/* Animated grid */}
       <div
-        className="absolute inset-0 w-full bg-grid pointer-events-none rounded-2xl"
-        aria-hidden="true"
+        className="absolute inset-0 opacity-10"
         style={{
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 40%, black 60%, transparent 100%)",
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 40%, black 60%, transparent 100%)",
+          backgroundImage:
+            "linear-gradient(rgba(227,24,108,.5) 2px, transparent 2px), linear-gradient(90deg, rgba(56,189,248,.5) 2px, transparent 2px)",
+          backgroundSize: "80px 80px",
         }}
       />
 
+      {/* Floating orbs */}
       <div
-        className="absolute inset-0 w-full h-full bg-black rounded-2xl opacity-90"
-        aria-hidden="true"
+        ref={orb1Ref}
+        className="absolute top-20 left-20 w-64 h-64 bg-[#e3186c] rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+      />
+      <div
+        ref={orb2Ref}
+        className="absolute bottom-20 right-20 w-80 h-80 bg-[#38bdf8] rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+      />
+      <div
+        ref={orb3Ref}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c084fc] rounded-full mix-blend-multiply filter blur-3xl opacity-15"
       />
 
-      <div
-        className="absolute top-[300px] left-1/2 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none z-0"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(200,200,200,0.2) 0%, transparent 70%)",
-          filter: "blur(10px)",
-        }}
-      />
+      <div className="relative max-w-5xl mx-auto">
+        {/* Main CTA Card */}
+        <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl rounded-3xl p-12 md:p-20 border border-white/20 overflow-hidden">
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c]/10 via-transparent to-[#38bdf8]/10" />
 
-      <div className="relative z-10 flex flex-col items-center justify-center gap-2">
-        <h1 className="md:text-6xl text-3xl pt-20 font-heading font-bold text-[#fbfffd] tracking-tighter text-center md:text-left">
-          Ready to signup and join the
-        </h1>
+          {/* Animated border glow */}
+          <div className="absolute inset-0 rounded-3xl">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#e3186c] via-[#38bdf8] to-[#e3186c] opacity-50 blur-xl animate-pulse" />
+          </div>
 
-        <h1 className="md:text-6xl text-3xl pt-4 font-heading font-bold text-[#fbfffd] tracking-tighter items-center">
-          community
-        </h1>
+          {/* Content */}
+          <div className="relative z-10 flex flex-col items-center justify-center text-center">
+            {/* Title */}
+            <div ref={titleRef}>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-4 leading-tight">
+                Ready to{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e3186c] via-[#38bdf8] to-[#c084fc]">
+                  Transform
+                </span>
+              </h2>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-8 leading-tight">
+                Your Workflow?
+              </h2>
+              <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-12">
+                Join thousands of users who are already experiencing the future of AI assistance
+              </p>
+            </div>
 
-        <Link
-          href="https://riffinity-fe.vercel.app/"
-          target="_blank"
-          className="bg-[#e3186c] hover:bg-[#9c0543] text-[#fbfffd] font-sans font-bold px-20 py-2 mt-20 rounded-full transition-colors duration-300 cursor-pointer inline-block"
-        >
-          Login
-        </Link>
+            {/* Button */}
+            <Link
+              ref={buttonRef}
+              href="https://riffinity-fe.vercel.app/"
+              target="_blank"
+              className="group relative inline-flex items-center justify-center"
+            >
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] rounded-full blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
+              
+              {/* Button */}
+              <div className="relative bg-gradient-to-r from-[#e3186c] to-[#9c0543] text-[#fbfffd] font-sans font-bold px-16 py-5 rounded-full overflow-hidden transition-all duration-300 group-hover:shadow-2xl">
+                <span className="relative z-10 text-lg">Get Started Now</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#9c0543] to-[#e3186c] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Arrow */}
+                <svg
+                  className="inline-block ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </div>
+            </Link>
+
+            {/* Trust indicators */}
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-slate-400 text-sm">
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-[#e3186c]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>No credit card required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-[#e3186c]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>Free trial available</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-[#e3186c]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span>Cancel anytime</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
