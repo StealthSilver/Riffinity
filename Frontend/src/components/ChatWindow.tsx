@@ -23,12 +23,10 @@ function ChatWindow() {
   const modelRef = useRef<HTMLDivElement | null>(null);
 
   const models = [
-    "gpt-4o-mini",
-    "gpt-4o",
-    "gpt-4.1-mini",
-    "gpt-4.1",
-    "o3-mini",
-    "gemini-1.5-flash",
+    { name: "gpt-4o-mini", provider: "OpenAI" },
+    { name: "gpt-4o", provider: "OpenAI" },
+    { name: "o3-mini", provider: "OpenAI" },
+    { name: "gemini-1.5-flash", provider: "Google" },
   ];
 
   const getReply = async () => {

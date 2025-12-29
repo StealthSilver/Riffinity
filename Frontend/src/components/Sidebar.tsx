@@ -98,12 +98,9 @@ function Sidebar() {
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-6 border-b border-white/8">
-          <div className="flex items-center gap-3">
-            <img className="h-8 w-auto" src={logo} alt="Riffinity" />
-            <span className="text-lg font-semibold text-white tracking-tight">
-              Riffinity
-            </span>
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
+          <div className="flex items-center">
+            <img className="h-6 w-auto" src={logo} alt="Riffinity" />
           </div>
           <button
             className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-all text-gray-400 hover:text-white"
@@ -118,11 +115,15 @@ function Sidebar() {
         <div className="px-4 py-4">
           <button
             onClick={createNewChat}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl transition-all font-medium shadow-lg shadow-indigo-900/30"
+            className="group relative w-full flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-xl transition-all font-medium overflow-hidden border border-gray-700 hover:border-pink-400/60 hover:text-white"
             aria-label="New chat"
           >
-            <SquarePen size={18} />
-            <span>New Chat</span>
+            {/* Metallic shine effect */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            </div>
+            <SquarePen size={18} className="relative z-10" />
+            <span className="relative z-10">New Chat</span>
           </button>
         </div>
 
