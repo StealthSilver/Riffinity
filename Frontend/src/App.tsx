@@ -15,6 +15,7 @@ function App() {
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
   const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const providerValues = {
     prompt,
@@ -33,6 +34,8 @@ function App() {
     setCurrentModel,
     mobileSidebarOpen,
     setMobileSidebarOpen,
+    sidebarCollapsed,
+    setSidebarCollapsed,
   };
 
   return (
