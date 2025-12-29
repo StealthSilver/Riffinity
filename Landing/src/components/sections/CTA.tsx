@@ -17,33 +17,41 @@ const CTA = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        scale: 0.8,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Title animation - only plays once
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, scale: 0.8, y: 50 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        }
+      );
 
-      // Button animation
-      gsap.from(buttonRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-        delay: 0.3,
-      });
+      // Button animation - only plays once
+      gsap.fromTo(
+        buttonRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        }
+      );
 
       // Floating orbs
       gsap.to(orb1Ref.current, {
@@ -75,14 +83,16 @@ const CTA = () => {
         delay: 1,
       });
 
-      // Pulse animation for button
-      gsap.to(buttonRef.current, {
-        scale: 1.05,
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      // Pulse animation for button (after it appears)
+      setTimeout(() => {
+        gsap.to(buttonRef.current, {
+          scale: 1.05,
+          duration: 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      }, 1000);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -138,7 +148,7 @@ const CTA = () => {
             <div ref={titleRef}>
               <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-4 leading-tight">
                 Ready to{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e3186c] via-[#38bdf8] to-[#c084fc]">
+                <span className="text-[#e3186c]">
                   Transform
                 </span>
               </h2>

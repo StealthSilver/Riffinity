@@ -52,45 +52,56 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Title animation - only plays once
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
 
-      // Cards animation
-      gsap.from(".testimonial-card", {
-        opacity: 0,
-        y: 80,
-        scale: 0.9,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Cards animation - only plays once
+      gsap.fromTo(
+        ".testimonial-card",
+        { opacity: 0, y: 80, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        }
+      );
 
-      // Continuous subtle animation for cards
-      gsap.to(".testimonial-card", {
-        y: -5,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: {
-          amount: 1,
-          from: "random",
-        },
-      });
+      // Continuous subtle animation for cards (after they've appeared)
+      setTimeout(() => {
+        gsap.to(".testimonial-card", {
+          y: -5,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          stagger: {
+            amount: 1,
+            from: "random",
+          },
+        });
+      }, 1000);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -115,7 +126,7 @@ export default function TestimonialsSection() {
           <div className="inline-block relative">
             <h2 className="text-5xl md:text-6xl font-heading font-bold text-[#fbfffd] mb-4">
               Loved by{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e3186c] to-[#38bdf8]">
+              <span className="text-[#e3186c]">
                 people everywhere
               </span>
             </h2>
@@ -204,7 +215,7 @@ export default function TestimonialsSection() {
               key={idx}
               className="text-center p-6 bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-xl border border-white/10 backdrop-blur-sm hover:border-[#e3186c]/50 transition-all duration-300"
             >
-              <div className="text-4xl md:text-5xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#e3186c] to-[#38bdf8] mb-2">
+              <div className="text-4xl md:text-5xl font-heading font-bold text-[#e3186c] mb-2">
                 {stat.number}
               </div>
               <div className="text-slate-400 text-sm font-sans">{stat.label}</div>

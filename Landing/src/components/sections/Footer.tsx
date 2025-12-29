@@ -19,44 +19,58 @@ const Footer = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Logo animation
-      gsap.from(logoRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Logo animation - only plays once
+      gsap.fromTo(
+        logoRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
 
-      // Links animation
-      gsap.from(".footer-link", {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: linksRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Links animation - only plays once
+      gsap.fromTo(
+        ".footer-link",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: linksRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
 
-      // Social icons animation
-      gsap.from(".social-icon", {
-        opacity: 0,
-        scale: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: socialsRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Social icons animation - only plays once
+      gsap.fromTo(
+        ".social-icon",
+        { opacity: 0, scale: 0 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: socialsRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
     }, footerRef);
 
     return () => ctx.revert();

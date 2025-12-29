@@ -21,50 +21,60 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial animations
-      gsap.from(badgeRef.current, {
-        opacity: 0,
-        y: -30,
+      // Set initial states
+      gsap.set([badgeRef.current, titleRef.current, descRef.current, imageRef.current], { 
+        opacity: 0 
+      });
+      gsap.set(badgeRef.current, { y: -30 });
+      gsap.set(titleRef.current, { y: 50 });
+      gsap.set(descRef.current, { y: 30 });
+      gsap.set(imageRef.current, { y: 100, scale: 0.95 });
+      gsap.set(buttonsRef.current?.children || [], { opacity: 0, y: 20 });
+
+      // Animate in (these will stay visible)
+      gsap.to(badgeRef.current, {
+        opacity: 1,
+        y: 0,
         duration: 0.8,
         ease: "power3.out",
         delay: 0.2,
       });
 
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
+      gsap.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
         duration: 1,
         ease: "power3.out",
         delay: 0.4,
       });
 
-      gsap.from(descRef.current, {
-        opacity: 0,
-        y: 30,
+      gsap.to(descRef.current, {
+        opacity: 1,
+        y: 0,
         duration: 0.8,
         ease: "power3.out",
         delay: 0.6,
       });
 
-      gsap.from(buttonsRef.current?.children || [], {
-        opacity: 0,
-        y: 20,
+      gsap.to(buttonsRef.current?.children || [], {
+        opacity: 1,
+        y: 0,
         duration: 0.6,
         stagger: 0.2,
         ease: "power3.out",
         delay: 0.8,
       });
 
-      gsap.from(imageRef.current, {
-        opacity: 0,
-        y: 100,
-        scale: 0.95,
+      gsap.to(imageRef.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
         duration: 1.2,
         ease: "power3.out",
         delay: 1,
       });
 
-      // Floating animations
+      // Floating animations for orbs
       gsap.to(floatingRef1.current, {
         y: -20,
         duration: 3,
@@ -89,17 +99,6 @@ const Hero = () => {
         yoyo: true,
         ease: "sine.inOut",
         delay: 1,
-      });
-
-      // Parallax effect on scroll
-      gsap.to(imageRef.current, {
-        y: 150,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
       });
     }, heroRef);
 

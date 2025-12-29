@@ -26,17 +26,22 @@ const Navbar = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(navRef.current, {
-        y: -100,
-        opacity: 0,
+      // Set initial states
+      gsap.set(navRef.current, { y: -100, opacity: 0 });
+      gsap.set(".nav-item", { opacity: 0, y: -20 });
+
+      // Animate in (stays visible)
+      gsap.to(navRef.current, {
+        y: 0,
+        opacity: 1,
         duration: 0.8,
         ease: "power3.out",
       });
 
       // Animate nav items
-      gsap.from(".nav-item", {
-        opacity: 0,
-        y: -20,
+      gsap.to(".nav-item", {
+        opacity: 1,
+        y: 0,
         duration: 0.5,
         stagger: 0.1,
         ease: "power2.out",

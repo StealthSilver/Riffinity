@@ -14,33 +14,40 @@ const Services = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          end: "bottom 60%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Title animation - only plays once
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
 
-      // Cards animation
-      gsap.from(".service-card", {
-        opacity: 0,
-        y: 80,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 75%",
-          end: "bottom 60%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Cards animation - only plays once
+      gsap.fromTo(
+        ".service-card",
+        { opacity: 0, y: 80 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        }
+      );
 
       // Hover effect setup
       const cards = document.querySelectorAll(".service-card");

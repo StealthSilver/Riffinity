@@ -60,34 +60,43 @@ const Features = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Title animation - only plays once
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, scale: 0.9 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
 
-      // Feature cards stagger animation
-      gsap.from(".feature-card", {
-        opacity: 0,
-        y: 60,
-        duration: 0.6,
-        stagger: {
-          amount: 0.8,
-          from: "start",
-        },
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      // Feature cards stagger animation - only plays once
+      gsap.fromTo(
+        ".feature-card",
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: {
+            amount: 0.8,
+            from: "start",
+          },
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        }
+      );
 
       // Floating animation for icons
       gsap.to(".feature-icon", {
