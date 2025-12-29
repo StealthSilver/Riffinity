@@ -100,7 +100,7 @@ function ChatWindow() {
   return (
     <div className="flex flex-col h-screen w-full bg-[#0a0a0a] relative">
       {/* Top Navigation Bar */}
-      <nav className="w-full flex items-center justify-between px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 border-b border-white/8 bg-[#111111]">
+      <nav className="w-full flex items-center justify-between px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl">
         {/* Mobile Menu Button */}
         <button
           className="md:hidden flex items-center justify-center p-1.5 sm:p-2 rounded-lg hover:bg-white/10 transition-all text-gray-400"
@@ -130,7 +130,7 @@ function ChatWindow() {
           </button>
 
           {modelMenuOpen && (
-            <div className="absolute top-full left-0 mt-2 w-[280px] sm:w-72 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50 animate-fade-in">
+            <div className="absolute top-full left-0 mt-2 w-[280px] sm:w-72 bg-[#1a1a1a]/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50 animate-fade-in">
               <div className="px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border-b border-white/8">
                 <div className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-wider">
                   AI Models
@@ -196,7 +196,7 @@ function ChatWindow() {
       <Chat />
 
       {/* Input Area */}
-      <div className="w-full border-t border-white/8 bg-[#111111] p-2.5 sm:p-3 md:p-4">
+      <div className="w-full border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2.5 sm:p-3 md:p-4">
         <div className="w-full max-w-4xl mx-auto flex items-center gap-2 sm:gap-3">
           <div className="relative flex-1">
             <input

@@ -95,7 +95,7 @@ function Sidebar() {
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative h-screen bg-[#111111] border-r border-white/8 flex flex-col transition-all duration-300 z-50 ${
+        className={`fixed md:relative h-screen bg-[#111111]/80 backdrop-blur-xl border-r border-white/8 flex flex-col transition-all duration-300 z-50 ${
           sidebarCollapsed ? "md:w-16" : "w-[280px] sm:w-72 md:w-80"
         } ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
@@ -195,7 +195,7 @@ function Sidebar() {
       {/* Mobile Overlay */}
       {mobileSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-md z-40 md:hidden"
           onClick={() => setMobileSidebarOpen(false)}
           aria-label="Close sidebar overlay"
         />
@@ -240,7 +240,7 @@ function ProfileSection({ collapsed }: { collapsed: boolean }) {
         </button>
 
         {expanded && !collapsed && (
-          <div className="absolute bottom-full left-0 mb-2 w-full bg-[#1a1a1a] border border-white/10 rounded-lg p-2.5 sm:p-3 shadow-2xl z-50 space-y-1.5 sm:space-y-2 animate-fade-in">
+          <div className="absolute bottom-full left-0 mb-2 w-full bg-[#1a1a1a]/90 backdrop-blur-xl border border-white/10 rounded-lg p-2.5 sm:p-3 shadow-2xl z-50 space-y-1.5 sm:space-y-2 animate-fade-in">
             <div className="text-[11px] sm:text-xs text-gray-400 break-all">user@example.com</div>
             <div className="px-2 sm:px-2.5 py-1 text-[9px] sm:text-[10px] bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/30 rounded-md text-center text-pink-300 font-medium">
               Silver Plan Active
