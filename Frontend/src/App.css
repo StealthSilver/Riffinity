@@ -1,17 +1,17 @@
 /* ===== ROOT & VARIABLES ===== */
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-tertiary: #1a1a1a;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1a1;
-  --text-tertiary: #6b6b6b;
-  --accent-primary: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --accent-hover: #7c3aed;
+  --bg-primary: #000000;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --text-primary: #fbfffd;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --accent-primary: #e3186c;
+  --accent-secondary: #38bdf8;
+  --accent-hover: #9c0543;
   --message-user-bg: #1e293b;
-  --message-ai-bg: #18181b;
+  --message-ai-bg: #0f172a;
 }
 
 /* ===== SCROLLBAR STYLING ===== */

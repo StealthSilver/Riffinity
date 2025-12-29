@@ -113,14 +113,14 @@ function Sidebar() {
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative h-screen bg-[#111111]/80 backdrop-blur-xl border-r border-white/8 flex flex-col transition-all duration-300 z-50 ${
+        className={`fixed md:relative h-screen bg-black/80 backdrop-blur-xl border-r border-white/10 flex flex-col transition-all duration-300 z-50 ${
           sidebarCollapsed ? "md:w-16" : "w-[280px] sm:w-72 md:w-80"
         } ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         {/* Header */}
-        <div className={`flex items-center border-b border-white/8 px-3 sm:px-4 md:px-5 py-3 sm:py-3 ${
+        <div className={`flex items-center border-b border-white/10 px-3 sm:px-4 md:px-5 py-3 sm:py-3 ${
           sidebarCollapsed ? "md:justify-center md:px-3" : "justify-between"
         }`}>
           {!sidebarCollapsed && (
@@ -131,7 +131,7 @@ function Sidebar() {
           
           {/* Collapse button for desktop */}
           <button
-            className="hidden md:block p-2 rounded-lg hover:bg-white/5 transition-all text-gray-400 hover:text-white"
+            className="hidden md:block p-2 rounded-lg hover:bg-white/5 transition-all text-slate-400 hover:text-[#fbfffd]"
             aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
           >
@@ -140,7 +140,7 @@ function Sidebar() {
           
           {/* Close button for mobile */}
           <button
-            className="md:hidden p-1.5 sm:p-2 rounded-lg hover:bg-white/5 transition-all text-gray-400 hover:text-white"
+            className="md:hidden p-1.5 sm:p-2 rounded-lg hover:bg-white/5 transition-all text-slate-400 hover:text-[#fbfffd]"
             aria-label="Close menu"
             onClick={() => setMobileSidebarOpen(false)}
           >
@@ -152,7 +152,7 @@ function Sidebar() {
         <div className={`px-3 sm:px-4 py-2.5 sm:py-3 ${sidebarCollapsed ? "md:px-2" : ""}`}>
           <button
             onClick={createNewChat}
-            className={`group relative w-full flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-lg transition-all text-xs sm:text-sm font-medium overflow-hidden border border-gray-700 hover:border-pink-400/60 hover:text-white ${
+            className={`group relative w-full flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-slate-900/80 to-slate-800/80 text-slate-300 rounded-lg transition-all text-xs sm:text-sm font-medium overflow-hidden border border-white/10 hover:border-[#e3186c]/60 hover:text-[#fbfffd] ${
               sidebarCollapsed ? "md:justify-center md:px-2" : "justify-center"
             }`}
             aria-label="New chat"
@@ -169,7 +169,7 @@ function Sidebar() {
 
         {/* Chat History */}
         <div className={`flex-1 overflow-y-auto px-3 sm:px-4 pb-3 sm:pb-4 ${sidebarCollapsed ? "md:hidden" : ""}`}>
-          <div className="mb-2 sm:mb-3 px-2 text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wider">
+          <div className="mb-2 sm:mb-3 px-2 text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">
             Recent Chats
           </div>
           <div className="space-y-1 sm:space-y-1.5">
@@ -179,8 +179,8 @@ function Sidebar() {
                   onClick={() => changeThread(thread.threadId)}
                   className={`w-full flex items-start gap-2 sm:gap-3 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-lg transition-all text-xs sm:text-sm ${
                     thread.threadId === currThreadId
-                      ? "bg-white/10 text-white shadow-sm"
-                      : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
+                      ? "bg-white/10 text-[#fbfffd] shadow-sm"
+                      : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
                   }`}
                 >
                   <MessageSquare size={14} className="sm:w-4 sm:h-4 mt-0.5 flex-shrink-0" />
@@ -188,11 +188,11 @@ function Sidebar() {
                     {thread.title}
                   </span>
                   {thread.threadId === currThreadId && (
-                    <ChevronRight size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-pink-400" />
+                    <ChevronRight size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#e3186c]" />
                   )}
                 </button>
                 <button
-                  className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all p-1 sm:p-1.5 hover:bg-red-500/20 rounded-md text-gray-500 hover:text-red-400"
+                  className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all p-1 sm:p-1.5 hover:bg-red-500/20 rounded-md text-slate-500 hover:text-red-400"
                   onClick={(e) => {
                     e.stopPropagation();
                     confirmDelete(thread.threadId, thread.title);
@@ -222,10 +222,10 @@ function Sidebar() {
       {/* Delete Confirmation Modal */}
       {deleteConfirmOpen && threadToDelete && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl max-w-md w-full animate-fade-in">
+          <div className="bg-slate-900/90 border border-white/10 rounded-xl shadow-2xl max-w-md w-full animate-fade-in">
             {/* Header */}
             <div className="px-5 py-4 border-b border-white/10">
-              <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-semibold text-[#fbfffd] flex items-center gap-2">
                 <Trash size={18} className="text-red-400" />
                 Delete Chat Thread
               </h3>
@@ -233,12 +233,12 @@ function Sidebar() {
             
             {/* Content */}
             <div className="px-5 py-4 space-y-3">
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-slate-300">
                 Are you sure you want to delete this chat thread?
               </p>
               <div className="bg-white/5 border border-white/10 rounded-lg p-3">
-                <p className="text-xs text-gray-400 mb-1">Thread Title:</p>
-                <p className="text-sm text-white font-medium truncate">{threadToDelete.title}</p>
+                <p className="text-xs text-slate-400 mb-1">Thread Title:</p>
+                <p className="text-sm text-[#fbfffd] font-medium truncate">{threadToDelete.title}</p>
               </div>
               <p className="text-xs text-red-400">
                 This action cannot be undone.
@@ -249,7 +249,7 @@ function Sidebar() {
             <div className="px-5 py-4 border-t border-white/10 flex gap-3 justify-end">
               <button
                 onClick={cancelDelete}
-                className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all text-gray-300 hover:text-white text-sm font-medium"
+                className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all text-slate-300 hover:text-[#fbfffd] text-sm font-medium"
               >
                 Cancel
               </button>
@@ -282,7 +282,7 @@ function ProfileSection({ collapsed }: { collapsed: boolean }) {
   }, [expanded]);
 
   return (
-    <div className="border-t border-white/8 p-2 sm:p-3">
+    <div className="border-t border-white/10 p-2 sm:p-3">
       <div className="profileWrapper relative">
         <button
           className={`w-full flex items-center gap-2 sm:gap-2.5 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-lg hover:bg-white/5 transition-all ${
@@ -293,19 +293,19 @@ function ProfileSection({ collapsed }: { collapsed: boolean }) {
           aria-expanded={expanded}
           title={collapsed ? "Silver User" : ""}
         >
-          <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
-            <User size={14} className="sm:w-4 sm:h-4 text-pink-400" />
+          <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
+            <User size={14} className="sm:w-4 sm:h-4 text-[#e3186c]" />
           </div>
           <div className={`flex-1 text-left transition-all duration-200 ${collapsed ? "md:hidden" : ""}`}>
-            <div className="text-[11px] sm:text-xs font-medium text-white">Silver User</div>
-            <div className="text-[9px] sm:text-[10px] text-gray-500">Pro Plan</div>
+            <div className="text-[11px] sm:text-xs font-medium text-[#fbfffd]">Silver User</div>
+            <div className="text-[9px] sm:text-[10px] text-slate-500">Pro Plan</div>
           </div>
         </button>
 
         {expanded && !collapsed && (
-          <div className="absolute bottom-full left-0 mb-2 w-full bg-[#1a1a1a]/90 backdrop-blur-xl border border-white/10 rounded-lg p-2.5 sm:p-3 shadow-2xl z-50 space-y-1.5 sm:space-y-2 animate-fade-in">
-            <div className="text-[11px] sm:text-xs text-gray-400 break-all">user@example.com</div>
-            <div className="px-2 sm:px-2.5 py-1 text-[9px] sm:text-[10px] bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/30 rounded-md text-center text-pink-300 font-medium">
+          <div className="absolute bottom-full left-0 mb-2 w-full bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-lg p-2.5 sm:p-3 shadow-2xl z-50 space-y-1.5 sm:space-y-2 animate-fade-in">
+            <div className="text-[11px] sm:text-xs text-slate-400 break-all">user@example.com</div>
+            <div className="px-2 sm:px-2.5 py-1 text-[9px] sm:text-[10px] bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-[#e3186c]/30 rounded-md text-center text-[#e3186c] font-medium">
               Silver Plan Active
             </div>
           </div>

@@ -31,27 +31,22 @@ function Chat() {
   }, [prevChats, latestReply]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] relative overflow-y-auto overscroll-contain">
+    <div className="flex-1 flex flex-col min-h-0 bg-gradient-to-b from-black via-slate-900 to-black relative overflow-y-auto overscroll-contain">
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {/* Primary gradient orb - Pink */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] animate-ripple-slow">
-          <div className="absolute inset-0 rounded-full bg-pink-500 opacity-12 blur-[150px]"></div>
+          <div className="absolute inset-0 rounded-full bg-[#e3186c] opacity-20 blur-[150px]"></div>
         </div>
         
-        {/* Secondary gradient orb - Purple */}
+        {/* Secondary gradient orb - Cyan */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] animate-ripple-slow-delayed">
-          <div className="absolute inset-0 rounded-full bg-purple-500 opacity-10 blur-[140px]"></div>
+          <div className="absolute inset-0 rounded-full bg-[#38bdf8] opacity-20 blur-[140px]"></div>
         </div>
         
-        {/* Tertiary gradient orb - Blue */}
+        {/* Tertiary gradient orb - Purple */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[620px] animate-ripple-slower">
-          <div className="absolute inset-0 rounded-full bg-blue-500 opacity-10 blur-[145px]"></div>
-        </div>
-        
-        {/* Fourth gradient orb - Cyan accent */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[580px] h-[580px] animate-ripple-slow">
-          <div className="absolute inset-0 rounded-full bg-cyan-400 opacity-8 blur-[130px]"></div>
+          <div className="absolute inset-0 rounded-full bg-[#c084fc] opacity-20 blur-[145px]"></div>
         </div>
       </div>
       
@@ -61,11 +56,11 @@ function Chat() {
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-4">
           <div className="text-center max-w-3xl space-y-3 sm:space-y-4 animate-fade-in">
             <h1 className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight px-2">
-              <span className="relative inline-block bg-gradient-to-r from-gray-200 via-pink-200 to-gray-200 bg-clip-text text-transparent animate-text-shine bg-[length:200%_100%]">
+              <span className="relative inline-block text-[#fbfffd]">
                 Welcome to Riffinity
               </span>
             </h1>
-            <p className="text-xs sm:text-sm md:text-base text-gray-400 leading-relaxed font-normal max-w-xl mx-auto px-2">
+            <p className="text-xs sm:text-sm md:text-base text-slate-400 leading-relaxed font-normal max-w-xl mx-auto px-2">
               Start a conversation and unlock the power of AI. Ask questions, explore ideas, or just chat.
             </p>
           </div>
@@ -81,15 +76,15 @@ function Chat() {
                 }`}
               >
                 {chat.role === "assistant" && (
-                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
-                    <Bot size={11} className="sm:w-3 sm:h-3 text-pink-400" />
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
+                    <Bot size={11} className="sm:w-3 sm:h-3 text-[#e3186c]" />
                   </div>
                 )}
                 <div
                   className={`max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg ${
                     chat.role === "user"
-                      ? "bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 text-gray-200"
-                      : "bg-[#1a1a1a] border border-white/10 text-gray-300"
+                      ? "bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 text-[#fbfffd]"
+                      : "bg-slate-900/50 border border-white/10 text-slate-300"
                   }`}
                 >
                   {chat.role === "user" ? (
@@ -107,7 +102,7 @@ function Chat() {
                   )}
                 </div>
                 {chat.role === "user" && (
-                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-gray-300 font-medium text-[9px] sm:text-[10px] shadow-md">
+                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center text-[#fbfffd] font-medium text-[9px] sm:text-[10px] shadow-md">
                     U
                   </div>
                 )}
@@ -116,10 +111,10 @@ function Chat() {
 
             {prevChats.length > 0 && (
               <div className="flex gap-1.5 sm:gap-2 justify-start animate-fade-in">
-                <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
-                  <Bot size={11} className="sm:w-3 sm:h-3 text-pink-400" />
+                <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
+                  <Bot size={11} className="sm:w-3 sm:h-3 text-[#e3186c]" />
                 </div>
-                <div className="max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-gray-300">
+                <div className="max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-slate-900/50 border border-white/10 text-slate-300">
                   <div className="prose prose-xs sm:prose-sm prose-invert max-w-none">
                     {latestReply === null ? (
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>

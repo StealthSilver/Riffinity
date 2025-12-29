@@ -124,12 +124,12 @@ function ChatWindow() {
   }, [modelMenuOpen]);
 
   return (
-    <div className="flex flex-col h-full w-full bg-[#0a0a0a] relative min-h-0">
+    <div className="flex flex-col h-full w-full bg-black relative min-h-0">
       {/* Top Navigation Bar */}
-      <nav className="w-full flex-shrink-0 flex items-center justify-between px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl relative z-50">
+      <nav className="w-full flex-shrink-0 flex items-center justify-between px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 border-b border-white/10 bg-black/80 backdrop-blur-xl relative z-50">
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden flex items-center justify-center p-1.5 sm:p-2 rounded-lg hover:bg-white/10 transition-all text-gray-400"
+          className="md:hidden flex items-center justify-center p-1.5 sm:p-2 rounded-lg hover:bg-white/10 transition-all text-slate-400"
           aria-label="Open menu"
           aria-expanded={mobileSidebarOpen}
           onClick={() => setMobileSidebarOpen((o) => !o)}
@@ -143,12 +143,12 @@ function ChatWindow() {
             onClick={() => setModelMenuOpen((o) => !o)}
             className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 bg-white/5 hover:bg-white/8 border border-white/10 hover:border-white/20 rounded-lg transition-all"
           >
-            <Cpu size={14} className="sm:w-4 sm:h-4 text-pink-400 flex-shrink-0" />
-            <span className="text-white text-xs sm:text-sm font-medium truncate max-w-[120px] md:max-w-none">
+            <Cpu size={14} className="sm:w-4 sm:h-4 text-[#e3186c] flex-shrink-0" />
+            <span className="text-[#fbfffd] text-xs sm:text-sm font-medium truncate max-w-[120px] md:max-w-none">
               {models.find(m => m.id === currentModel)?.name || currentModel}
             </span>
             <ChevronDown
-              className={`transition-transform duration-200 text-gray-400 flex-shrink-0 ${
+              className={`transition-transform duration-200 text-slate-400 flex-shrink-0 ${
                 modelMenuOpen ? "rotate-180" : ""
               }`}
               size={12}
@@ -156,19 +156,19 @@ function ChatWindow() {
           </button>
 
           {modelMenuOpen && (
-            <div className="absolute top-full left-0 mt-2 w-[280px] sm:w-72 bg-[#1a1a1a]/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50 animate-fade-in">
-              <div className="px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border-b border-white/8">
-                <div className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <div className="absolute top-full left-0 mt-2 w-[280px] sm:w-72 bg-slate-900/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50 animate-fade-in">
+              <div className="px-3 sm:px-4 py-2 sm:py-3 bg-white/5 border-b border-white/10">
+                <div className="text-[10px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider">
                   AI Models
                 </div>
               </div>
               <div className="p-2 space-y-1 max-h-[60vh] sm:max-h-96 overflow-y-auto">
                 {loadingModels ? (
                   <div className="flex items-center justify-center py-8">
-                    <PropagateLoader color="#ec4899" size={6} />
+                    <PropagateLoader color="#e3186c" size={6} />
                   </div>
                 ) : models.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500 text-xs">
+                  <div className="text-center py-8 text-slate-500 text-xs">
                     No models available
                   </div>
                 ) : (
@@ -177,8 +177,8 @@ function ChatWindow() {
                       key={model.id}
                       className={`w-full flex items-center justify-between gap-2 sm:gap-3 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm transition-all group ${
                         model.id === currentModel
-                          ? "bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/60"
-                          : "hover:bg-white/5 border border-transparent hover:border-gray-700"
+                          ? "bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-[#e3186c]/60"
+                          : "hover:bg-white/5 border border-transparent hover:border-white/10"
                       }`}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -189,32 +189,32 @@ function ChatWindow() {
                       <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                         <div className={`p-1 sm:p-1.5 rounded-md flex-shrink-0 ${
                           model.id === currentModel 
-                            ? "bg-pink-500/20" 
+                            ? "bg-[#e3186c]/20" 
                             : "bg-white/5 group-hover:bg-white/10"
                         }`}>
                           <Cpu size={12} className={`sm:w-3.5 sm:h-3.5 ${
                             model.id === currentModel 
-                              ? "text-pink-400" 
-                              : "text-gray-400 group-hover:text-gray-300"
+                              ? "text-[#e3186c]" 
+                              : "text-slate-400 group-hover:text-slate-300"
                           }`} />
                         </div>
                         <div className="text-left min-w-0">
                           <div className={`font-medium truncate ${
                             model.id === currentModel 
-                              ? "text-white" 
-                              : "text-gray-300 group-hover:text-white"
+                              ? "text-[#fbfffd]" 
+                              : "text-slate-300 group-hover:text-[#fbfffd]"
                           }`}>
                             {model.name}
                           </div>
                           {model.description && (
-                            <div className="text-[10px] sm:text-xs text-gray-500 truncate">
+                            <div className="text-[10px] sm:text-xs text-slate-500 truncate">
                               {model.description}
                             </div>
                           )}
                         </div>
                       </div>
                       {model.id === currentModel && (
-                        <Check size={14} className="sm:w-4 sm:h-4 text-pink-400 flex-shrink-0" />
+                        <Check size={14} className="sm:w-4 sm:h-4 text-[#e3186c] flex-shrink-0" />
                       )}
                     </button>
                   ))
@@ -234,7 +234,7 @@ function ChatWindow() {
       <Chat />
 
       {/* Input Area */}
-      <div className="w-full flex-shrink-0 border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2 sm:p-3 md:p-4 relative z-[100]">
+      <div className="w-full flex-shrink-0 border-t border-white/10 bg-black/80 backdrop-blur-xl p-2 sm:p-3 md:p-4 relative z-[100]">
         <div className="w-full max-w-4xl mx-auto flex items-center gap-2">
           <div className="relative flex-1">
             <input
@@ -248,19 +248,19 @@ function ChatWindow() {
                   getReply();
                 }
               }}
-              className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-[#1a1a1a] border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none focus:border-pink-400/50 hover:bg-white/5 transition-all"
+              className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-900/50 border border-white/10 rounded-lg sm:rounded-xl text-[#fbfffd] placeholder-slate-500 text-sm focus:outline-none focus:border-[#e3186c]/50 hover:bg-white/5 transition-all"
               disabled={loading}
             />
             {loading && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-[#1a1a1a]/50 rounded-lg sm:rounded-xl">
-                <PropagateLoader color="#ec4899" loading={loading} size={6} />
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-slate-900/50 rounded-lg sm:rounded-xl">
+                <PropagateLoader color="#e3186c" loading={loading} size={6} />
               </div>
             )}
           </div>
           <button
             onClick={getReply}
             disabled={loading || !prompt.trim()}
-            className="flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-700 hover:border-pink-400/60 rounded-lg sm:rounded-xl transition-all text-gray-300 hover:text-white text-sm font-medium"
+            className="flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-br from-slate-900/80 to-slate-800/80 hover:from-slate-800 hover:to-slate-900 disabled:opacity-50 disabled:cursor-not-allowed border border-white/10 hover:border-[#e3186c]/60 rounded-lg sm:rounded-xl transition-all text-slate-300 hover:text-[#fbfffd] text-sm font-medium"
             aria-label="Send message"
           >
             <Send size={16} className="sm:w-4 sm:h-4" />
