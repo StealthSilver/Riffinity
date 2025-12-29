@@ -21,13 +21,8 @@ function ChatWindow() {
   const [loading, setLoading] = useState(false);
   const [modelMenuOpen, setModelMenuOpen] = useState(false);
   const modelRef = useRef<HTMLDivElement | null>(null);
-
-  const models = [
-    { name: "gpt-4o-mini", provider: "OpenAI" },
-    { name: "gpt-4o", provider: "OpenAI" },
-    { name: "o3-mini", provider: "OpenAI" },
-    { name: "gemini-1.5-flash", provider: "Google" },
-  ];
+  const [models, setModels] = useState<Array<{ id: string; name: string; description?: string }>>([]);
+  const [loadingModels, setLoadingModels] = useState(true);
 
   const getReply = async () => {
     if (!prompt.trim()) return;
@@ -65,6 +60,37 @@ function ChatWindow() {
     }
     setLoading(false);
   };
+
+  // Fetch available models from OpenRouter
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const baseUrl = "https://riffinity.onrender.com";
+        const response = await fetch(`${baseUrl}/api/models`);
+        const data = await response.json();
+        
+        if (Array.isArray(data)) {
+          setModels(data);
+          // Set default model if current model is not in the list
+          if (data.length > 0 && !data.find((m: any) => m.id === currentModel)) {
+            setCurrentModel(data[0].id);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching models:", err);
+        // Fallback to some default models if API fails
+        setModels([
+          { id: "openai/gpt-4o-mini", name: "GPT-4o Mini", description: "OpenAI" },
+          { id: "openai/gpt-4o", name: "GPT-4o", description: "OpenAI" },
+          { id: "google/gemini-2.0-flash-exp:free", name: "Gemini 2.0 Flash", description: "Google" },
+        ]);
+      } finally {
+        setLoadingModels(false);
+      }
+    };
+
+    fetchModels();
+  }, []);
 
   useEffect(() => {
     if (prompt && reply) {
@@ -119,7 +145,7 @@ function ChatWindow() {
           >
             <Cpu size={14} className="sm:w-4 sm:h-4 text-pink-400 flex-shrink-0" />
             <span className="hidden sm:inline text-white text-xs sm:text-sm font-medium truncate max-w-[120px] md:max-w-none">
-              {currentModel}
+              {models.find(m => m.id === currentModel)?.name || currentModel}
             </span>
             <ChevronDown
               className={`transition-transform duration-200 text-gray-400 flex-shrink-0 ${
@@ -137,50 +163,62 @@ function ChatWindow() {
                 </div>
               </div>
               <div className="p-2 space-y-1 max-h-[60vh] sm:max-h-96 overflow-y-auto">
-                {models.map((model) => (
-                  <button
-                    key={model.name}
-                    className={`w-full flex items-center justify-between gap-2 sm:gap-3 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm transition-all group ${
-                      model.name === currentModel
-                        ? "bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/60"
-                        : "hover:bg-white/5 border border-transparent hover:border-gray-700"
-                    }`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentModel(model.name);
-                      setModelMenuOpen(false);
-                    }}
-                  >
-                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                      <div className={`p-1 sm:p-1.5 rounded-md flex-shrink-0 ${
-                        model.name === currentModel 
-                          ? "bg-pink-500/20" 
-                          : "bg-white/5 group-hover:bg-white/10"
-                      }`}>
-                        <Cpu size={12} className={`sm:w-3.5 sm:h-3.5 ${
-                          model.name === currentModel 
-                            ? "text-pink-400" 
-                            : "text-gray-400 group-hover:text-gray-300"
-                        }`} />
-                      </div>
-                      <div className="text-left min-w-0">
-                        <div className={`font-medium truncate ${
-                          model.name === currentModel 
-                            ? "text-white" 
-                            : "text-gray-300 group-hover:text-white"
+                {loadingModels ? (
+                  <div className="flex items-center justify-center py-8">
+                    <PropagateLoader color="#ec4899" size={6} />
+                  </div>
+                ) : models.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500 text-xs">
+                    No models available
+                  </div>
+                ) : (
+                  models.map((model) => (
+                    <button
+                      key={model.id}
+                      className={`w-full flex items-center justify-between gap-2 sm:gap-3 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm transition-all group ${
+                        model.id === currentModel
+                          ? "bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/60"
+                          : "hover:bg-white/5 border border-transparent hover:border-gray-700"
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentModel(model.id);
+                        setModelMenuOpen(false);
+                      }}
+                    >
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                        <div className={`p-1 sm:p-1.5 rounded-md flex-shrink-0 ${
+                          model.id === currentModel 
+                            ? "bg-pink-500/20" 
+                            : "bg-white/5 group-hover:bg-white/10"
                         }`}>
-                          {model.name}
+                          <Cpu size={12} className={`sm:w-3.5 sm:h-3.5 ${
+                            model.id === currentModel 
+                              ? "text-pink-400" 
+                              : "text-gray-400 group-hover:text-gray-300"
+                          }`} />
                         </div>
-                        <div className="text-[10px] sm:text-xs text-gray-500">
-                          {model.provider}
+                        <div className="text-left min-w-0">
+                          <div className={`font-medium truncate ${
+                            model.id === currentModel 
+                              ? "text-white" 
+                              : "text-gray-300 group-hover:text-white"
+                          }`}>
+                            {model.name}
+                          </div>
+                          {model.description && (
+                            <div className="text-[10px] sm:text-xs text-gray-500 truncate">
+                              {model.description}
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </div>
-                    {model.name === currentModel && (
-                      <Check size={14} className="sm:w-4 sm:h-4 text-pink-400 flex-shrink-0" />
-                    )}
-                  </button>
-                ))}
+                      {model.id === currentModel && (
+                        <Check size={14} className="sm:w-4 sm:h-4 text-pink-400 flex-shrink-0" />
+                      )}
+                    </button>
+                  ))
+                )}
               </div>
             </div>
           )}

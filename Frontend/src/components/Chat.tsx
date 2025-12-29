@@ -32,35 +32,8 @@ function Chat() {
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] relative overflow-hidden">
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Base gradient mesh */}
-        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-gray-700/5"></div>
-        
-        {/* Diagonal moving gradient waves */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-transparent to-transparent animate-diagonal-wave-1"></div>
-          <div className="absolute inset-0 bg-gradient-to-tl from-pink-400/15 via-transparent to-transparent animate-diagonal-wave-2"></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-gray-600/10 to-transparent animate-diagonal-wave-3"></div>
-        </div>
-        
-        {/* Animated gradient orbs - scaled down for mobile */}
-        <div className="absolute top-0 left-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gradient-radial from-pink-500/10 via-pink-500/5 to-transparent rounded-full blur-3xl animate-float-slow"></div>
-        <div className="absolute bottom-0 right-0 w-[350px] md:w-[700px] h-[350px] md:h-[700px] bg-gradient-radial from-gray-600/8 via-gray-600/4 to-transparent rounded-full blur-3xl animate-float-slow-reverse"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-gradient-radial from-pink-400/6 via-transparent to-transparent rounded-full blur-3xl animate-pulse-slow"></div>
-        
-        {/* Subtle grid overlay - smaller on mobile */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: 'linear-gradient(rgba(236, 72, 153, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(236, 72, 153, 0.3) 1px, transparent 1px)',
-          backgroundSize: '30px 30px'
-        }}></div>
-        
-        {/* Vignette effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"></div>
-      </div>
-
       {newChat ? (
-        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 relative z-10">
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-6">
           <div className="text-center max-w-3xl space-y-4 sm:space-y-6 animate-fade-in">
             <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight px-2">
               <span className="relative inline-block bg-gradient-to-r from-gray-200 via-pink-200 to-gray-200 bg-clip-text text-transparent animate-text-shine bg-[length:200%_100%]">
@@ -73,7 +46,7 @@ function Chat() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 relative z-10">
+        <div className="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6">
           <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
             {prevChats?.slice(0, -1).map((chat, idx) => (
               <div

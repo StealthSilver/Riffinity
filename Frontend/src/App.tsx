@@ -13,7 +13,7 @@ function App() {
   const [prevChats, setPrevChats] = useState<ChatMessage[]>([]);
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
-  const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
+  const [currentModel, setCurrentModel] = useState<string>("openai/gpt-4o-mini");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 

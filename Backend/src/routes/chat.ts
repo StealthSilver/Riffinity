@@ -3,6 +3,37 @@ const router = express.Router();
 import Thread from "../models/Thread";
 import getAIResponse from "../utils/ai";
 
+// Get available models from OpenRouter
+router.get("/models", async (req, res) => {
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/models", {
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch models: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    // Filter and format models for easier frontend consumption
+    const models = data.data.map((model: any) => ({
+      id: model.id,
+      name: model.name,
+      description: model.description,
+      pricing: model.pricing,
+      context_length: model.context_length,
+    }));
+
+    res.json(models);
+  } catch (err) {
+    console.error("Error fetching models:", err);
+    res.status(500).json({ error: "Failed to fetch models" });
+  }
+});
+
 // test
 
 router.post("/test", async (req, res) => {

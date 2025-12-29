@@ -45,7 +45,7 @@ export const MyContext = createContext<ChatContextType>({
   setAllThreads: () => {},
   newChat: false,
   setNewChat: () => {},
-  currentModel: "gpt-4o-mini",
+  currentModel: "openai/gpt-4o-mini",
   setCurrentModel: () => {},
   mobileSidebarOpen: false,
   setMobileSidebarOpen: () => {},
@@ -60,7 +60,7 @@ export function MyProvider({ children }: { children: ReactNode }) {
   const [prevChats, setPrevChats] = useState<ChatMessage[]>([]);
   const [allThreads, setAllThreads] = useState<Thread[]>([]);
   const [newChat, setNewChat] = useState<boolean>(false);
-  const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
+  const [currentModel, setCurrentModel] = useState<string>("openai/gpt-4o-mini");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState<boolean>(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
 

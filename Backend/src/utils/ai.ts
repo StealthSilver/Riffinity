@@ -1,68 +1,51 @@
 import "dotenv/config";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const getAIResponse = async (message: string, model: string) => {
-  if (model.startsWith("gpt") || model.startsWith("o")) {
-    // OpenAI models
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: model,
-        messages: [
-          {
-            role: "user",
-            content: message,
-          },
-        ],
-      }),
-    };
+  // Use OpenRouter for all models
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "HTTP-Referer": process.env.YOUR_SITE_URL || "http://localhost:5173",
+      "X-Title": process.env.YOUR_SITE_NAME || "Riffinity",
+    },
+    body: JSON.stringify({
+      model: model,
+      messages: [
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+    }),
+  };
 
-    try {
-      const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
-        options
+  try {
+    const response = await fetch(
+      "https://openrouter.ai/api/v1/chat/completions",
+      options
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("OpenRouter API Error:", errorData);
+      throw new Error(
+        `OpenRouter API Error: ${errorData.error?.message || response.statusText}`
       );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("OpenAI API Error:", errorData);
-        throw new Error(
-          `OpenAI API Error: ${errorData.error?.message || response.statusText}`
-        );
-      }
-
-      const data = await response.json();
-      console.log(data);
-
-      if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-        throw new Error("Invalid response from OpenAI API");
-      }
-
-      return data.choices[0].message.content;
-    } catch (err) {
-      console.error("Error in getAIResponse for OpenAI:", err);
-      throw err;
     }
-  } else if (model.startsWith("gemini")) {
-    // Gemini models
-    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
-    const aiModel = genAI.getGenerativeModel({ model: model });
 
-    try {
-      const result = await aiModel.generateContent(message);
-      const response = await result.response;
-      const text = response.text();
-      return text;
-    } catch (err) {
-      console.error("Error in getAIResponse for Gemini:", err);
-      throw err;
+    const data = await response.json();
+    console.log("OpenRouter Response:", data);
+
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error("Invalid response from OpenRouter API");
     }
-  } else {
-    throw new Error(`Unsupported model: ${model}`);
+
+    return data.choices[0].message.content;
+  } catch (err) {
+    console.error("Error in getAIResponse for OpenRouter:", err);
+    throw err;
   }
 };
 
