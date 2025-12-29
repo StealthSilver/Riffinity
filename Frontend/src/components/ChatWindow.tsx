@@ -124,9 +124,9 @@ function ChatWindow() {
   }, [modelMenuOpen]);
 
   return (
-    <div className="flex flex-col h-full w-full bg-[#0a0a0a] relative">
+    <div className="flex flex-col h-full w-full bg-[#0a0a0a] relative min-h-0">
       {/* Top Navigation Bar */}
-      <nav className="w-full flex-shrink-0 flex items-center justify-between px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl relative z-50">
+      <nav className="w-full flex-shrink-0 flex items-center justify-between px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl relative z-50">
         {/* Mobile Menu Button */}
         <button
           className="md:hidden flex items-center justify-center p-1.5 sm:p-2 rounded-lg hover:bg-white/10 transition-all text-gray-400"
@@ -234,8 +234,8 @@ function ChatWindow() {
       <Chat />
 
       {/* Input Area */}
-      <div className="w-full flex-shrink-0 border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2.5 sm:p-3 md:p-4 relative z-[100]">
-        <div className="w-full max-w-4xl mx-auto flex items-center gap-2 sm:gap-3">
+      <div className="w-full flex-shrink-0 border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2 sm:p-3 md:p-4 relative z-[100]">
+        <div className="w-full max-w-4xl mx-auto flex items-center gap-2">
           <div className="relative flex-1">
             <input
               type="text"
@@ -248,11 +248,11 @@ function ChatWindow() {
                   getReply();
                 }
               }}
-              className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-[#1a1a1a] border border-white/10 rounded-xl text-white placeholder-gray-500 text-xs sm:text-sm focus:outline-none focus:border-pink-400/50 hover:bg-white/5 transition-all"
+              className="w-full px-3 py-2 sm:px-4 sm:py-2.5 bg-[#1a1a1a] border border-white/10 rounded-lg sm:rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none focus:border-pink-400/50 hover:bg-white/5 transition-all"
               disabled={loading}
             />
             {loading && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-[#1a1a1a]/50 rounded-xl">
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none bg-[#1a1a1a]/50 rounded-lg sm:rounded-xl">
                 <PropagateLoader color="#ec4899" loading={loading} size={6} />
               </div>
             )}
@@ -260,10 +260,10 @@ function ChatWindow() {
           <button
             onClick={getReply}
             disabled={loading || !prompt.trim()}
-            className="flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-700 hover:border-pink-400/60 rounded-xl transition-all text-gray-300 hover:text-white text-sm font-medium"
+            className="flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2.5 bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 disabled:opacity-50 disabled:cursor-not-allowed border border-gray-700 hover:border-pink-400/60 rounded-lg sm:rounded-xl transition-all text-gray-300 hover:text-white text-sm font-medium"
             aria-label="Send message"
           >
-            <Send size={14} className="sm:w-4 sm:h-4" />
+            <Send size={16} className="sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>
