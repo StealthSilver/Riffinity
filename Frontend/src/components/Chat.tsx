@@ -1,12 +1,14 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { MyContext } from "../context";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
+import { Sparkles, Bot } from "lucide-react";
 
 function Chat() {
   const { newChat, prevChats, reply } = useContext(MyContext);
   const [latestReply, setLatestReply] = useState<string | null>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (reply === null) {
@@ -24,57 +26,77 @@ function Chat() {
     return () => clearInterval(interval);
   }, [prevChats, reply]);
 
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [prevChats, latestReply]);
+
   return (
-    <div className="w-full flex flex-col items-center flex-1 bg-transparent min-h-0">
-      {newChat && (
-        <div className="mt-32 text-center flex flex-col items-center w-full">
-          <h1 className="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 drop-shadow-lg tracking-tight">
-            Welcome to Riffinity
-          </h1>
-          <p className="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto font-light mb-2">
-            Start a conversation with your favorite AI model and explore endless
-            possibilities.
-          </p>
+    <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a]">
+      {newChat ? (
+        <div className="flex-1 flex items-center justify-center px-6">
+          <div className="text-center max-w-2xl space-y-6 animate-fade-in">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 shadow-2xl shadow-indigo-900/50 mb-4">
+              <Sparkles size={36} className="text-white" />
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+              Welcome to Riffinity
+            </h1>
+            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+              Start a conversation and unlock the power of AI. Ask questions, explore ideas, or just chat.
+            </p>
+          </div>
         </div>
-      )}
-      <div className="w-full flex-1 flex justify-center items-center min-h-0">
-        <div className="w-full max-w-4xl h-full flex flex-col gap-8 px-2 sm:px-6 py-10 overflow-y-auto scroll-smooth rounded-3xl bg-black/30 shadow-2xl border border-white/10 backdrop-blur-xl">
-          <div className="flex flex-col gap-7">
+      ) : (
+        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-8">
+          <div className="max-w-4xl mx-auto space-y-6">
             {prevChats?.slice(0, -1).map((chat, idx) => (
               <div
                 key={idx}
-                className={`flex animate-fadeIn ${
+                className={`flex gap-4 animate-fade-in ${
                   chat.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
+                {chat.role === "assistant" && (
+                  <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
+                    <Bot size={18} className="text-white" />
+                  </div>
+                )}
                 <div
-                  className={`rounded-3xl max-w-3xl px-7 py-5 text-lg shadow-lg transition-all duration-200 ${
+                  className={`flex-1 max-w-3xl px-5 py-4 rounded-2xl ${
                     chat.role === "user"
-                      ? "bg-gradient-to-r from-cyan-700/40 to-purple-700/40 border border-cyan-400/30 text-white rounded-br-xl"
-                      : "glass rounded-bl-xl border border-white/10"
+                      ? "bg-[#1e293b] text-white ml-12"
+                      : "bg-[#18181b] border border-white/8"
                   }`}
                 >
                   {chat.role === "user" ? (
-                    <p className="leading-relaxed font-medium tracking-wide">
+                    <p className="text-[15px] leading-relaxed text-gray-100">
                       {chat.content.trim() === ""
                         ? "(empty message)"
                         : chat.content}
                     </p>
                   ) : (
-                    <div className="prose prose-invert max-w-none text-lg">
+                    <div className="prose prose-invert max-w-none">
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                         {chat.content}
                       </ReactMarkdown>
                     </div>
                   )}
                 </div>
+                {chat.role === "user" && (
+                  <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center text-gray-300 font-semibold text-sm shadow-lg">
+                    U
+                  </div>
+                )}
               </div>
             ))}
 
             {prevChats.length > 0 && (
-              <div className="flex justify-start animate-fadeIn">
-                <div className="rounded-3xl max-w-3xl px-7 py-5 glass rounded-bl-xl border border-white/10 shadow-lg">
-                  <div className="prose prose-invert max-w-none text-lg">
+              <div className="flex gap-4 justify-start animate-fade-in">
+                <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
+                  <Bot size={18} className="text-white" />
+                </div>
+                <div className="flex-1 max-w-3xl px-5 py-4 rounded-2xl bg-[#18181b] border border-white/8">
+                  <div className="prose prose-invert max-w-none">
                     {latestReply === null ? (
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                         {prevChats[prevChats.length - 1].content}
@@ -88,9 +110,10 @@ function Chat() {
                 </div>
               </div>
             )}
+            <div ref={chatEndRef} />
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
