@@ -78,6 +78,58 @@ body::after {
   }
 }
 
+/* Ripple animations for chat background */
+@keyframes ripple-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+@keyframes ripple-slow-delayed {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.65;
+  }
+}
+
+@keyframes ripple-slower {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.6;
+  }
+}
+
+.animate-ripple-slow {
+  animation: ripple-slow 15s ease-in-out infinite;
+}
+
+.animate-ripple-slow-delayed {
+  animation: ripple-slow-delayed 18s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.animate-ripple-slower {
+  animation: ripple-slower 20s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
 @keyframes ripple-drift {
   0% {
     transform: translate3d(0, 0, 0);

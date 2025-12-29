@@ -120,7 +120,7 @@ function Sidebar() {
         }`}
       >
         {/* Header */}
-        <div className={`flex items-center border-b border-white/8 px-3 sm:px-4 md:px-5 py-3 sm:py-4 ${
+        <div className={`flex items-center border-b border-white/8 px-3 sm:px-4 md:px-5 py-3 sm:py-3 ${
           sidebarCollapsed ? "md:justify-center md:px-3" : "justify-between"
         }`}>
           {!sidebarCollapsed && (

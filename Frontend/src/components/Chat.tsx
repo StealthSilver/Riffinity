@@ -32,6 +32,31 @@ function Chat() {
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] relative overflow-y-auto overscroll-contain">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Primary gradient orb - Pink */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] animate-ripple-slow">
+          <div className="absolute inset-0 rounded-full bg-pink-500 opacity-12 blur-[150px]"></div>
+        </div>
+        
+        {/* Secondary gradient orb - Purple */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] animate-ripple-slow-delayed">
+          <div className="absolute inset-0 rounded-full bg-purple-500 opacity-10 blur-[140px]"></div>
+        </div>
+        
+        {/* Tertiary gradient orb - Blue */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[620px] animate-ripple-slower">
+          <div className="absolute inset-0 rounded-full bg-blue-500 opacity-10 blur-[145px]"></div>
+        </div>
+        
+        {/* Fourth gradient orb - Cyan accent */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[580px] h-[580px] animate-ripple-slow">
+          <div className="absolute inset-0 rounded-full bg-cyan-400 opacity-8 blur-[130px]"></div>
+        </div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-20 flex-1 flex flex-col min-h-0">
       {newChat ? (
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-4">
           <div className="text-center max-w-3xl space-y-3 sm:space-y-4 animate-fade-in">
@@ -113,6 +138,7 @@ function Chat() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
