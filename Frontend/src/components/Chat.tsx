@@ -37,6 +37,13 @@ function Chat() {
         {/* Base gradient mesh */}
         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-gray-700/5"></div>
         
+        {/* Diagonal moving gradient waves */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-transparent to-transparent animate-diagonal-wave-1"></div>
+          <div className="absolute inset-0 bg-gradient-to-tl from-pink-400/15 via-transparent to-transparent animate-diagonal-wave-2"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-gray-600/10 to-transparent animate-diagonal-wave-3"></div>
+        </div>
+        
         {/* Animated gradient orbs - scaled down for mobile */}
         <div className="absolute top-0 left-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gradient-radial from-pink-500/10 via-pink-500/5 to-transparent rounded-full blur-3xl animate-float-slow"></div>
         <div className="absolute bottom-0 right-0 w-[350px] md:w-[700px] h-[350px] md:h-[700px] bg-gradient-radial from-gray-600/8 via-gray-600/4 to-transparent rounded-full blur-3xl animate-float-slow-reverse"></div>
@@ -55,10 +62,9 @@ function Chat() {
       {newChat ? (
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 relative z-10">
           <div className="text-center max-w-3xl space-y-4 sm:space-y-6 animate-fade-in">
-            <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight tracking-tight px-2 overflow-hidden">
-              <span className="relative inline-block">
-                <span className="relative z-10">Welcome to Riffinity</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 animate-shine"></span>
+            <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight px-2">
+              <span className="relative inline-block bg-gradient-to-r from-gray-200 via-pink-200 to-gray-200 bg-clip-text text-transparent animate-text-shine bg-[length:200%_100%]">
+                Welcome to Riffinity
               </span>
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed font-normal max-w-xl mx-auto px-2">
