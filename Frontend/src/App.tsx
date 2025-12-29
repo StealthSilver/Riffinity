@@ -36,10 +36,12 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className="flex h-screen w-screen bg-slate-950 overflow-hidden">
       <MyContext.Provider value={providerValues}>
         <Sidebar />
-        <ChatWindow />
+        <main className="flex-1 flex flex-col h-screen overflow-hidden">
+          <ChatWindow />
+        </main>
       </MyContext.Provider>
     </div>
   );

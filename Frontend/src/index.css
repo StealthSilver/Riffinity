@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    linear-gradient(143deg, #1e3a8a 0%, #7e22ce 30%, #dc2626 65%, #facc15 100%);
+  background-size: 250% 250%;
+  background-attachment: fixed;
+  animation: gradient-wave 16s ease-in-out infinite;
+  overflow: hidden;
+  min-height: 100vh;
+  color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 30%,
+    rgba(255, 255, 255, 0.02) 60%,
+    transparent 100%
+  );
+  mix-blend-mode: overlay;
+  animation: overlay-pulse 10s ease-in-out infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(255, 255, 255, 0.04),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(255, 255, 255, 0.02),
+      transparent 65%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.03),
+      transparent 70%
+    );
+  animation: ripple-drift 18s linear infinite;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes gradient-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes ripple-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes overlay-pulse {
+  0% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7e22ce, #dc2626);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #a855f7, #ef4444);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #7e22ce transparent;
+}
+
+/* Prose styling for markdown */
+.prose {
+  color: #f5f5f5;
+}
+
+.prose code {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-weight: 500;
+  font-family: "Fira Code", "Courier New", monospace;
+}
+
+.prose pre {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(126, 34, 206, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+}
+
+.prose pre code {
+  background: transparent;
+  color: #e5e7eb;
+  padding: 0;
+}
+
+.prose strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.prose a {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #93c5fd;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Glass effect utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-sm {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes overlay-pulse {
+  0% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Prose styling for markdown */
+.prose {
+  color: inherit;
+}
+
+.prose code {
+  color: #e879f9;
+  background: rgba(200, 0, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.prose pre {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+}
+
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.prose strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.prose em {
+  color: #e6e6e6;
+}
+
+.prose a {
+  color: #a78bfa;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #d8b4fe;
+}
+
+.prose blockquote {
+  border-left-color: rgba(167, 139, 250, 0.5);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: #ffffff;
+}
+
+.prose hr {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.prose table {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.prose th {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.prose td {
+  border-color: rgba(255, 255, 255, 0.1);
+}
