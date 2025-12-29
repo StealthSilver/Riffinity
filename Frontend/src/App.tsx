@@ -42,7 +42,7 @@ function App() {
     <div className="flex h-screen w-screen bg-slate-950 overflow-hidden">
       <MyContext.Provider value={providerValues}>
         <Sidebar />
-        <main className="flex-1 flex flex-col h-screen overflow-hidden">
+        <main className="flex-1 flex flex-col h-full overflow-hidden">
           <ChatWindow />
         </main>
       </MyContext.Provider>

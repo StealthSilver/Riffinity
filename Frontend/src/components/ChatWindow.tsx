@@ -124,7 +124,7 @@ function ChatWindow() {
   }, [modelMenuOpen]);
 
   return (
-    <div className="flex flex-col h-screen w-full bg-[#0a0a0a] relative overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-[#0a0a0a] relative">
       {/* Top Navigation Bar */}
       <nav className="w-full flex-shrink-0 flex items-center justify-between px-3 sm:px-4 md:px-5 py-2.5 sm:py-3 border-b border-white/8 bg-[#111111]/80 backdrop-blur-xl relative z-50">
         {/* Mobile Menu Button */}

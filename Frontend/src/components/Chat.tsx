@@ -31,9 +31,9 @@ function Chat() {
   }, [prevChats, latestReply]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 max-h-full bg-[#0a0a0a] relative overflow-hidden">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] relative overflow-y-auto">
       {newChat ? (
-        <div className="flex-1 flex items-center justify-center px-4 sm:px-6">
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 min-h-[200px]">
           <div className="text-center max-w-3xl space-y-4 sm:space-y-6 animate-fade-in">
             <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight px-2">
               <span className="relative inline-block bg-gradient-to-r from-gray-200 via-pink-200 to-gray-200 bg-clip-text text-transparent animate-text-shine bg-[length:200%_100%]">
@@ -46,7 +46,7 @@ function Chat() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6">
+        <div className="flex-1 px-3 sm:px-4 md:px-6 py-4 sm:py-6 pb-4">
           <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
             {prevChats?.slice(0, -1).map((chat, idx) => (
               <div
