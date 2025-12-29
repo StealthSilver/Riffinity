@@ -29,6 +29,7 @@ function ChatWindow() {
     "gpt-4.1-mini",
     "gpt-4.1",
     "o3-mini",
+    "gemini-1.5-flash",
   ];
 
   const getReply = async () => {

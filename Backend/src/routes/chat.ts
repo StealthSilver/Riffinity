@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 const router = express.Router();
 import Thread from "../models/Thread";
-import getOpenAiAPIResponse from "../utils/openai";
+import getAIResponse from "../utils/ai";
 
 // test
 
@@ -72,9 +72,9 @@ router.delete("/thread/:threadId", async (req, res) => {
 // chatting wiht the model
 
 router.post("/chat", async (req, res) => {
-  const { threadId, message } = req.body;
+  const { threadId, message, model } = req.body;
 
-  if (!threadId || !message) {
+  if (!threadId || !message || !model) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -100,7 +100,7 @@ router.post("/chat", async (req, res) => {
       return res.json({ assistantReply });
     }
 
-    const assistantReply = await getOpenAiAPIResponse(message);
+    const assistantReply = await getAIResponse(message, model);
 
     thread.messages.push({ role: "assistant", content: assistantReply });
     thread.updatedAt = new Date();
