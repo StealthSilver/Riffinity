@@ -1,5 +1,5 @@
 import logo from "../assets/riffinity_logo.svg";
-import { SquarePen, MessageSquare, Trash, X, User, ChevronRight } from "lucide-react";
+import { SquarePen, MessageSquare, Trash, X, User, ChevronRight, PanelLeftClose, PanelLeft } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import { v1 as uuidv1 } from "uuid";
@@ -16,6 +16,8 @@ function Sidebar() {
     setPrevChats,
     mobileSidebarOpen,
     setMobileSidebarOpen,
+    sidebarCollapsed,
+    setSidebarCollapsed,
   } = useContext(MyContext);
 
   const getAllThreads = async () => {
@@ -93,15 +95,32 @@ function Sidebar() {
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative w-72 md:w-80 h-screen bg-[#111111] border-r border-white/8 flex flex-col transition-transform duration-300 z-50 md:translate-x-0 ${
-          mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed md:relative h-screen bg-[#111111] border-r border-white/8 flex flex-col transition-all duration-300 z-50 ${
+          sidebarCollapsed ? "md:w-16" : "w-72 md:w-80"
+        } ${
+          mobileSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
-          <div className="flex items-center">
-            <img className="h-6 w-auto" src={logo} alt="Riffinity" />
-          </div>
+        <div className={`flex items-center border-b border-white/8 px-5 py-4 ${
+          sidebarCollapsed ? "md:justify-center md:px-3" : "justify-between"
+        }`}>
+          {!sidebarCollapsed && (
+            <div className="flex items-center">
+              <img className="h-6 w-auto" src={logo} alt="Riffinity" />
+            </div>
+          )}
+          
+          {/* Collapse button for desktop */}
+          <button
+            className="hidden md:block p-2 rounded-lg hover:bg-white/5 transition-all text-gray-400 hover:text-white"
+            aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+          >
+            {sidebarCollapsed ? <PanelLeft size={20} /> : <PanelLeftClose size={20} />}
+          </button>
+          
+          {/* Close button for mobile */}
           <button
             className="md:hidden p-2 rounded-lg hover:bg-white/5 transition-all text-gray-400 hover:text-white"
             aria-label="Close menu"
@@ -112,23 +131,26 @@ function Sidebar() {
         </div>
 
         {/* New Chat Button */}
-        <div className="px-4 py-3">
+        <div className={`px-4 py-3 ${sidebarCollapsed ? "md:px-2" : ""}`}>
           <button
             onClick={createNewChat}
-            className="group relative w-full flex items-center justify-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-lg transition-all text-sm font-medium overflow-hidden border border-gray-700 hover:border-pink-400/60 hover:text-white"
+            className={`group relative w-full flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-lg transition-all text-sm font-medium overflow-hidden border border-gray-700 hover:border-pink-400/60 hover:text-white ${
+              sidebarCollapsed ? "md:justify-center md:px-2" : "justify-center"
+            }`}
             aria-label="New chat"
+            title={sidebarCollapsed ? "New Chat" : ""}
           >
             {/* Metallic shine effect */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </div>
             <SquarePen size={16} className="relative z-10" />
-            <span className="relative z-10">New Chat</span>
+            <span className={`relative z-10 transition-all duration-200 ${sidebarCollapsed ? "md:hidden" : ""}`}>New Chat</span>
           </button>
         </div>
 
         {/* Chat History */}
-        <div className="flex-1 overflow-y-auto px-4 pb-4">
+        <div className={`flex-1 overflow-y-auto px-4 pb-4 ${sidebarCollapsed ? "md:hidden" : ""}`}>
           <div className="mb-3 px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
             Recent Chats
           </div>
@@ -167,7 +189,7 @@ function Sidebar() {
         </div>
 
         {/* Profile Section */}
-        <ProfileSection />
+        <ProfileSection collapsed={sidebarCollapsed} />
       </aside>
 
       {/* Mobile Overlay */}
@@ -182,7 +204,7 @@ function Sidebar() {
   );
 }
 
-function ProfileSection() {
+function ProfileSection({ collapsed }: { collapsed: boolean }) {
   const [expanded, setExpanded] = useState(false);
 
   React.useEffect(() => {
@@ -200,21 +222,24 @@ function ProfileSection() {
     <div className="border-t border-white/8 p-3">
       <div className="profileWrapper relative">
         <button
-          className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/5 transition-all"
+          className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-white/5 transition-all ${
+            collapsed ? "md:justify-center md:px-0" : ""
+          }`}
           onClick={() => setExpanded((e) => !e)}
           aria-haspopup="dialog"
           aria-expanded={expanded}
+          title={collapsed ? "Silver User" : ""}
         >
           <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 flex items-center justify-center shadow-md">
             <User size={16} className="text-pink-400" />
           </div>
-          <div className="flex-1 text-left">
+          <div className={`flex-1 text-left transition-all duration-200 ${collapsed ? "md:hidden" : ""}`}>
             <div className="text-xs font-medium text-white">Silver User</div>
             <div className="text-[10px] text-gray-500">Pro Plan</div>
           </div>
         </button>
 
-        {expanded && (
+        {expanded && !collapsed && (
           <div className="absolute bottom-full left-0 mb-2 w-full bg-[#1a1a1a] border border-white/10 rounded-lg p-3 shadow-2xl z-50 space-y-2 animate-fade-in">
             <div className="text-xs text-gray-400">user@example.com</div>
             <div className="px-2.5 py-1 text-[10px] bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/30 rounded-md text-center text-pink-300 font-medium">

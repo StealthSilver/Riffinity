@@ -28,6 +28,8 @@ type ChatContextType = {
   setCurrentModel: React.Dispatch<React.SetStateAction<string>>;
   mobileSidebarOpen: boolean;
   setMobileSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const MyContext = createContext<ChatContextType>({
@@ -47,6 +49,8 @@ export const MyContext = createContext<ChatContextType>({
   setCurrentModel: () => {},
   mobileSidebarOpen: false,
   setMobileSidebarOpen: () => {},
+  sidebarCollapsed: false,
+  setSidebarCollapsed: () => {},
 });
 
 export function MyProvider({ children }: { children: ReactNode }) {
@@ -58,6 +62,7 @@ export function MyProvider({ children }: { children: ReactNode }) {
   const [newChat, setNewChat] = useState<boolean>(false);
   const [currentModel, setCurrentModel] = useState<string>("gpt-4o-mini");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState<boolean>(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
 
   return (
     <MyContext.Provider
@@ -78,6 +83,8 @@ export function MyProvider({ children }: { children: ReactNode }) {
         setCurrentModel,
         mobileSidebarOpen,
         setMobileSidebarOpen,
+        sidebarCollapsed,
+        setSidebarCollapsed,
       }}
     >
       {children}
