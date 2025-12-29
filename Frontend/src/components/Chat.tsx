@@ -31,20 +31,40 @@ function Chat() {
   }, [prevChats, latestReply]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a]">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#0a0a0a] relative overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Base gradient mesh */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-transparent to-gray-700/5"></div>
+        
+        {/* Animated gradient orbs */}
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-pink-500/10 via-pink-500/5 to-transparent rounded-full blur-3xl animate-float-slow"></div>
+        <div className="absolute bottom-0 right-0 w-[700px] h-[700px] bg-gradient-radial from-gray-600/8 via-gray-600/4 to-transparent rounded-full blur-3xl animate-float-slow-reverse"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-radial from-pink-400/6 via-transparent to-transparent rounded-full blur-3xl animate-pulse-slow"></div>
+        
+        {/* Subtle grid overlay */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: 'linear-gradient(rgba(236, 72, 153, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(236, 72, 153, 0.3) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
+        
+        {/* Vignette effect */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"></div>
+      </div>
+
       {newChat ? (
-        <div className="flex-1 flex items-center justify-center px-6">
-          <div className="text-center max-w-2xl space-y-4 animate-fade-in">
-            <h1 className="text-2xl md:text-3xl font-medium text-pink-200/70 leading-relaxed">
+        <div className="flex-1 flex items-center justify-center px-6 relative z-10">
+          <div className="text-center max-w-3xl space-y-6 animate-fade-in">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-pink-400 via-pink-300 to-gray-300 bg-clip-text text-transparent leading-tight tracking-tight">
               Welcome to Riffinity
             </h1>
-            <p className="text-sm md:text-base text-pink-200/50 leading-relaxed font-light">
+            <p className="text-base md:text-lg text-gray-400 leading-relaxed font-light max-w-xl mx-auto">
               Start a conversation and unlock the power of AI. Ask questions, explore ideas, or just chat.
             </p>
           </div>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6">
+        <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6 relative z-10">
           <div className="max-w-4xl mx-auto space-y-4">
             {prevChats?.slice(0, -1).map((chat, idx) => (
               <div

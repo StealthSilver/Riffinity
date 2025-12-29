@@ -195,34 +195,29 @@ function ChatWindow() {
       {/* Chat Area */}
       <Chat />
 
-      {/* Loader Section - Above Input */}
-      {loading && (
-        <div className="w-full border-t border-white/8 bg-[#111111] px-4 py-3">
-          <div className="w-full max-w-4xl mx-auto flex items-center gap-3 px-4 py-2 bg-[#1a1a1a] border border-pink-400/30 rounded-lg">
-            <div className="flex items-center gap-2">
-              <PropagateLoader color="#ec4899" loading={loading} size={8} />
-            </div>
-            <p className="text-xs text-gray-400 font-medium">Generating response...</p>
-          </div>
-        </div>
-      )}
-
       {/* Input Area */}
       <div className="w-full border-t border-white/8 bg-[#111111] p-4">
         <div className="w-full max-w-4xl mx-auto flex items-center gap-3">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                getReply();
-              }
-            }}
-            className="flex-1 px-4 py-2.5 bg-[#1a1a1a] border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none focus:border-pink-400/50 hover:bg-white/5 transition-all"
-          />
+          <div className="relative flex-1">
+            <input
+              type="text"
+              placeholder="Type your message..."
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  getReply();
+                }
+              }}
+              className="w-full px-4 py-2.5 bg-[#1a1a1a] border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm focus:outline-none focus:border-pink-400/50 hover:bg-white/5 transition-all"
+            />
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <PropagateLoader color="#ec4899" loading={loading} size={8} />
+              </div>
+            )}
+          </div>
           <button
             onClick={getReply}
             disabled={loading || !prompt.trim()}
