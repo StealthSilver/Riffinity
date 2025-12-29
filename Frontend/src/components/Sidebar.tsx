@@ -19,6 +19,9 @@ function Sidebar() {
     sidebarCollapsed,
     setSidebarCollapsed,
   } = useContext(MyContext);
+  
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [threadToDelete, setThreadToDelete] = useState<{ id: string; title: string } | null>(null);
 
   const getAllThreads = async () => {
     try {
@@ -70,25 +73,40 @@ function Sidebar() {
     }
   };
 
-  const deleteThread = async (threadId: string) => {
+  const confirmDelete = (threadId: string, threadTitle: string) => {
+    setThreadToDelete({ id: threadId, title: threadTitle });
+    setDeleteConfirmOpen(true);
+  };
+
+  const deleteThread = async () => {
+    if (!threadToDelete) return;
+    
     try {
       const baseUrl = "https://riffinity.onrender.com";
-      const response = await fetch(`${baseUrl}/api/thread/${threadId}`, {
+      const response = await fetch(`${baseUrl}/api/thread/${threadToDelete.id}`, {
         method: "DELETE",
       });
 
       await response.json();
 
       setAllThreads((prev) =>
-        prev.filter((thread) => thread.threadId !== threadId)
+        prev.filter((thread) => thread.threadId !== threadToDelete.id)
       );
 
-      if (threadId === currThreadId) {
+      if (threadToDelete.id === currThreadId) {
         createNewChat();
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setDeleteConfirmOpen(false);
+      setThreadToDelete(null);
     }
+  };
+
+  const cancelDelete = () => {
+    setDeleteConfirmOpen(false);
+    setThreadToDelete(null);
   };
 
   return (
@@ -177,7 +195,7 @@ function Sidebar() {
                   className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all p-1 sm:p-1.5 hover:bg-red-500/20 rounded-md text-gray-500 hover:text-red-400"
                   onClick={(e) => {
                     e.stopPropagation();
-                    deleteThread(thread.threadId);
+                    confirmDelete(thread.threadId, thread.title);
                   }}
                   aria-label="Delete thread"
                 >
@@ -199,6 +217,51 @@ function Sidebar() {
           onClick={() => setMobileSidebarOpen(false)}
           aria-label="Close sidebar overlay"
         />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirmOpen && threadToDelete && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl max-w-md w-full animate-fade-in">
+            {/* Header */}
+            <div className="px-5 py-4 border-b border-white/10">
+              <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                <Trash size={18} className="text-red-400" />
+                Delete Chat Thread
+              </h3>
+            </div>
+            
+            {/* Content */}
+            <div className="px-5 py-4 space-y-3">
+              <p className="text-sm text-gray-300">
+                Are you sure you want to delete this chat thread?
+              </p>
+              <div className="bg-white/5 border border-white/10 rounded-lg p-3">
+                <p className="text-xs text-gray-400 mb-1">Thread Title:</p>
+                <p className="text-sm text-white font-medium truncate">{threadToDelete.title}</p>
+              </div>
+              <p className="text-xs text-red-400">
+                This action cannot be undone.
+              </p>
+            </div>
+            
+            {/* Actions */}
+            <div className="px-5 py-4 border-t border-white/10 flex gap-3 justify-end">
+              <button
+                onClick={cancelDelete}
+                className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all text-gray-300 hover:text-white text-sm font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={deleteThread}
+                className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 hover:border-red-500 rounded-lg transition-all text-red-400 hover:text-red-300 text-sm font-medium"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
