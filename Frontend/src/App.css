@@ -225,6 +225,20 @@
   animation-delay: 1s;
 }
 
+.animate-diagonal-wave-1 {
+  animation: diagonalWave1 25s ease-in-out infinite;
+}
+
+.animate-diagonal-wave-2 {
+  animation: diagonalWave2 30s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+.animate-diagonal-wave-3 {
+  animation: diagonalWave3 35s ease-in-out infinite;
+  animation-delay: 10s;
+}
+
 /* ===== MARKDOWN/PROSE STYLING ===== */
 .prose {
   color: var(--text-primary);
