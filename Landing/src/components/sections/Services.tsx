@@ -91,20 +91,20 @@ const Services = () => {
         <div ref={titleRef} className="text-center mb-20">
           <div className="inline-block relative">
             <h2 className="text-5xl md:text-6xl font-heading font-bold text-[#fbfffd] mb-4">
-              {siteData.servicesTitle}
-            </h2>
+          {siteData.servicesTitle}
+        </h2>
             <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
           </div>
           <p className="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
             Discover powerful AI-driven solutions tailored to your needs
           </p>
-        </div>
+      </div>
 
         {/* Services Grid */}
         <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {siteData.services.map((service, idx) => (
+        {siteData.services.map((service, idx) => (
             <div
-              key={idx}
+            key={idx}
               className="service-card group relative bg-gradient-to-br from-slate-900/50 to-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 overflow-hidden hover:border-[#e3186c]/50 transition-all duration-300"
             >
               {/* Gradient overlay on hover */}

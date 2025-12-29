@@ -106,9 +106,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <section
+      <section
       ref={heroRef}
-      id="home"
+        id="home"
       className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-black overflow-hidden"
     >
       {/* Animated gradient orbs */}
@@ -155,43 +155,43 @@ const Hero = () => {
           ref={titleRef}
           className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-[#fbfffd] tracking-tight text-center mb-8 leading-tight"
         >
-          {siteData.heroTitle}
-        </h1>
+              {siteData.heroTitle}
+            </h1>
 
         {/* Description */}
         <p
           ref={descRef}
           className="text-lg md:text-2xl font-sans text-slate-300 text-center max-w-4xl mb-12 leading-relaxed"
         >
-          {siteData.heroDescription}
-        </p>
+            {siteData.heroDescription}
+          </p>
 
         {/* Buttons */}
         <div
           ref={buttonsRef}
           className="flex flex-col md:flex-row items-center justify-center gap-6 mb-20 z-10 relative"
         >
-          <Link
-            href="https://riffinity-fe.vercel.app/"
-            target="_blank"
+            <Link
+              href="https://riffinity-fe.vercel.app/"
+              target="_blank"
             className="group relative bg-[#e3186c] text-[#fbfffd] font-sans font-bold px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e3186c]/50 hover:bg-[#9c0543]"
-          >
+            >
             <span className="relative z-10">Get Started</span>
-          </Link>
-          <Link
-            href="#contact"
+            </Link>
+            <Link
+              href="#contact"
             className="group relative bg-transparent text-[#fbfffd] font-sans font-bold px-12 py-4 rounded-full border-2 border-white/30 hover:border-white/60 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
-          >
+            >
             <span className="relative z-10">Contact Us</span>
-          </Link>
+            </Link>
         </div>
 
         {/* Hero Image */}
         <div ref={imageRef} className="relative w-full max-w-6xl">
           <div className="absolute inset-0 bg-gradient-to-t from-[#e3186c]/20 to-transparent rounded-3xl blur-2xl" />
           <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl backdrop-blur-sm bg-slate-900/50">
-            <img
-              src="/Hero.png"
+        <img
+          src="/Hero.png"
               alt="Dashboard preview"
               className="w-full h-auto object-cover"
             />
@@ -203,7 +203,7 @@ const Hero = () => {
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
-    </section>
+      </section>
   );
 };
 

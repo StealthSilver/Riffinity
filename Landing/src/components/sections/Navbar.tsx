@@ -66,13 +66,13 @@ const Navbar = () => {
         <Link href="/" className="flex items-center cursor-pointer group">
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] rounded-lg blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-            <img
-              src="/logo.svg"
+          <img
+            src="/logo.svg"
               alt="RiffinityAI Logo"
-              width={140}
-              height={60}
+            width={140}
+            height={60}
               className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
-            />
+          />
           </div>
         </Link>
 
@@ -85,7 +85,7 @@ const Navbar = () => {
               className="nav-item relative text-[#fbfffd] font-medium group"
             >
               <span className="relative z-10 transition-colors duration-200 group-hover:text-[#38bdf8]">
-                {item.name}
+              {item.name}
               </span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] group-hover:w-full transition-all duration-300" />
             </Link>

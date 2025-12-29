@@ -141,12 +141,12 @@ const Features = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] blur-3xl opacity-30" />
             <h2 className="relative text-5xl md:text-6xl font-heading font-bold text-[#fbfffd] mb-4">
               Why <span className="text-[#e3186c]">{siteData.name}</span>?
-            </h2>
+        </h2>
           </div>
           <p className="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
             Experience the difference with our cutting-edge features
           </p>
-        </div>
+      </div>
 
         {/* Features Grid */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -165,24 +165,24 @@ const Features = () => {
               <div className="relative z-10">
                 {/* Icon */}
                 <div className="feature-icon mb-4 inline-flex p-3 bg-gradient-to-br from-[#e3186c]/20 to-[#38bdf8]/20 rounded-xl border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300">
-                  <Image
-                    src={card.icon}
-                    alt={card.title}
-                    width={32}
-                    height={32}
+              <Image
+                src={card.icon}
+                alt={card.title}
+                width={32}
+                height={32}
                     className="group-hover:scale-110 transition-transform duration-300"
-                  />
+              />
                 </div>
 
                 {/* Title */}
                 <h3 className="text-xl font-heading font-bold text-[#fbfffd] mb-3 group-hover:text-[#38bdf8] transition-all duration-300">
-                  {card.title}
+                {card.title}
                 </h3>
 
                 {/* Description */}
                 <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
-                  {card.description}
-                </p>
+                {card.description}
+              </p>
               </div>
 
               {/* Bottom right accent */}

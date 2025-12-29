@@ -87,21 +87,6 @@ export default function TestimonialsSection() {
           },
         }
       );
-
-      // Continuous subtle animation for cards (after they've appeared)
-      setTimeout(() => {
-        gsap.to(".testimonial-card", {
-          y: -5,
-          duration: 2,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          stagger: {
-            amount: 1,
-            from: "random",
-          },
-        });
-      }, 1000);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -129,7 +114,7 @@ export default function TestimonialsSection() {
               <span className="text-[#e3186c]">
                 people everywhere
               </span>
-            </h2>
+          </h2>
             <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
           </div>
           <p className="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
@@ -201,7 +186,7 @@ export default function TestimonialsSection() {
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           ))}
-        </div>
+      </div>
 
         {/* Stats section */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">

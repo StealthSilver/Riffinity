@@ -133,14 +133,13 @@ const CTA = () => {
 
       <div className="relative max-w-5xl mx-auto">
         {/* Main CTA Card */}
-        <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl rounded-3xl p-12 md:p-20 border border-white/20 overflow-hidden">
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c]/10 via-transparent to-[#38bdf8]/10" />
-
-          {/* Animated border glow */}
-          <div className="absolute inset-0 rounded-3xl">
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#e3186c] via-[#38bdf8] to-[#e3186c] opacity-50 blur-xl animate-pulse" />
-          </div>
+        <div className="relative bg-slate-900/50 backdrop-blur-xl rounded-3xl p-12 md:p-20 border border-white/10 overflow-hidden">
+          {/* Subtle top accent */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e3186c]/50 to-transparent" />
+          
+          {/* Subtle corner glow */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#e3186c]/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#38bdf8]/5 rounded-full blur-3xl" />
 
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center justify-center text-center">
@@ -161,36 +160,32 @@ const CTA = () => {
             </div>
 
             {/* Button */}
-            <Link
+        <Link
               ref={buttonRef}
-              href="https://riffinity-fe.vercel.app/"
-              target="_blank"
-              className="group relative inline-flex items-center justify-center"
+          href="https://riffinity-fe.vercel.app/"
+          target="_blank"
+              className="group relative inline-flex items-center justify-center gap-2 bg-[#e3186c] text-[#fbfffd] font-sans font-bold px-16 py-5 rounded-full overflow-hidden transition-all duration-300 hover:bg-[#9c0543] hover:shadow-2xl hover:shadow-[#e3186c]/30"
             >
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] rounded-full blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
+              <span className="relative z-10 text-lg">Get Started Now</span>
               
-              {/* Button */}
-              <div className="relative bg-gradient-to-r from-[#e3186c] to-[#9c0543] text-[#fbfffd] font-sans font-bold px-16 py-5 rounded-full overflow-hidden transition-all duration-300 group-hover:shadow-2xl">
-                <span className="relative z-10 text-lg">Get Started Now</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#9c0543] to-[#e3186c] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Arrow */}
-                <svg
-                  className="inline-block ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-              </div>
-            </Link>
+              {/* Arrow */}
+              <svg
+                className="relative z-10 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+              
+              {/* Subtle shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+        </Link>
 
             {/* Trust indicators */}
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-slate-400 text-sm">

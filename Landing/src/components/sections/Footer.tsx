@@ -192,7 +192,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="text-center">
+        <div className="text-center mt-4">
           <p className="text-slate-400 text-sm font-sans">
             &copy; {new Date().getFullYear()}{" "}
             <span className="text-[#e3186c] font-semibold">
@@ -200,7 +200,6 @@ const Footer = () => {
             </span>
             . All rights reserved
           </p>
-         
         </div>
       </div>
     </footer>
