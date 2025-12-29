@@ -100,7 +100,7 @@ function ChatWindow() {
   return (
     <div className="flex flex-col h-screen w-full bg-[#0a0a0a] relative">
       {/* Top Navigation Bar */}
-      <nav className="w-full flex items-center justify-between px-6 py-4 border-b border-white/8 bg-[#111111]">
+      <nav className="w-full flex items-center justify-between px-5 py-3 border-b border-white/8 bg-[#111111]">
         {/* Mobile Menu Button */}
         <button
           className="md:hidden flex items-center justify-center p-2 rounded-lg hover:bg-white/10 transition-all text-gray-400"
@@ -108,59 +108,79 @@ function ChatWindow() {
           aria-expanded={mobileSidebarOpen}
           onClick={() => setMobileSidebarOpen((o) => !o)}
         >
-          <Menu size={22} />
+          <Menu size={20} />
         </button>
 
         {/* Model Selector */}
         <div className="relative" ref={modelRef}>
           <button
             onClick={() => setModelMenuOpen((o) => !o)}
-            className="flex items-center gap-2.5 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all text-sm"
+            className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/8 border border-white/10 hover:border-white/20 rounded-lg transition-all"
           >
-            <Cpu size={18} className="text-indigo-400" />
-            <span className="hidden sm:inline text-white font-medium">
+            <Cpu size={16} className="text-pink-400" />
+            <span className="hidden sm:inline text-white text-sm font-medium">
               {currentModel}
             </span>
             <ChevronDown
-              className={`transition-transform duration-300 text-gray-400 ${
+              className={`transition-transform duration-200 text-gray-400 ${
                 modelMenuOpen ? "rotate-180" : ""
               }`}
-              size={16}
+              size={14}
             />
           </button>
 
           {modelMenuOpen && (
-            <div className="absolute top-full left-0 mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl p-2 shadow-2xl z-50 animate-fade-in">
-              <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-white/8 mb-2">
-                Select Model
+            <div className="absolute top-full left-0 mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-2xl z-50 animate-fade-in">
+              <div className="px-4 py-3 bg-white/5 border-b border-white/8">
+                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  AI Models
+                </div>
               </div>
-              <div className="space-y-1 max-h-80 overflow-y-auto">
-                {models.map((m) => (
+              <div className="p-2 space-y-1 max-h-96 overflow-y-auto">
+                {models.map((model) => (
                   <button
-                    key={m}
-                    className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                      m === currentModel
-                        ? "bg-indigo-600/20 text-white border border-indigo-500/30"
-                        : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
+                    key={model.name}
+                    className={`w-full flex items-center justify-between gap-3 px-3 py-3 rounded-lg text-sm transition-all group ${
+                      model.name === currentModel
+                        ? "bg-gradient-to-br from-gray-800 to-gray-900 border border-pink-400/60"
+                        : "hover:bg-white/5 border border-transparent hover:border-gray-700"
                     }`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      setCurrentModel(m);
+                      setCurrentModel(model.name);
                       setModelMenuOpen(false);
                     }}
                   >
-                    <div className="flex items-center gap-2.5">
-                      <Cpu size={16} className={m === currentModel ? "text-indigo-400" : ""} />
-                      <span>{m}</span>
+                    <div className="flex items-center gap-3">
+                      <div className={`p-1.5 rounded-md ${
+                        model.name === currentModel 
+                          ? "bg-pink-500/20" 
+                          : "bg-white/5 group-hover:bg-white/10"
+                      }`}>
+                        <Cpu size={14} className={
+                          model.name === currentModel 
+                            ? "text-pink-400" 
+                            : "text-gray-400 group-hover:text-gray-300"
+                        } />
+                      </div>
+                      <div className="text-left">
+                        <div className={`font-medium ${
+                          model.name === currentModel 
+                            ? "text-white" 
+                            : "text-gray-300 group-hover:text-white"
+                        }`}>
+                          {model.name}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {model.provider}
+                        </div>
+                      </div>
                     </div>
-                    {m === currentModel && (
-                      <Check size={16} className="text-indigo-400" />
+                    {model.name === currentModel && (
+                      <Check size={16} className="text-pink-400" />
                     )}
                   </button>
                 ))}
-              </div>
-              <div className="mt-2 pt-2 border-t border-white/8 text-center text-xs text-gray-500">
-                More models coming soon
               </div>
             </div>
           )}
