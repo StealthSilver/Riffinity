@@ -144,7 +144,7 @@ function ChatWindow() {
             className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 bg-white/5 hover:bg-white/8 border border-white/10 hover:border-white/20 rounded-lg transition-all"
           >
             <Cpu size={14} className="sm:w-4 sm:h-4 text-pink-400 flex-shrink-0" />
-            <span className="hidden sm:inline text-white text-xs sm:text-sm font-medium truncate max-w-[120px] md:max-w-none">
+            <span className="text-white text-xs sm:text-sm font-medium truncate max-w-[120px] md:max-w-none">
               {models.find(m => m.id === currentModel)?.name || currentModel}
             </span>
             <ChevronDown
@@ -234,7 +234,7 @@ function ChatWindow() {
       <Chat />
 
       {/* Input Area */}
-      <div className="w-full border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2.5 sm:p-3 md:p-4">
+      <div className="w-full border-t border-white/8 bg-[#111111]/80 backdrop-blur-xl p-2.5 sm:p-3 md:p-4 relative z-10">
         <div className="w-full max-w-4xl mx-auto flex items-center gap-2 sm:gap-3">
           <div className="relative flex-1">
             <input
