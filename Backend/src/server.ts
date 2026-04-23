@@ -6,6 +6,17 @@ import chatRoutes from "./routes/chat";
 
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 8080;
+const defaultAllowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://riffinity.vercel.app",
+  "https://riffinity-fe.vercel.app",
+];
+const envAllowedOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+const allowedOrigins = new Set([...defaultAllowedOrigins, ...envAllowedOrigins]);
 
 // Prevent mongoose from buffering commands when not connected
 mongoose.set("bufferCommands", false);
@@ -25,14 +36,7 @@ app.use(async (req, res, next) => {
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowed = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "https://riffinity.vercel.app",
-
-        "https://riffinity-fe.vercel.app",
-      ];
-      if (!origin || allowed.includes(origin)) {
+      if (!origin || allowedOrigins.has(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
