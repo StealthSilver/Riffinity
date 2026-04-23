@@ -119,51 +119,39 @@ const Features = () => {
     <section
       ref={sectionRef}
       id="features"
-      className="relative py-32 px-4 overflow-hidden"
+      className="relative overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black" />
-
-      {/* Animated grid background */}
+      <div className="absolute -top-24 right-0 h-72 w-72 rounded-full bg-[#e3186c] blur-3xl opacity-10" />
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(227,24,108,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,.3) 1px, transparent 1px)",
-          backgroundSize: "100px 100px",
+          backgroundSize: "84px 84px",
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Title */}
-        <div ref={titleRef} className="text-center mb-20">
+      <div className="section-shell relative">
+        <div ref={titleRef} className="text-center mb-16 md:mb-20">
           <div className="inline-block relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] blur-3xl opacity-30" />
-            <h2 className="relative text-5xl md:text-6xl font-heading font-bold text-[#fbfffd] mb-4">
+            <h2 className="section-title relative text-4xl md:text-6xl mb-4">
               Why <span className="text-[#e3186c]">{siteData.name}</span>?
         </h2>
           </div>
-          <p className="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
+          <p className="section-copy text-lg mt-6 mx-auto">
             Experience the difference with our cutting-edge features
           </p>
       </div>
 
-        {/* Features Grid */}
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {cardData.map((card, index) => (
             <div
               key={index}
-              className="feature-card group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#e3186c]/50 transition-all duration-300 overflow-hidden"
+              className="feature-card glass-card group relative rounded-2xl p-6 hover:border-[#e3186c]/35 transition-all duration-300 overflow-hidden"
             >
-              {/* Gradient glow effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c]/0 via-[#38bdf8]/0 to-[#e3186c]/0 group-hover:from-[#e3186c]/10 group-hover:via-[#38bdf8]/5 group-hover:to-[#e3186c]/10 transition-all duration-500" />
-              
-              {/* Top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Content */}
               <div className="relative z-10">
-                {/* Icon */}
                 <div className="feature-icon mb-4 inline-flex p-3 bg-gradient-to-br from-[#e3186c]/20 to-[#38bdf8]/20 rounded-xl border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300">
               <Image
                 src={card.icon}
@@ -174,26 +162,16 @@ const Features = () => {
               />
                 </div>
 
-                {/* Title */}
                 <h3 className="text-xl font-heading font-bold text-[#fbfffd] mb-3 group-hover:text-[#38bdf8] transition-all duration-300">
                 {card.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-slate-400 text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
                 {card.description}
               </p>
               </div>
-
-              {/* Bottom right accent */}
-              <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-[#e3186c]/10 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           ))}
-        </div>
-
-        {/* Bottom decorative element */}
-        <div className="mt-20 flex justify-center">
-          <div className="h-1 w-64 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent rounded-full" />
         </div>
       </div>
     </section>

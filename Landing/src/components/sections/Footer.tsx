@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import siteData from "../../data";
 import gsap from "gsap";
@@ -80,43 +81,35 @@ const Footer = () => {
     <footer
       ref={footerRef}
       id="contact"
-      className="relative overflow-hidden py-16 px-4 mt-20"
+      className="relative overflow-hidden mt-10"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-slate-900 to-black" />
-
-      {/* Subtle grid */}
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
+          backgroundSize: "60px 60px",
         }}
       />
 
-      {/* Top gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Logo */}
-        <div ref={logoRef} className="flex justify-center mb-12">
+      <div className="section-shell relative pt-20 pb-12">
+        <div ref={logoRef} className="flex justify-center mb-10">
           <Link href="/" className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] rounded-lg blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
             <img
               src="/logo.svg"
               alt="RiffinityAI Logo"
               width={250}
               height={100}
-              className="relative z-10 transition-transform duration-300 group-hover:scale-105"
+              className="relative z-10 opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>
         </div>
 
-        {/* Navigation Links */}
         <div
           ref={linksRef}
-          className="flex flex-wrap justify-center items-center gap-8 md:gap-16 mb-12"
+          className="flex flex-wrap justify-center items-center gap-7 md:gap-14 mb-10"
         >
           {navLinks.map((link, index) => (
             <Link
@@ -127,15 +120,14 @@ const Footer = () => {
               <span className="relative z-10 group-hover:text-[#fbfffd] transition-colors duration-300">
                 {link.label}
               </span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </div>
 
-        {/* Social Icons */}
         <div
           ref={socialsRef}
-          className="flex items-center justify-center gap-6 mb-12"
+          className="flex items-center justify-center gap-4 mb-10"
         >
           <a
             href={socialLinks.github}
@@ -143,8 +135,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="social-icon group relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c] to-[#38bdf8] rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-            <div className="relative w-12 h-12 flex items-center justify-center bg-slate-800/50 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-110">
+            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-105">
               <FaGithub className="text-slate-400 group-hover:text-[#fbfffd] transition-colors duration-300 text-xl" />
             </div>
           </a>
@@ -155,9 +146,8 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="social-icon group relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c] to-[#38bdf8] rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-            <div className="relative w-12 h-12 flex items-center justify-center bg-slate-800/50 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-110">
-              <FaTwitter className="text-slate-400 group-hover:text-[#38bdf8] transition-colors duration-300 text-xl" />
+            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-105">
+              <FaXTwitter className="text-slate-400 group-hover:text-[#38bdf8] transition-colors duration-300 text-xl" />
             </div>
           </a>
 
@@ -165,8 +155,7 @@ const Footer = () => {
             href={socialLinks.email}
             className="social-icon group relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c] to-[#38bdf8] rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-            <div className="relative w-12 h-12 flex items-center justify-center bg-slate-800/50 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-110">
+            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-105">
               <MdEmail className="text-slate-400 group-hover:text-[#e3186c] transition-colors duration-300 text-xl" />
             </div>
           </a>
@@ -177,21 +166,18 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="social-icon group relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c] to-[#38bdf8] rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-            <div className="relative w-12 h-12 flex items-center justify-center bg-slate-800/50 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-110">
+            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-105">
               <FaLinkedin className="text-slate-400 group-hover:text-[#38bdf8] transition-colors duration-300 text-xl" />
             </div>
           </a>
         </div>
 
-        {/* Divider */}
         <div className="relative mb-8">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="text-center mt-4">
           <p className="text-slate-400 text-sm font-sans">
             &copy; {new Date().getFullYear()}{" "}

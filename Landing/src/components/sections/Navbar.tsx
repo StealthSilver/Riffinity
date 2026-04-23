@@ -57,48 +57,44 @@ const Navbar = () => {
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-lg"
+          ? "bg-black/65 backdrop-blur-xl border-b border-white/10"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo */}
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
         <Link href="/" className="flex items-center cursor-pointer group">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] rounded-lg blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
+          <div className="relative rounded-xl px-2 py-1 transition-colors duration-300 group-hover:bg-white/5">
           <img
             src="/logo.svg"
               alt="RiffinityAI Logo"
             width={140}
             height={60}
-              className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-105"
+              className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-[1.02]"
           />
           </div>
         </Link>
 
-        {/* Nav Items */}
-        <div className="hidden md:flex items-center gap-8 font-sans">
-          {NAV_ITEMS.map((item, index) => (
+        <div className="hidden md:flex items-center gap-9 font-sans">
+          {NAV_ITEMS.map((item) => (
             <Link
               key={item.name}
               href={item.link}
-              className="nav-item relative text-[#fbfffd] font-medium group"
+              className="nav-item relative text-[#fbfffd]/80 font-medium group"
             >
-              <span className="relative z-10 transition-colors duration-200 group-hover:text-[#38bdf8]">
+              <span className="relative z-10 transition-colors duration-200 group-hover:text-[#fbfffd]">
               {item.name}
               </span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </div>
 
-        {/* CTA Button */}
         <Link
           href="https://riffinity-fe.vercel.app/"
           target="_blank"
-          className="nav-item group relative bg-[#e3186c] text-[#fbfffd] font-bold px-6 py-2 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#e3186c]/50 hover:bg-[#9c0543] z-20"
+          className="nav-item btn-primary inline-flex items-center justify-center text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-300 z-20"
         >
-          <span className="relative z-10">Login</span>
+          <span className="relative z-10">Get started</span>
         </Link>
       </div>
     </nav>

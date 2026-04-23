@@ -96,46 +96,38 @@ export default function TestimonialsSection() {
     <section
       ref={sectionRef}
       id="testimonials"
-      className="relative py-32 px-4 overflow-hidden"
+      className="relative overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black" />
+      <div className="absolute top-20 left-8 w-72 h-72 bg-[#38bdf8] rounded-full blur-3xl opacity-10" />
+      <div className="absolute bottom-20 right-8 w-72 h-72 bg-[#e3186c] rounded-full blur-3xl opacity-10" />
 
-      {/* Animated orbs */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-[#e3186c] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" />
-
-      <div className="relative max-w-7xl mx-auto">
-        {/* Title */}
-        <div ref={titleRef} className="text-center mb-20">
-          <div className="inline-block relative">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-[#fbfffd] mb-4">
+      <div className="section-shell relative">
+        <div ref={titleRef} className="text-center mb-16 md:mb-20">
+          <div className="inline-block">
+            <h2 className="section-title text-4xl md:text-6xl mb-4">
               Loved by{" "}
               <span className="text-[#e3186c]">
                 people everywhere
               </span>
           </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
+            <div className="mx-auto h-1 w-36 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
           </div>
-          <p className="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
+          <p className="section-copy text-lg mt-6 mx-auto">
             Join thousands of satisfied users who have transformed their workflow
           </p>
         </div>
 
-        {/* Testimonials Grid */}
         <div
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className="testimonial-card group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#e3186c]/50 transition-all duration-300 overflow-hidden"
+              className="testimonial-card glass-card group relative rounded-2xl p-8 hover:border-[#e3186c]/35 transition-all duration-300 overflow-hidden"
             >
-              {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c]/0 to-[#38bdf8]/0 group-hover:from-[#e3186c]/10 group-hover:to-[#38bdf8]/10 transition-all duration-500" />
 
-              {/* Quote icon */}
               <div className="absolute top-6 right-6 text-[#e3186c]/20 group-hover:text-[#e3186c]/40 transition-colors duration-300">
                 <svg
                   className="w-12 h-12"
@@ -148,7 +140,6 @@ export default function TestimonialsSection() {
 
               {/* Content */}
               <div className="relative z-10">
-                {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <svg
@@ -163,12 +154,10 @@ export default function TestimonialsSection() {
                   ))}
                 </div>
 
-                {/* Quote */}
                 <p className="text-slate-300 text-base leading-relaxed mb-6 group-hover:text-slate-200 transition-colors duration-300">
-                  "{testimonial.quote}"
+                  &ldquo;{testimonial.quote}&rdquo;
                 </p>
 
-                {/* Author */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#e3186c] to-[#38bdf8] flex items-center justify-center text-white font-bold text-lg">
                     {testimonial.name.charAt(0)}
@@ -181,15 +170,11 @@ export default function TestimonialsSection() {
                   </div>
                 </div>
               </div>
-
-              {/* Bottom accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           ))}
       </div>
 
-        {/* Stats section */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5">
           {[
             { number: "10K+", label: "Active Users" },
             { number: "50K+", label: "Tasks Completed" },
@@ -198,7 +183,7 @@ export default function TestimonialsSection() {
           ].map((stat, idx) => (
             <div
               key={idx}
-              className="text-center p-6 bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-xl border border-white/10 backdrop-blur-sm hover:border-[#e3186c]/50 transition-all duration-300"
+              className="text-center p-6 glass-card rounded-xl hover:border-[#e3186c]/35 transition-all duration-300"
             >
               <div className="text-4xl md:text-5xl font-heading font-bold text-[#e3186c] mb-2">
                 {stat.number}

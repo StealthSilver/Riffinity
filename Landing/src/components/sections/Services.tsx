@@ -77,76 +77,44 @@ const Services = () => {
     <section
       ref={sectionRef}
       id="services"
-      className="relative py-32 px-4 overflow-hidden"
+      className="relative overflow-hidden"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black" />
-      
-      {/* Animated orbs */}
-      <div className="absolute top-20 right-20 w-96 h-96 bg-[#e3186c] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" />
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" />
+      <div className="absolute top-16 right-10 w-80 h-80 bg-[#e3186c] rounded-full blur-3xl opacity-10" />
+      <div className="absolute bottom-16 left-10 w-80 h-80 bg-[#38bdf8] rounded-full blur-3xl opacity-10" />
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Title */}
-        <div ref={titleRef} className="text-center mb-20">
-          <div className="inline-block relative">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-[#fbfffd] mb-4">
+      <div className="section-shell relative">
+        <div ref={titleRef} className="text-center mb-16 md:mb-20">
+          <div className="inline-block">
+            <h2 className="section-title text-4xl md:text-6xl mb-4">
           {siteData.servicesTitle}
         </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
+            <div className="mx-auto h-1 w-36 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
           </div>
-          <p className="text-slate-400 text-lg mt-6 max-w-2xl mx-auto">
+          <p className="section-copy text-lg mt-6 mx-auto">
             Discover powerful AI-driven solutions tailored to your needs
           </p>
       </div>
 
-        {/* Services Grid */}
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {siteData.services.map((service, idx) => (
             <div
             key={idx}
-              className="service-card group relative bg-gradient-to-br from-slate-900/50 to-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 overflow-hidden hover:border-[#e3186c]/50 transition-all duration-300"
+              className="service-card glass-card group relative rounded-2xl p-8 overflow-hidden hover:border-[#e3186c]/40 transition-all duration-300"
             >
-              {/* Gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c]/10 to-[#38bdf8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              {/* Corner accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#e3186c]/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Content */}
               <div className="relative z-10">
-                {/* Icon */}
-                <div className="mb-6 inline-flex p-4 bg-gradient-to-br from-[#e3186c]/20 to-[#38bdf8]/20 rounded-xl border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-6 inline-flex p-4 bg-gradient-to-br from-[#e3186c]/15 to-[#38bdf8]/15 rounded-xl border border-white/10 group-hover:scale-105 transition-transform duration-300">
                   {service.icon}
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl font-heading font-bold text-[#fbfffd] mb-4 group-hover:text-[#38bdf8] transition-all duration-300">
+                <h3 className="text-2xl font-heading font-bold text-[#fbfffd] mb-4 group-hover:text-[#38bdf8] transition-colors duration-300">
                   {service.title}
                 </h3>
 
-                {/* Description */}
                 <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
                   {service.description}
                 </p>
-
-                {/* Arrow indicator */}
-                <div className="mt-6 flex items-center text-[#e3186c] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-sm font-semibold">Learn more</span>
-                  <svg
-                    className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
               </div>
             </div>
           ))}

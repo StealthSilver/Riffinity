@@ -109,99 +109,87 @@ const Hero = () => {
       <section
       ref={heroRef}
         id="home"
-      className="relative min-h-screen bg-gradient-to-b from-black via-slate-900 to-black overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
     >
-      {/* Animated gradient orbs */}
       <div
         ref={floatingRef1}
-        className="absolute top-20 left-10 w-72 h-72 bg-[#e3186c] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+        className="absolute -top-20 left-8 w-72 h-72 bg-[#e3186c] rounded-full blur-3xl opacity-20"
       />
       <div
         ref={floatingRef2}
-        className="absolute top-40 right-10 w-96 h-96 bg-[#38bdf8] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+        className="absolute top-24 right-10 w-96 h-96 bg-[#38bdf8] rounded-full blur-3xl opacity-20"
       />
       <div
         ref={floatingRef3}
-        className="absolute bottom-20 left-1/2 w-80 h-80 bg-[#c084fc] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+        className="absolute bottom-6 left-[40%] w-80 h-80 bg-[#c084fc] rounded-full blur-3xl opacity-10"
       />
 
-      {/* Grid overlay */}
       <div
-        className="absolute inset-0 bg-grid opacity-10 pointer-events-none"
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
+          backgroundSize: "64px 64px",
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 pt-32 pb-20 flex flex-col items-center justify-center">
-        {/* Badge */}
-        <div ref={badgeRef} className="mb-8">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c] to-[#38bdf8] rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300" />
-            <div className="relative bg-slate-900/90 backdrop-blur-sm text-[#fbfffd] font-sans px-8 py-3 rounded-full border border-white/20 flex items-center gap-2">
+      <div className="relative max-w-7xl mx-auto px-4 pt-36 pb-24 md:pb-32 flex flex-col items-center justify-center">
+        <div ref={badgeRef} className="mb-10">
+          <div className="glass-card rounded-full px-6 py-2.5 border border-white/20 text-[#fbfffd] flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e3186c] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e3186c]"></span>
               </span>
-              <span className="text-sm md:text-base">New! Ultimate AI Companion</span>
-            </div>
+            <span className="text-sm md:text-base">Smart workspace for AI productivity</span>
           </div>
         </div>
 
-        {/* Title */}
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-[#fbfffd] tracking-tight text-center mb-8 leading-tight"
+          className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-[#fbfffd] tracking-tight text-center mb-7 leading-[1.05]"
         >
               {siteData.heroTitle}
             </h1>
 
-        {/* Description */}
         <p
           ref={descRef}
-          className="text-lg md:text-2xl font-sans text-slate-300 text-center max-w-4xl mb-12 leading-relaxed"
+          className="text-lg md:text-2xl font-sans text-slate-300 text-center max-w-3xl mb-14 leading-relaxed"
         >
             {siteData.heroDescription}
           </p>
 
-        {/* Buttons */}
         <div
           ref={buttonsRef}
-          className="flex flex-col md:flex-row items-center justify-center gap-6 mb-20 z-10 relative"
+          className="flex flex-col md:flex-row items-center justify-center gap-4 mb-20 z-10 relative"
         >
             <Link
               href="https://riffinity-fe.vercel.app/"
               target="_blank"
-            className="group relative bg-[#e3186c] text-[#fbfffd] font-sans font-bold px-12 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#e3186c]/50 hover:bg-[#9c0543]"
+            className="btn-primary inline-flex items-center justify-center font-sans font-semibold px-10 py-4 rounded-full transition-all duration-300"
             >
-            <span className="relative z-10">Get Started</span>
+            <span className="relative z-10">Get started</span>
             </Link>
             <Link
               href="#contact"
-            className="group relative bg-transparent text-[#fbfffd] font-sans font-bold px-12 py-4 rounded-full border-2 border-white/30 hover:border-white/60 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+            className="btn-secondary inline-flex items-center justify-center font-sans font-semibold px-10 py-4 rounded-full transition-all duration-300"
             >
-            <span className="relative z-10">Contact Us</span>
+            <span className="relative z-10">Contact us</span>
             </Link>
         </div>
 
-        {/* Hero Image */}
         <div ref={imageRef} className="relative w-full max-w-6xl">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#e3186c]/20 to-transparent rounded-3xl blur-2xl" />
-          <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl backdrop-blur-sm bg-slate-900/50">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#e3186c]/20 to-[#38bdf8]/20 rounded-3xl blur-2xl" />
+          <div className="glass-card relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
         <img
           src="/Hero.png"
               alt="Dashboard preview"
               className="w-full h-auto object-cover"
             />
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
 
-      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </section>
   );

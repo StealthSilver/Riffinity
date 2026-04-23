@@ -102,50 +102,36 @@ const CTA = () => {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative py-32 px-4 overflow-hidden"
+      className="relative overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-black" />
-
-      {/* Animated grid */}
+      <div className="absolute -top-16 left-10 w-72 h-72 bg-[#e3186c] rounded-full blur-3xl opacity-10" />
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(227,24,108,.5) 2px, transparent 2px), linear-gradient(90deg, rgba(56,189,248,.5) 2px, transparent 2px)",
-          backgroundSize: "80px 80px",
+            "linear-gradient(rgba(227,24,108,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,.35) 1px, transparent 1px)",
+          backgroundSize: "84px 84px",
         }}
       />
 
-      {/* Floating orbs */}
       <div
         ref={orb1Ref}
-        className="absolute top-20 left-20 w-64 h-64 bg-[#e3186c] rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        className="absolute top-20 left-20 w-64 h-64 bg-[#e3186c] rounded-full blur-3xl opacity-14"
       />
       <div
         ref={orb2Ref}
-        className="absolute bottom-20 right-20 w-80 h-80 bg-[#38bdf8] rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        className="absolute bottom-20 right-20 w-80 h-80 bg-[#38bdf8] rounded-full blur-3xl opacity-14"
       />
       <div
         ref={orb3Ref}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c084fc] rounded-full mix-blend-multiply filter blur-3xl opacity-15"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c084fc] rounded-full blur-3xl opacity-10"
       />
 
-      <div className="relative max-w-5xl mx-auto">
-        {/* Main CTA Card */}
-        <div className="relative bg-slate-900/50 backdrop-blur-xl rounded-3xl p-12 md:p-20 border border-white/10 overflow-hidden">
-          {/* Subtle top accent */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e3186c]/50 to-transparent" />
-          
-          {/* Subtle corner glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#e3186c]/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#38bdf8]/5 rounded-full blur-3xl" />
-
-          {/* Content */}
+      <div className="section-shell">
+        <div className="glass-card relative max-w-5xl mx-auto rounded-3xl p-10 md:p-16 lg:p-20 border border-white/15 overflow-hidden">
           <div className="relative z-10 flex flex-col items-center justify-center text-center">
-            {/* Title */}
             <div ref={titleRef}>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-4 leading-tight">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-4 leading-tight tracking-tight">
                 Ready to{" "}
                 <span className="text-[#e3186c]">
                   Transform
@@ -159,14 +145,13 @@ const CTA = () => {
               </p>
             </div>
 
-            {/* Button */}
         <Link
               ref={buttonRef}
           href="https://riffinity-fe.vercel.app/"
           target="_blank"
-              className="group relative inline-flex items-center justify-center gap-2 bg-[#e3186c] text-[#fbfffd] font-sans font-bold px-16 py-5 rounded-full overflow-hidden transition-all duration-300 hover:bg-[#9c0543] hover:shadow-2xl hover:shadow-[#e3186c]/30"
+              className="btn-primary group relative inline-flex items-center justify-center gap-2 font-sans font-semibold px-14 py-5 rounded-full overflow-hidden transition-all duration-300"
             >
-              <span className="relative z-10 text-lg">Get Started Now</span>
+              <span className="relative z-10 text-lg">Get started now</span>
               
               {/* Arrow */}
               <svg
@@ -182,12 +167,9 @@ const CTA = () => {
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
-              
-              {/* Subtle shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
         </Link>
 
-            {/* Trust indicators */}
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-slate-400 text-sm">
               <div className="flex items-center gap-2">
                 <svg className="w-5 h-5 text-[#e3186c]" fill="currentColor" viewBox="0 0 20 20">

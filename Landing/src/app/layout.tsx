@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: siteData.name,
   description: siteData.description,
   icons: {
-    icon: "/logo_small.svg",
+    icon: "/icons/header.svg",
   },
 };
 
