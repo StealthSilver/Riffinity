@@ -1,5 +1,5 @@
 import logo from "../assets/riffinity_logo.svg";
-import { MessageSquare, Trash2, X, UserRound, PanelLeftClose, PanelLeft, Sparkles } from "lucide-react";
+import { MessageSquare, Trash2, X, UserRound, PanelLeftClose, PanelLeft } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import { v1 as uuidv1 } from "uuid";
@@ -160,7 +160,6 @@ function Sidebar() {
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </div>
-            <Sparkles size={14} className="relative z-10 sm:w-4 sm:h-4 text-[#e3186c]" />
             <span className={`relative z-10 transition-all duration-200 ${sidebarCollapsed ? "md:hidden" : ""}`}>New Chat</span>
           </button>
         </div>

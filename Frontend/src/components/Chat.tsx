@@ -3,7 +3,7 @@ import { MyContext } from "../context";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
-import { Bot, Sparkles, UserRound } from "lucide-react";
+import { Bot, UserRound } from "lucide-react";
 
 function Chat() {
   const { newChat, prevChats, reply } = useContext(MyContext);
@@ -55,12 +55,9 @@ function Chat() {
       {newChat ? (
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-4">
           <div className="text-center max-w-3xl space-y-4 sm:space-y-5 animate-fade-in">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-lg">
-              <Sparkles size={22} className="text-[#e3186c]" />
-            </div>
             <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight px-2">
               <span className="relative inline-block text-[#fbfffd]">
-                Start a new chat
+                Meet Riffinity AI
               </span>
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-slate-300/90 leading-relaxed font-normal max-w-2xl mx-auto px-2">
