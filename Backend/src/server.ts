@@ -25,6 +25,7 @@ app.use(express.json());
 
 // Lazy DB connection middleware (do not block requests if DB is down).
 app.use(async (req, res, next) => {
+  if (dbDisabled) return next();
   if (mongoose.connection.readyState === 1) return next(); // connected
   try {
     await connectDB();
@@ -54,6 +55,7 @@ app.use("/api", chatRoutes);
 // Start the server only in traditional runtime (not Vercel serverless)
 // Cache for in-flight mongoose connection promise to avoid duplicate connects
 let _connecting: Promise<void> | null = null;
+let dbDisabled = false;
 
 async function start() {
   try {
@@ -82,6 +84,13 @@ async function connectDB() {
     if (!process.env.MONGODB_URI) {
       throw new Error("MONGODB_URI is not defined in .env file");
     }
+    if (process.env.MONGODB_URI.includes("<db_password>")) {
+      dbDisabled = true;
+      console.warn(
+        "MongoDB is disabled: replace <db_password> in MONGODB_URI. Running in memory-only mode."
+      );
+      return;
+    }
     if (mongoose.connection.readyState === 1) return; // already connected
     if (_connecting) {
       await _connecting; // reuse in-flight promise
@@ -99,6 +108,14 @@ async function connectDB() {
       });
     await _connecting;
   } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (message.toLowerCase().includes("bad auth")) {
+      dbDisabled = true;
+      console.warn(
+        "MongoDB auth failed. Running in memory-only mode until backend restart."
+      );
+      return;
+    }
     console.error("MongoDB connection error:", err);
     throw err;
   }
