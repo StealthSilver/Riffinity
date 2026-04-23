@@ -77,6 +77,23 @@ section {
   transform: translateY(-2px);
 }
 
+@media (max-width: 768px) {
+  .section-shell {
+    padding: 4.5rem 1rem;
+  }
+
+  .section-copy {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-shell {
+    padding: 4rem 0.9rem;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

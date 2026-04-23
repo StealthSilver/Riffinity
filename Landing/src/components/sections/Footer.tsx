@@ -94,22 +94,22 @@ const Footer = () => {
 
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
 
-      <div className="section-shell relative pt-20 pb-12">
-        <div ref={logoRef} className="flex justify-center mb-10">
+      <div className="section-shell relative pt-16 sm:pt-20 pb-10 sm:pb-12">
+        <div ref={logoRef} className="flex justify-center mb-8 sm:mb-10">
           <Link href="/" className="group relative">
             <img
               src="/logo.svg"
               alt="RiffinityAI Logo"
               width={250}
               height={100}
-              className="relative z-10 opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
+              className="w-44 sm:w-[250px] h-auto relative z-10 opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>
         </div>
 
         <div
           ref={linksRef}
-          className="flex flex-wrap justify-center items-center gap-7 md:gap-14 mb-10"
+          className="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 md:gap-14 mb-8 sm:mb-10"
         >
           {navLinks.map((link, index) => (
             <Link
@@ -127,7 +127,7 @@ const Footer = () => {
 
         <div
           ref={socialsRef}
-          className="flex items-center justify-center gap-4 mb-10"
+          className="flex items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10"
         >
           <a
             href={socialLinks.github}
@@ -135,7 +135,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="social-icon group relative"
           >
-            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-105">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-105">
               <FaGithub className="text-slate-400 group-hover:text-[#fbfffd] transition-colors duration-300 text-xl" />
             </div>
           </a>
@@ -146,7 +146,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="social-icon group relative"
           >
-            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-105">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-105">
               <FaXTwitter className="text-slate-400 group-hover:text-[#38bdf8] transition-colors duration-300 text-xl" />
             </div>
           </a>
@@ -155,7 +155,7 @@ const Footer = () => {
             href={socialLinks.email}
             className="social-icon group relative"
           >
-            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-105">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#e3186c]/50 transition-all duration-300 group-hover:scale-105">
               <MdEmail className="text-slate-400 group-hover:text-[#e3186c] transition-colors duration-300 text-xl" />
             </div>
           </a>
@@ -166,7 +166,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="social-icon group relative"
           >
-            <div className="relative w-11 h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-105">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-slate-800/45 backdrop-blur-sm rounded-full border border-white/10 group-hover:border-[#38bdf8]/50 transition-all duration-300 group-hover:scale-105">
               <FaLinkedin className="text-slate-400 group-hover:text-[#38bdf8] transition-colors duration-300 text-xl" />
             </div>
           </a>

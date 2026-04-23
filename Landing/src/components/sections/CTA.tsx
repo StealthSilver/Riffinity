@@ -128,19 +128,19 @@ const CTA = () => {
       />
 
       <div className="section-shell">
-        <div className="glass-card relative max-w-5xl mx-auto rounded-3xl p-10 md:p-16 lg:p-20 border border-white/15 overflow-hidden">
+        <div className="glass-card relative max-w-5xl mx-auto rounded-3xl p-6 sm:p-8 md:p-16 lg:p-20 border border-white/15 overflow-hidden">
           <div className="relative z-10 flex flex-col items-center justify-center text-center">
             <div ref={titleRef}>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-4 leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-3 sm:mb-4 leading-tight tracking-tight">
                 Ready to{" "}
                 <span className="text-[#e3186c]">
                   Transform
                 </span>
               </h2>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-[#fbfffd] mb-6 sm:mb-8 leading-tight">
                 Your Workflow?
               </h2>
-              <p className="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-12">
+              <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-12">
                 Join thousands of users who are already experiencing the future of AI assistance
               </p>
             </div>
@@ -149,9 +149,9 @@ const CTA = () => {
               ref={buttonRef}
           href="https://riffinity-fe.vercel.app/"
           target="_blank"
-              className="btn-primary group relative inline-flex items-center justify-center gap-2 font-sans font-semibold px-14 py-5 rounded-full overflow-hidden transition-all duration-300"
+              className="btn-primary group relative inline-flex items-center justify-center gap-2 font-sans font-semibold px-8 sm:px-14 py-3.5 sm:py-5 rounded-full overflow-hidden transition-all duration-300 w-full sm:w-auto min-h-12"
             >
-              <span className="relative z-10 text-lg">Get started now</span>
+              <span className="relative z-10 text-base sm:text-lg">Get started now</span>
               
               {/* Arrow */}
               <svg
@@ -170,7 +170,7 @@ const CTA = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
         </Link>
 
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-slate-400 text-sm">
+            <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-slate-400 text-xs sm:text-sm">
               <div className="flex items-center gap-2">
                 <svg className="w-5 h-5 text-[#e3186c]" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />

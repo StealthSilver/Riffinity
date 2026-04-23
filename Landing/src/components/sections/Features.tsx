@@ -132,18 +132,18 @@ const Features = () => {
       />
 
       <div className="section-shell relative">
-        <div ref={titleRef} className="text-center mb-16 md:mb-20">
+        <div ref={titleRef} className="text-center mb-14 md:mb-20">
           <div className="inline-block relative">
-            <h2 className="section-title relative text-4xl md:text-6xl mb-4">
+            <h2 className="section-title relative text-3xl sm:text-4xl md:text-6xl mb-4">
               Why <span className="text-[#e3186c]">{siteData.name}</span>?
         </h2>
           </div>
-          <p className="section-copy text-lg mt-6 mx-auto">
+          <p className="section-copy text-base sm:text-lg mt-5 sm:mt-6 mx-auto">
             Experience the difference with our cutting-edge features
           </p>
       </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {cardData.map((card, index) => (
             <div
               key={index}

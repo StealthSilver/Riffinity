@@ -61,15 +61,15 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 gap-3">
         <Link href="/" className="flex items-center cursor-pointer group">
           <div className="relative rounded-xl px-2 py-1 transition-colors duration-300 group-hover:bg-white/5">
           <img
-            src="/logo.svg"
+            src="/icons/logo.svg"
               alt="RiffinityAI Logo"
             width={140}
             height={60}
-              className="object-contain relative z-10 transition-transform duration-300 group-hover:scale-[1.02]"
+              className="w-28 sm:w-[140px] h-auto object-contain relative z-10 transition-transform duration-300 group-hover:scale-[1.02]"
           />
           </div>
         </Link>
@@ -92,7 +92,7 @@ const Navbar = () => {
         <Link
           href="https://riffinity-fe.vercel.app/"
           target="_blank"
-          className="nav-item btn-primary inline-flex items-center justify-center text-sm font-semibold px-6 py-2.5 rounded-full transition-all duration-300 z-20"
+          className="nav-item btn-primary inline-flex items-center justify-center text-xs sm:text-sm font-semibold px-4 sm:px-6 py-2.5 rounded-full transition-all duration-300 z-20 whitespace-nowrap"
         >
           <span className="relative z-10">Get started</span>
         </Link>

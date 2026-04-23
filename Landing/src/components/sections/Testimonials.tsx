@@ -102,9 +102,9 @@ export default function TestimonialsSection() {
       <div className="absolute bottom-20 right-8 w-72 h-72 bg-[#e3186c] rounded-full blur-3xl opacity-10" />
 
       <div className="section-shell relative">
-        <div ref={titleRef} className="text-center mb-16 md:mb-20">
+        <div ref={titleRef} className="text-center mb-14 md:mb-20">
           <div className="inline-block">
-            <h2 className="section-title text-4xl md:text-6xl mb-4">
+            <h2 className="section-title text-3xl sm:text-4xl md:text-6xl mb-4">
               Loved by{" "}
               <span className="text-[#e3186c]">
                 people everywhere
@@ -112,7 +112,7 @@ export default function TestimonialsSection() {
           </h2>
             <div className="mx-auto h-1 w-36 bg-gradient-to-r from-transparent via-[#e3186c] to-transparent" />
           </div>
-          <p className="section-copy text-lg mt-6 mx-auto">
+          <p className="section-copy text-base sm:text-lg mt-5 sm:mt-6 mx-auto">
             Join thousands of satisfied users who have transformed their workflow
           </p>
         </div>
@@ -124,7 +124,7 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className="testimonial-card glass-card group relative rounded-2xl p-8 hover:border-[#e3186c]/35 transition-all duration-300 overflow-hidden"
+              className="testimonial-card glass-card group relative rounded-2xl p-6 sm:p-8 hover:border-[#e3186c]/35 transition-all duration-300 overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#e3186c]/0 to-[#38bdf8]/0 group-hover:from-[#e3186c]/10 group-hover:to-[#38bdf8]/10 transition-all duration-500" />
 
@@ -174,7 +174,7 @@ export default function TestimonialsSection() {
           ))}
       </div>
 
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="mt-14 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
           {[
             { number: "10K+", label: "Active Users" },
             { number: "50K+", label: "Tasks Completed" },
@@ -183,9 +183,9 @@ export default function TestimonialsSection() {
           ].map((stat, idx) => (
             <div
               key={idx}
-              className="text-center p-6 glass-card rounded-xl hover:border-[#e3186c]/35 transition-all duration-300"
+              className="text-center p-4 sm:p-6 glass-card rounded-xl hover:border-[#e3186c]/35 transition-all duration-300"
             >
-              <div className="text-4xl md:text-5xl font-heading font-bold text-[#e3186c] mb-2">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-[#e3186c] mb-2">
                 {stat.number}
               </div>
               <div className="text-slate-400 text-sm font-sans">{stat.label}</div>
