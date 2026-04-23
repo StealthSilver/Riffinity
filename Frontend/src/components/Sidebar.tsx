@@ -1,8 +1,9 @@
 import logo from "../assets/riffinity_logo.svg";
-import { SquarePen, MessageSquare, Trash, X, User, ChevronRight, PanelLeftClose, PanelLeft } from "lucide-react";
+import { MessageSquare, Trash2, X, UserRound, PanelLeftClose, PanelLeft, Sparkles } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../context";
 import { v1 as uuidv1 } from "uuid";
+import { API_BASE_URL } from "../config";
 
 function Sidebar() {
   const {
@@ -25,8 +26,7 @@ function Sidebar() {
 
   const getAllThreads = async () => {
     try {
-      const baseUrl = "https://riffinity.onrender.com";
-      const response = await fetch(`${baseUrl}/api/thread`);
+      const response = await fetch(`${API_BASE_URL}/api/thread`);
       const res = await response.json();
 
       const filteredData = res.map((thread: any) => ({
@@ -59,8 +59,7 @@ function Sidebar() {
     setCurrThreadId(newthreadId);
 
     try {
-      const baseUrl = "https://riffinity.onrender.com";
-      const response = await fetch(`${baseUrl}/api/thread/${newthreadId}`);
+      const response = await fetch(`${API_BASE_URL}/api/thread/${newthreadId}`);
 
       const res = await response.json();
       console.log(res);
@@ -82,8 +81,7 @@ function Sidebar() {
     if (!threadToDelete) return;
     
     try {
-      const baseUrl = "https://riffinity.onrender.com";
-      const response = await fetch(`${baseUrl}/api/thread/${threadToDelete.id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/thread/${threadToDelete.id}`, {
         method: "DELETE",
       });
 
@@ -113,14 +111,14 @@ function Sidebar() {
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative h-screen bg-black/80 backdrop-blur-xl border-r border-white/10 flex flex-col transition-all duration-300 z-50 ${
+        className={`fixed md:relative h-screen bg-black/80 backdrop-blur-xl border-r border-white/10 flex flex-col transition-all duration-300 z-50 shadow-2xl ${
           sidebarCollapsed ? "md:w-16" : "w-[280px] sm:w-72 md:w-80"
         } ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         {/* Header */}
-        <div className={`flex items-center border-b border-white/10 px-3 sm:px-4 md:px-5 py-3 sm:py-3 ${
+        <div className={`h-14 sm:h-[60px] flex items-center border-b border-white/10 px-3 sm:px-4 md:px-5 ${
           sidebarCollapsed ? "md:justify-center md:px-3" : "justify-between"
         }`}>
           {!sidebarCollapsed && (
@@ -152,7 +150,7 @@ function Sidebar() {
         <div className={`px-3 sm:px-4 py-2.5 sm:py-3 ${sidebarCollapsed ? "md:px-2" : ""}`}>
           <button
             onClick={createNewChat}
-            className={`group relative w-full flex items-center gap-2 px-3 py-2 bg-gradient-to-br from-slate-900/80 to-slate-800/80 text-slate-300 rounded-lg transition-all text-xs sm:text-sm font-medium overflow-hidden border border-white/10 hover:border-[#e3186c]/60 hover:text-[#fbfffd] ${
+            className={`group relative w-full flex items-center gap-2 px-3 py-2.5 bg-gradient-to-br from-slate-900/80 to-slate-800/80 text-slate-300 rounded-xl transition-all text-xs sm:text-sm font-semibold overflow-hidden border border-white/10 hover:border-[#e3186c]/60 hover:text-[#fbfffd] shadow-sm ${
               sidebarCollapsed ? "md:justify-center md:px-2" : "justify-center"
             }`}
             aria-label="New chat"
@@ -162,7 +160,7 @@ function Sidebar() {
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </div>
-            <SquarePen size={14} className="relative z-10 sm:w-4 sm:h-4" />
+            <Sparkles size={14} className="relative z-10 sm:w-4 sm:h-4 text-[#e3186c]" />
             <span className={`relative z-10 transition-all duration-200 ${sidebarCollapsed ? "md:hidden" : ""}`}>New Chat</span>
           </button>
         </div>
@@ -177,19 +175,16 @@ function Sidebar() {
               <div key={idx} className="group relative animate-slide-in">
                 <button
                   onClick={() => changeThread(thread.threadId)}
-                  className={`w-full flex items-start gap-2 sm:gap-3 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-lg transition-all text-xs sm:text-sm ${
+                  className={`w-full flex items-start gap-2 sm:gap-3 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm border ${
                     thread.threadId === currThreadId
-                      ? "bg-white/10 text-[#fbfffd] shadow-sm"
-                      : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
+                      ? "bg-white/10 text-[#fbfffd] shadow-sm border-white/15"
+                      : "text-slate-400 hover:bg-white/5 hover:text-slate-200 border-transparent hover:border-white/10"
                   }`}
                 >
                   <MessageSquare size={14} className="sm:w-4 sm:h-4 mt-0.5 flex-shrink-0" />
                   <span className="truncate flex-1 text-left leading-relaxed">
                     {thread.title}
                   </span>
-                  {thread.threadId === currThreadId && (
-                    <ChevronRight size={14} className="sm:w-4 sm:h-4 flex-shrink-0 text-[#e3186c]" />
-                  )}
                 </button>
                 <button
                   className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all p-1 sm:p-1.5 hover:bg-red-500/20 rounded-md text-slate-500 hover:text-red-400"
@@ -199,7 +194,7 @@ function Sidebar() {
                   }}
                   aria-label="Delete thread"
                 >
-                  <Trash size={12} className="sm:w-3.5 sm:h-3.5" />
+                  <Trash2 size={12} className="sm:w-3.5 sm:h-3.5" />
                 </button>
               </div>
             ))}
@@ -226,7 +221,7 @@ function Sidebar() {
             {/* Header */}
             <div className="px-5 py-4 border-b border-white/10">
               <h3 className="text-base sm:text-lg font-semibold text-[#fbfffd] flex items-center gap-2">
-                <Trash size={18} className="text-red-400" />
+                <Trash2 size={18} className="text-red-400" />
                 Delete Chat Thread
               </h3>
             </div>
@@ -293,12 +288,12 @@ function ProfileSection({ collapsed }: { collapsed: boolean }) {
           aria-expanded={expanded}
           title={collapsed ? "Silver User" : ""}
         >
-          <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
-            <User size={14} className="sm:w-4 sm:h-4 text-[#e3186c]" />
+          <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
+            <UserRound size={15} className="sm:w-4 sm:h-4 text-[#e3186c]" />
           </div>
           <div className={`flex-1 text-left transition-all duration-200 ${collapsed ? "md:hidden" : ""}`}>
-            <div className="text-[11px] sm:text-xs font-medium text-[#fbfffd]">Silver User</div>
-            <div className="text-[9px] sm:text-[10px] text-slate-500">Pro Plan</div>
+            <div className="text-[11px] sm:text-xs font-semibold text-[#fbfffd]">Silver User</div>
+            <div className="text-[9px] sm:text-[10px] text-slate-500">Creative Plan</div>
           </div>
         </button>
 

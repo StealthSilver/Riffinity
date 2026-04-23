@@ -3,7 +3,7 @@ import { MyContext } from "../context";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
-import { Bot } from "lucide-react";
+import { Bot, UserRound } from "lucide-react";
 
 function Chat() {
   const { newChat, prevChats, reply } = useContext(MyContext);
@@ -54,41 +54,41 @@ function Chat() {
       <div className="relative z-20 flex-1 flex flex-col min-h-0">
       {newChat ? (
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-4">
-          <div className="text-center max-w-3xl space-y-3 sm:space-y-4 animate-fade-in">
-            <h1 className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight px-2">
+          <div className="text-center max-w-3xl space-y-4 sm:space-y-5 animate-fade-in">
+            <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight px-2">
               <span className="relative inline-block text-[#fbfffd]">
-                Welcome to Riffinity
+                Meet Riffinity AI
               </span>
             </h1>
-            <p className="text-xs sm:text-sm md:text-base text-slate-400 leading-relaxed font-normal max-w-xl mx-auto px-2">
-              Start a conversation and unlock the power of AI. Ask questions, explore ideas, or just chat.
+            <p className="text-sm sm:text-base md:text-lg text-slate-300/90 leading-relaxed font-normal max-w-2xl mx-auto px-2">
+              Ask, build, research, and create in one place. Start with a prompt and let the assistant help you move faster.
             </p>
           </div>
         </div>
       ) : (
-        <div className="flex-1 px-3 sm:px-4 md:px-6 py-3 sm:py-4 pb-2 sm:pb-3">
-          <div className="max-w-4xl mx-auto space-y-2 sm:space-y-3">
+        <div className="flex-1 px-3 sm:px-4 md:px-6 py-4 sm:py-5 pb-2 sm:pb-3">
+          <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
             {prevChats?.slice(0, -1).map((chat, idx) => (
               <div
                 key={idx}
-                className={`flex gap-1.5 sm:gap-2 animate-fade-in ${
+                className={`flex gap-2 sm:gap-2.5 animate-fade-in ${
                   chat.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 {chat.role === "assistant" && (
-                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
-                    <Bot size={11} className="sm:w-3 sm:h-3 text-[#e3186c]" />
+                  <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md mt-0.5">
+                    <Bot size={14} className="sm:w-4 sm:h-4 text-[#e3186c]" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg ${
+                  className={`max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl shadow-lg ${
                     chat.role === "user"
-                      ? "bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 text-[#fbfffd]"
-                      : "bg-slate-900/50 border border-white/10 text-slate-300"
+                      ? "bg-gradient-to-br from-slate-900/85 to-slate-800/85 border border-white/15 text-[#fbfffd]"
+                      : "bg-slate-900/55 border border-white/10 text-slate-300"
                   }`}
                 >
                   {chat.role === "user" ? (
-                    <p className="text-xs sm:text-sm leading-relaxed break-words">
+                    <p className="text-xs sm:text-sm leading-relaxed break-words tracking-[0.005em]">
                       {chat.content.trim() === ""
                         ? "(empty message)"
                         : chat.content}
@@ -102,19 +102,19 @@ function Chat() {
                   )}
                 </div>
                 {chat.role === "user" && (
-                  <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center text-[#fbfffd] font-medium text-[9px] sm:text-[10px] shadow-md">
-                    U
+                  <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-[#fbfffd] font-medium text-[9px] sm:text-[10px] shadow-md mt-0.5">
+                    <UserRound size={14} className="sm:w-4 sm:h-4 text-slate-100" />
                   </div>
                 )}
               </div>
             ))}
 
             {prevChats.length > 0 && (
-              <div className="flex gap-1.5 sm:gap-2 justify-start animate-fade-in">
-                <div className="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md">
-                  <Bot size={11} className="sm:w-3 sm:h-3 text-[#e3186c]" />
+              <div className="flex gap-2 sm:gap-2.5 justify-start animate-fade-in">
+                <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-white/10 flex items-center justify-center shadow-md mt-0.5">
+                  <Bot size={14} className="sm:w-4 sm:h-4 text-[#e3186c]" />
                 </div>
-                <div className="max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-slate-900/50 border border-white/10 text-slate-300">
+                <div className="max-w-[85%] sm:max-w-[75%] md:max-w-3xl px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl bg-slate-900/55 border border-white/10 text-slate-300 shadow-lg">
                   <div className="prose prose-xs sm:prose-sm prose-invert max-w-none">
                     {latestReply === null ? (
                       <ReactMarkdown rehypePlugins={[rehypeHighlight]}>

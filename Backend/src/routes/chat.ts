@@ -1,7 +1,28 @@
 import express, { Router } from "express";
+import mongoose from "mongoose";
 const router = express.Router();
 import Thread from "../models/Thread";
 import getAIResponse from "../utils/ai";
+
+type InMemoryMessage = {
+  role: "user" | "assistant";
+  content: string;
+  timestamp?: Date;
+};
+
+type InMemoryThread = {
+  threadId: string;
+  title: string;
+  messages: InMemoryMessage[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+const inMemoryThreads = new Map<string, InMemoryThread>();
+
+function isDbConnected() {
+  return mongoose.connection.readyState === 1;
+}
 
 // Get available models from OpenRouter
 router.get("/models", async (req, res) => {
@@ -18,14 +39,26 @@ router.get("/models", async (req, res) => {
 
     const data = await response.json();
     
-    // Filter and format models for easier frontend consumption
-    const models = data.data.map((model: any) => ({
-      id: model.id,
-      name: model.name,
-      description: model.description,
-      pricing: model.pricing,
-      context_length: model.context_length,
-    }));
+    // Filter and format models for easier frontend consumption.
+    // "Free" models are usually tagged with ":free" and/or zero token pricing.
+    const models = data.data
+      .map((model: any) => {
+        const promptPrice = Number(model?.pricing?.prompt ?? 0);
+        const completionPrice = Number(model?.pricing?.completion ?? 0);
+        const isFree =
+          String(model?.id ?? "").includes(":free") ||
+          (promptPrice === 0 && completionPrice === 0);
+
+        return {
+          id: model.id,
+          name: model.name,
+          description: model.description,
+          pricing: model.pricing,
+          context_length: model.context_length,
+          isFree,
+        };
+      })
+      .sort((a: any, b: any) => Number(b.isFree) - Number(a.isFree));
 
     res.json(models);
   } catch (err) {
@@ -38,6 +71,10 @@ router.get("/models", async (req, res) => {
 
 router.post("/test", async (req, res) => {
   try {
+    if (!isDbConnected()) {
+      return res.status(503).json({ error: "Database is not connected" });
+    }
+
     const thread = new Thread({
       threadId: "abc",
       title: "Testing new thread",
@@ -55,7 +92,12 @@ router.post("/test", async (req, res) => {
 
 router.get("/thread", async (req, res) => {
   try {
-    const threads = await Thread.find({}).sort({ updatedAt: -1 });
+    const threads = isDbConnected()
+      ? await Thread.find({}).sort({ updatedAt: -1 })
+      : Array.from(inMemoryThreads.values()).sort(
+          (a, b) => b.updatedAt.getTime() - a.updatedAt.getTime()
+        );
+
     // most recent thread on top: decending order on UpdatedAt
     res.json(threads);
   } catch (err) {
@@ -69,7 +111,9 @@ router.get("/thread", async (req, res) => {
 router.get("/thread/:threadId", async (req, res) => {
   const { threadId } = req.params;
   try {
-    const thread = await Thread.findOne({ threadId });
+    const thread = isDbConnected()
+      ? await Thread.findOne({ threadId })
+      : inMemoryThreads.get(threadId);
 
     if (!thread) {
       return res.status(404).json({ error: "Thread not found" });
@@ -87,10 +131,16 @@ router.get("/thread/:threadId", async (req, res) => {
 router.delete("/thread/:threadId", async (req, res) => {
   const { threadId } = req.params;
   try {
-    const deletedThread = await Thread.findOneAndDelete({ threadId });
+    const deletedThread = isDbConnected()
+      ? await Thread.findOneAndDelete({ threadId })
+      : inMemoryThreads.get(threadId);
 
     if (!deletedThread) {
-      res.status(404).json({ error: "thread not found" });
+      return res.status(404).json({ error: "thread not found" });
+    }
+
+    if (!isDbConnected()) {
+      inMemoryThreads.delete(threadId);
     }
 
     res.status(200).json({ success: "thread deleted successfully" });
@@ -110,15 +160,26 @@ router.post("/chat", async (req, res) => {
   }
 
   try {
-    let thread = await Thread.findOne({ threadId });
+    let thread = isDbConnected()
+      ? await Thread.findOne({ threadId })
+      : inMemoryThreads.get(threadId);
 
     if (!thread) {
       // create a new thread in db
-      thread = new Thread({
+      const newThread = {
         threadId,
         title: message,
         messages: [{ role: "user", content: message }],
-      });
+      };
+
+      thread = isDbConnected()
+        ? new Thread(newThread)
+        : {
+            ...newThread,
+            messages: [{ role: "user", content: message, timestamp: new Date() }],
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          };
     } else {
       thread.messages.push({ role: "user", content: message });
     }
@@ -127,7 +188,11 @@ router.post("/chat", async (req, res) => {
       const assistantReply = "Please enter a prompt to talk.";
       thread.messages.push({ role: "assistant", content: assistantReply });
       thread.updatedAt = new Date();
-      await thread.save();
+      if (isDbConnected()) {
+        await (thread as any).save();
+      } else {
+        inMemoryThreads.set(threadId, thread as InMemoryThread);
+      }
       return res.json({ assistantReply });
     }
 
@@ -135,7 +200,11 @@ router.post("/chat", async (req, res) => {
 
     thread.messages.push({ role: "assistant", content: assistantReply });
     thread.updatedAt = new Date();
-    await thread.save();
+    if (isDbConnected()) {
+      await (thread as any).save();
+    } else {
+      inMemoryThreads.set(threadId, thread as InMemoryThread);
+    }
 
     res.json({ assistantReply });
   } catch (err: any) {

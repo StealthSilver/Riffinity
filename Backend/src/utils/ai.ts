@@ -1,5 +1,18 @@
 import "dotenv/config";
 
+const getFriendlyOpenRouterError = (message: string) => {
+  const normalized = message.toLowerCase();
+
+  if (
+    normalized.includes("requires more credits") ||
+    normalized.includes("can only afford")
+  ) {
+    return "You are out of free OpenRouter credits. Please get a paid account or choose a free model.";
+  }
+
+  return `OpenRouter API Error: ${message}`;
+};
+
 const getAIResponse = async (message: string, model: string) => {
   // Use OpenRouter for all models
   const options = {
@@ -30,9 +43,8 @@ const getAIResponse = async (message: string, model: string) => {
     if (!response.ok) {
       const errorData = await response.json();
       console.error("OpenRouter API Error:", errorData);
-      throw new Error(
-        `OpenRouter API Error: ${errorData.error?.message || response.statusText}`
-      );
+      const rawMessage = errorData.error?.message || response.statusText;
+      throw new Error(getFriendlyOpenRouterError(rawMessage));
     }
 
     const data = await response.json();

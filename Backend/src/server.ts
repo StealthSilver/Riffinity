@@ -12,15 +12,15 @@ mongoose.set("bufferCommands", false);
 
 app.use(express.json());
 
-// DB readiness / lazy connection middleware (helps in serverless cold starts)
+// Lazy DB connection middleware (do not block requests if DB is down).
 app.use(async (req, res, next) => {
   if (mongoose.connection.readyState === 1) return next(); // connected
   try {
     await connectDB();
-    return next();
-  } catch (e) {
-    return res.status(503).json({ error: "Database not connected" });
+  } catch {
+    // Keep serving requests; route layer can decide how to handle DB-down mode.
   }
+  return next();
 });
 app.use(
   cors({
@@ -54,11 +54,16 @@ let _connecting: Promise<void> | null = null;
 async function start() {
   try {
     await connectDB();
+  } catch (err) {
+    console.error("Starting without MongoDB connection:", err);
+  }
+
+  try {
     app.listen(PORT, () => {
       console.log(`App is listening on port ${PORT}`);
     });
   } catch (err) {
-    console.error("Failed to start server:", err);
+    console.error("Failed to bind server:", err);
     process.exit(1);
   }
 }
