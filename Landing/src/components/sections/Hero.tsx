@@ -140,7 +140,7 @@ const Hero = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e3186c] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e3186c]"></span>
               </span>
-            <span className="text-sm md:text-base">Smart workspace for AI productivity</span>
+        <span className="text-sm md:text-base">Smart workspace for AI productivity</span>      
           </div>
         </div>
 
